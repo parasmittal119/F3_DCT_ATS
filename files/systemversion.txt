@@ -1,0 +1,186 @@
+[HE517636]
+config=53.01
+dgbc=29.10.00
+acif=27.10.01
+dcif=00.15.01
+m1000=22.17.02
+bootloader=22.14.02
+pfcio 1=25.10.00
+
+[RACK TYPE]
+HE518341=HE518341
+HE517949=HE517949
+HE518017=HE518017
+HE518003=HE518003
+HE517656=HE517656
+HE517693=HE517693
+HE518900=HE518900
+HE518361=HE518361
+HE518323=HE518323
+
+[MCM TYPE]
+HE518341=M2000
+HE517728=M2000
+HE517949=M1000
+HE518017=M1000
+HE518003=M1000
+HE517656=M1000
+HE517693=M1000
+HE518900=M1000
+HE518361=M2000
+HE518323=M2000
+
+[HE518323 VER]
+config=17.01
+m1000=73.00
+bootloader=34.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.14.07
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517728 VER]
+config=52.04
+m1000=22.15.19
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.14.07
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517949 VER]
+config=121.01
+m1000=22.15.19
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.16.03
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE518017 VER]
+config=131.03
+m1000=22.17.09
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.16.03
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE518003 VER]
+config=129.02
+m1000=22.17.09
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.16.03
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517656 VER]
+config=37.02
+m1000=22.10.22
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.15.01
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517963 VER]
+config=125.00
+m1000=22.17.09
+bootloader=22.14.03
+hvlv=00.00.00
+acif=27.10.02
+dcif=24.16.03
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517964 VER]
+config=124.00
+m1000=22.17.09
+bootloader=22.14.03
+hvlv=00.00.00
+acif=27.10.02
+dcif=24.16.03
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517651 VER]
+config=39.00
+m1000=22.10.22
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.15.01
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517773 VER]
+config=87.00
+m1000=22.10.22
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.15.01
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517652 VER]
+config=38.02
+m1000=22.10.22
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.15.01
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE517654 VER]
+config=42.02
+m1000=22.10.22
+bootloader=22.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.15.01
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+
+[HE518361 VER]
+config=00.00
+m1000=34.16.04
+bootloader=34.14.03
+hvlv=00.00.00
+acif=00.00.00
+dcif=24.15.01
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00
+
+[HE518900 VER]
+config=50.00
+m1000=22.10.22
+bootloader=22.14.03
+hvlv=27.11.01
+acif=00.00.00
+dcif=24.16.03
+pfcio 1=00.00.00
+pfcio 2=00.00.00
+dgbc=00.00.00

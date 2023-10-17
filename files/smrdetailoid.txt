@@ -1,0 +1,16 @@
+[SMR DETAIL PARAMETERS]
+smr status=TAB.1461.
+smr id=TAB.2009.
+smr op current=TAB.145B.
+smr op voltage=TAB.145C.
+smr current limit=TAB.147B.
+smr pfc temp=TAB.147C.
+smr amb temp=TAB.147D.
+smr dcdc temp=TAB.147E.
+smr vr=TAB.A071.
+smr ip voltage=TAB.145D.
+smr ip current=TAB.145E.
+smr ip frequency=TAB.145F.
+smr dc state=TAB.1459.
+smr status=TAB.1461.
+

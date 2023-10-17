@@ -1,0 +1,14 @@
+[DEFAULT SETTING]
+smr count = 7
+system overload = 400
+battery ah = 500
+max smr count = 10
+comm smr count = 100
+
+[DEFAULT SETTING STATE]
+smr count = YES
+system overload = YES
+battery ah = YES
+max smr count = YES
+comm smr count = YES
+

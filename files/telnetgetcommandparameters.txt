@@ -1,0 +1,627 @@
+current_config_version=TELNET_GET_COMMAND(self.telnet,OIDRead('VER REV')['config'])
+current_acif_version=TELNET_GET_COMMAND(self.telnet,OIDRead('VER REV')['acif'])
+current_dcif_version=TELNET_GET_COMMAND(self.telnet,OIDRead('VER REV')['dcif'])
+current_dgbc_version=TELNET_GET_COMMAND(self.telnet,OIDRead('VER REV')['dgbc'])
+current_m1000_software_version=TELNET_GET_COMMAND(self.telnet,OIDRead('VER REV')['m1000'])
+current_bootloader_version=TELNET_GET_COMMAND(self.telnet,OIDRead('VER REV')['bootloader'])
+current_pfcio1_version=TELNET_GET_COMMAND(self.telnet,OIDRead('VER REV')['pfcio 1'])
+get_config_version_revision=TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM COMMANDS')['config file version'])
+date_time=TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM COMMANDS')['rtc date time'])
+site_id=TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['site id'])
+initial_eb_kwh_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['grid kwh']))
+initial_dg_kwh_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['dg kwh']))
+initial_dg_runhr_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['dg runhr']))
+initial_eb_runhr_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['grid runhr']))
+phase_type=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['ac phases type']))
+dg_phase_type=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['dg phase type'])) ## added for IPMS
+battery_fuses_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['no. of battery fuses']))
+battery_lvd_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['no. of battery lvd']))
+load_lvd_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['no. of load lvd']))
+load_current_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['no. of load current']))
+load_current_sensor_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['load current sensor']))
+dcif_card_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['dcif card']))
+dcif_type=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['dcif card type']))
+load_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['load'+str(count)+' hall effect value']))
+batt_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['batt'+str(count-load_current_count)+' hall effect value']))
+load_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['load'+str(count)+' shunt value']))
+load_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['load'+str(count)+' shunt mv value']))
+
+            batt_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['batt'+str(count-load_current_count)+' shunt value']))
+
+            batt_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['batt'+str(count-load_current_count)+' shunt mv value']))
+
+            load_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['load'+str(count)+' shunt value']))
+
+            load_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['load'+str(count)+' shunt mv value']))
+
+            batt_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['batt'+str(count-load_current_count)+' shunt value']))
+
+            batt_hall_effect_value=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['batt'+str(count-load_current_count)+' shunt mv value']))
+
+    hvlv_card_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['hvlv card']))
+
+    acif_card_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['acif card'])) ## added for IPMS
+
+    dgbc_card_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['dgbc card'])) ## added for IPMS
+
+    dcif_ip_card_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['dcif ip card']))
+
+    dcif_op_card_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['dcif op card']))
+
+    batt_temperature_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['temperature1']))
+
+    room_temperature1_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['temperature2']))
+
+    room_temperature2_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['temperature3']))
+
+    pfc_io_card_state=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['pfc io card']))
+
+    smr_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['smr count']))
+
+    smr_type=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['smr type']))
+
+    battery_type=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['battery type']))
+
+        battery_capacity=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['vrla battery capacity']))
+
+        bcl_factor=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['vrla bcl factor']))
+
+        battery_capacity=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['lion battery capacity']))
+
+        bcl_factor=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['lion bcl factor']))
+
+        module_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['lion module count']))
+
+    ac_ip_voltage_source=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['ac ip voltage source']))
+
+    ac_ip_current_source=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['ac ip current source']))
+
+    ipms_power_logic_type=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['ipms power logic'])) ## added for IPMS
+
+    lower_port_baudrate=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['lower port baudrate']))
+
+    upper_port_baudrate=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['upper port baudrate']))
+
+    modbus_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['modbus comm']))
+
+    lithium_ion_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['lithium ion comm']))
+
+    acem_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['acem comm']))
+
+    dg_amf_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['dg amf comm']))
+
+    solar_hvlv_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['solar hvlv comm']))
+
+    ext_dcem_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['ext dcem comm']))
+
+    bnms_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['bnms comm']))
+
+    lcu_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['lcu comm'])) ## added for IPMS
+
+    fuel_sensor_comm_port=int(TELNET_GET_COMMAND(self.telnet,OIDRead('RS 485')['fuel sensor comm'])) ## added for IPMS
+
+        value=TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(temp_count)])
+
+            PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(i)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' gain'])))
+
+            PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(i)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' offset'])))
+
+            #PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(i)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' deadband'])))
+
+            if (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' gain'])!='0') or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' offset'])!='0'):# or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' deadband'])!='0'):
+
+                PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(i)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' gain'])))
+
+                PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(i)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' offset'])))
+
+                #PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(i)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(i)+' deadband'])))
+
+                DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+                DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+        DUT_bus_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+            DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+        DUT_bus_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+        PRINT_CONSOLE(self,"CHANNEL "+str(i+1)+"VOLTAGE DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE DC VOLTAGE')['channel'+str(i+1)+' deadband'])))
+
+        PRINT_CONSOLE(self,"CHANNEL "+str(i+1)+"VOLTAGE GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE DC VOLTAGE')['channel'+str(i+1)+' gain'])))
+
+        DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(i)]))
+
+    DUT_bus_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+        DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(i)]))
+
+    DUT_bus_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+    if (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])!='0') or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])!='0'):# or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])!='0'):
+
+        PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])))
+
+        PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])))
+
+        #PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])))
+
+    DUT_READ_CURRENT_LOW=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))/10
+
+    DUT_READ_CURRENT_HIGH=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))/10
+
+        if (float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain']))!=GAIN_OFFSET) or (float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset']))!=ZERO_OFFSET) or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])!=str(DEADBAND)):
+
+    PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])))
+
+    PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])))
+
+    PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])))
+
+    DUT__VERIFY_READ_CURRENT_LOW=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))/10
+
+    DUT__VERIFY_READ_CURRENT_MID=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))/10
+
+    DUT__VERIFY_READ_CURRENT_HIGH=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))/10
+
+    if (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])!='0') or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])!='0'):# or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])!='0'):
+
+        PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])))
+
+        PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])))
+
+        #PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])))
+
+    DUT_READ_CURRENT_LOW=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))
+
+    DUT_READ_CURRENT_HIGH=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))
+
+        if (float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain']))!=GAIN_OFFSET) or (float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset']))!=ZERO_OFFSET) or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])!=str(DEADBAND)):
+
+    PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])))
+
+    PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])))
+
+    PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])))
+
+    DUT__VERIFY_READ_CURRENT_LOW=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))
+
+    DUT__VERIFY_READ_CURRENT_MID=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))
+
+    DUT__VERIFY_READ_CURRENT_HIGH=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))
+
+#     if (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])!='0') or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])!='0'):# or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])!='0'):
+
+#         PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])))
+
+#         PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])))
+
+#         #PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])))
+
+#     DUT_READ_CURRENT_LOW=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))
+
+#     DUT_READ_CURRENT_HIGH=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))
+
+            if TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT DCIO')['channel'+str(channel_number)+' deadband'])!=str(DEADBAND):
+
+        #if (float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain']))!=GAIN_OFFSET) or (float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset']))!=ZERO_OFFSET) or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])!=str(DEADBAND)):
+
+            if TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])!=str(DEADBAND):
+
+    #PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])))
+
+    #PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])))
+
+    PRINT_CONSOLE(self,"PROGRAMMED CURRENT CHANNEL "+str(channel_number)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])))  
+
+#     DUT__VERIFY_READ_CURRENT_LOW=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))/10
+
+#     DUT__VERIFY_READ_CURRENT_MID=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))/10
+
+        DUT__VERIFY_READ_CURRENT_HIGH=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT DCIO')['channel'+str(channel_number)]))
+
+        DUT__VERIFY_READ_CURRENT_HIGH=float(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)]))/10
+
+            if (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])!='0') or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])!='0'):# or (TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])!='0'):
+
+                PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" GAIN: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' gain'])))
+
+                PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" OFFSET: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' offset'])))
+
+                #PRINT_CONSOLE(self,"CURRENT CHANNEL "+str(channel_number)+" DEADBAND: "+str(TELNET_GET_COMMAND(self.telnet,OIDRead('CALIBRATE CURRENT')['channel'+str(channel_number)+' deadband'])))
+
+        DUT_batt_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['batt'+str(count_temp)]))
+
+            DUT_batt_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['batt'+str(count_temp)]))
+
+            DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+                DUT_bus_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus'])) 
+
+            DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(count_temp)]))
+
+                DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(count_temp)]))
+
+                DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt1']))  
+
+                DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(count_temp)]))
+
+                    DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(count_temp)]))
+
+                DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt1'])) 
+
+            INDI_SMR_CURRENT=float(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(smr_number)+' current']))
+
+            INDI_DUT_BATT_VOLTAGE=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(batt_number)]))
+
+        DUT_BUS_VOLTAGE=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+#         INDI_DUT_BATT_VOLTAGE=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')[BATT+str(count_temp)]))
+
+#     INDI_DUT_BATT_VOLTAGE=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+                    DUT_batt_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['batt'+str(count_temp)]))
+
+                    DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+                DUT_batt_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['batt'+str(count_temp)]))
+
+            DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(1)]))
+
+                    DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+                DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(i)]))
+
+                        DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+            DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(i)]))
+
+            DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+                    DUT_batt_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['batt'+str(count_temp)]))
+
+                    DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+                DUT_batt_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['batt'+str(count_temp)]))
+
+#             DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(1)]))
+
+#                 DUT_load_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ CURRENT')['load'+str(i)]))
+
+#                 DUT_batt_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['batt'+str(count_temp)]))
+
+        if TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(count)+' id'])!='':
+
+#         common_battery_fuse_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['batt fuse fail']))
+
+#         batt1_fuse_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['batt1 fuse fail']))
+
+#         batt2_fuse_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['batt2 fuse fail']))
+
+#         batt3_fuse_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['batt3 fuse fail']))
+
+            temperature=float(TELNET_GET_COMMAND(self.telnet,OIDRead('READ TEMPERATURE')['temperature'+str(temp)]))
+
+                    temperature=TELNET_GET_COMMAND(self.telnet,OIDRead('READ TEMPERATURE')['temperature'+str(temp)])
+
+        alarm_hvlv_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['hvlv comm fail']))
+
+        config_smr_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['smr count']))
+
+#         alarm_mains_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['mains fail']))
+
+#         voltage_r_phase=int(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')['r phase']))
+
+            smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+        config_smr_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['smr count']))
+
+        alarm_mains_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['mains fail']))
+
+        voltage_r_phase=int(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')['r phase']))
+
+            smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+            alarm_phase_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')[phase.lower()+' fail']))
+
+            voltage_phase=int(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')[phase.lower()]))
+
+            config_smr_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['smr count']))
+
+                smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+    alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['can comm fail']))
+
+        alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['hvlv comm fail']))
+
+        alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dcif comm fail']))
+
+        alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['pfc1 comm fail']))
+
+        alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['acif comm fail']))
+
+        alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dgbc comm fail']))
+
+    if int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==0:
+
+        if int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==ip_pfc_state:
+
+        #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+        if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+        #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+        if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+        #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+        if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+        #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+        if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+        #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+        if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+        #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+        if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+    modem_type=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['modem type']))
+
+            charge_voltage_telnet=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['charge voltage']))
+
+            #fuel_sensor_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['fs comm fail']))
+
+                fuel_mm=float(TELNET_GET_COMMAND(self.telnet,'TAB.880D.0'))
+
+                    #lcu_ip_v=float(TELNET_GET_COMMAND(self.telnet,'TAB.4C01.0'))
+
+                #fuel_sensor_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['fs comm fail']))
+
+            charge_voltage_telnet=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['charge voltage']))
+
+                #lcu_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['lcu comm fail']))
+
+                    lcu_op_v=float(TELNET_GET_COMMAND(self.telnet,'TAB.4C01.0'))
+
+                    #lcu_ip_v=float(TELNET_GET_COMMAND(self.telnet,'TAB.4C01.0'))
+
+            signal_strength_recieved=TELNET_GET_COMMAND(self.telnet,OIDRead('MODEM')['signal strength'])
+
+    config_smr_count=TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['smr count'])
+
+    site_id=TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['site id'])
+
+    float_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['float voltage']))
+
+    charge_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['charge voltage']))
+
+    battery_lvd_set=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['battery lvd set']))
+
+    battery_lvd_restore=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['battery lvd restore']))
+
+    load_lvd_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['no. of load lvd']))
+
+        load_lvd_set=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['load1 lvd set']))
+
+        load_lvd_restore=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['load1 lvd restore']))
+
+    dc_v_low_set=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['dc voltage low set']))
+
+    dc_v_low_restore=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['dc voltage low restore']))
+
+    dc_v_low_set=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['dc voltage low set']))
+
+    dc_v_low_restore=float(TELNET_GET_COMMAND(self.telnet,OIDRead('BATTERY SETTING')['dc voltage low restore']))
+
+    main_low_fail_set=int(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS SETTING')['mains low fail set']))
+
+    main_low_fail_restore=int(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS SETTING')['mains low fail restore']))
+
+    main_high_fail_set=int(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS SETTING')['mains high fail set']))
+
+    main_high_fail_restore=int(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS SETTING')['mains high fail restore']))
+
+    smr_count=TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['smr count'])
+
+    m1000_mac_id=TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM COMMANDS')['m1000 mac id'])
+
+    m1000_serial_number=TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM COMMANDS')['serial number'])
+
+        battery_capacity_vrla=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['vrla battery capacity']))
+
+        bcl_factor_vrla=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['vrla bcl factor']))
+
+        battery_capacity=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['lion battery capacity']))
+
+        module_count=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['lion module count']))
+
+        bcl_factor=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['lion bcl factor']))
+
+        battery_capacity_vrla=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['vrla battery capacity']))
+
+        bcl_factor_vrla=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['vrla bcl factor']))
+
+        alarm_byte=int(TELNET_GET_COMMAND(self.telnet,OIDRead('DG')['dg alarm byte']))
+
+        alarm_byte=int(TELNET_GET_COMMAND(self.telnet,OIDRead('DG')['dg alarm byte2']))
+
+        alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dgbc comm fail']))
+
+    dg_alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dg contactor on']))
+
+    eb_alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['eb contactor on']))
+
+                dg_battery_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG')['battery voltage']))
+
+                dg_battery_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG')['battery current']))
+
+                alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dgbc comm fail']))
+
+            alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dg contactor on']))
+
+                    r_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG READ VOLTAGE')['r phase']))
+
+                    r_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG READ CURRENT')['r phase']))
+
+                    r_phase_pf=(float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['dg pf r phase'])))/100
+
+                    r_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG READ VOLTAGE')['r phase']))
+
+                    y_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG READ VOLTAGE')['y phase']))
+
+                    b_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG READ VOLTAGE')['b phase']))
+
+                    r_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG READ CURRENT')['r phase']))
+
+                    y_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG READ CURRENT')['y phase']))
+
+                    b_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DG READ CURRENT')['b phase']))
+
+                    r_phase_pf=(float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['dg pf r phase'])))/100
+
+                    y_phase_pf=(float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['dg pf y phase'])))/100
+
+                    b_phase_pf=(float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['dg pf b phase'])))/100
+
+                #initial_dg_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['dg kwh']))
+
+                #final_dg_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['dg kwh']))
+
+    lcu_present_flag=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['lcu present']))
+
+    AC1_present_flag=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['ac1 present']))
+
+    AC2_present_flag = int(TELNET_GET_COMMAND(self.telnet, OIDRead('SYSTEM CONFIG')['ac2 present']))
+
+    dg_alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dg contactor on']))
+
+    eb_alarm_comm_fail=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['eb contactor on']))
+
+                eb_contactor_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['eb contactor on']))
+
+                            smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+                        r_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')['r phase']))
+
+                        r_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ CURRENT')['r phase']))
+
+                eb_contactor_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['eb contactor on']))
+
+                            smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+                        y_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')['y phase']))
+
+                        y_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ CURRENT')['y phase']))
+
+                eb_contactor_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['eb contactor on']))
+
+                            smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+                        b_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')['b phase']))
+
+                        b_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ CURRENT')['b phase']))
+
+                eb_contactor_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['eb contactor on']))
+
+                            smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+                #initial_eb_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['grid kwh']))
+
+                eb_contactor_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['eb contactor on']))
+
+                            smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+            #initial_eb_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['grid kwh']))
+
+#             final_eb_reading=float(TELNET_GET_COMMAND(self.telnet,OIDRead('ACIF DATA')['grid kwh']))
+
+                eb_contactor_alarm=int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['eb contactor on']))
+
+                            smr_status=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SMR COMMANDS')['smr'+str(i)+" status"]))
+
+                r_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')['r phase']))
+
+                y_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')['y phase']))
+
+                b_phase_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ VOLTAGE')['b phase']))
+
+                r_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ CURRENT')['r phase']))
+
+                y_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ CURRENT')['y phase']))
+
+                b_phase_current=float(TELNET_GET_COMMAND(self.telnet,OIDRead('MAINS READ CURRENT')['b phase']))
+
+        if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==0:
+
+                #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+                #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+                #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+                #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+                #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+                #if (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==96) or (int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))==1):
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['spu fail']))==1:
+
+#             if int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))!=0:
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dccb trip']))==1:
+
+        read_restore_time=int(TELNET_GET_COMMAND(self.telnet,OIDRead('DOOR SETTING')['door open restore time']))
+
+#             if int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))!=0:
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['door open alarm']))==1:
+
+#             if int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))!=0:
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['smoke alarm']))==1:
+
+    #aviation_lamp_flag=int(TELNET_GET_COMMAND(self.telnet,OIDRead('SYSTEM CONFIG')['aviation lamp configuration']))##This oid is 0 if False , otherwise it is a number.
+
+    #fan_fail_sense=int(TELNET_GET_COMMAND(self.telnet, OIDRead('SYSTEM CONFIG')['fan fail sense']))
+
+            fan_flag=TELNET_GET_COMMAND(self.telnet, OIDRead('ALARM')['power fan fail'])
+
+            if (int(TELNET_GET_COMMAND(self.telnet, OIDRead('ALARM')['power fan fail']))) ==1:
+
+            if (int(TELNET_GET_COMMAND(self.telnet, OIDRead('ALARM')['battery  fan fail']))) == 1:
+
+#             if int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))!=0:
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['batt fuse fail pfc']))==1:
+
+        DUT_bus_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+        dc_source_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['dc source']))
+
+            DUT_bus_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+            dc_source_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['dc source']))
+
+            DUT_bus_volt=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['bus']))
+
+            dc_source_voltage=float(TELNET_GET_COMMAND(self.telnet,OIDRead('DC READ VOLTAGE')['dc source']))
+
+                if int(TELNET_GET_COMMAND(self.telnet,OIDRead('DCIF 8 IP PFC')['pfc']))!=0:
+
+                    if int(TELNET_GET_COMMAND(self.telnet,OIDRead('ALARM')['dccb trip']))==1:

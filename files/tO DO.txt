@@ -1,0 +1,7 @@
+1. Change the oid file
+2. Run test again with changed oid file
+3. Right now wrong values are DCIO current calibration, lower and upper ports for RS485
+4. PFC logic is not working for all racks, test the logic
+5. Check whether default values are being set correctly or not after test completion.
+6. Check the values of default set parameters after test completeion.
+7. Once go through each test PASS and FAIL criteria.

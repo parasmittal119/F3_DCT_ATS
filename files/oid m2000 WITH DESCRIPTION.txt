@@ -1,0 +1,640 @@
+[MAINS SETTING]
+mains low fail set=2585
+mains low fail restore=2586
+mains high fail set=2581
+mains high fail restore=2582
+mains low set=2575
+mains low restore=2576
+mains high set=2571
+mains high restore=2572
+
+[BATTERY SETTING]
+float voltage=2195
+charge voltage=2196
+lion charge voltage=1210
+battery lvd set=2281
+battery lvd restore=2282
+load1 lvd set=2273
+load1 lvd restore=2274
+load2 lvd set=2275
+load2 lvd restore=2276
+load3 lvd set=2277
+load3 lvd restore=2278
+load4 lvd set=2279
+load4 lvd restore=2280
+dc voltage low set=2265
+dc voltage low restore=2266
+
+[DOOR SETTING]
+door open set time=TAB.45.0
+door open restore time=TAB.46.0
+
+[MAINS READ VOLTAGE]
+r phase=2109
+y phase=2112
+b phase=2115
+
+[MAINS READ CURRENT]
+r phase=2110
+y phase=2113
+b phase=2116
+
+[DG READ VOLTAGE]
+r phase=TAB.4456.0
+y phase=TAB.4459.0
+b phase=TAB.445C.0
+
+[DG READ CURRENT]
+r phase=TAB.4457.0
+y phase=TAB.445A.0
+b phase=TAB.445D.0
+
+[DC READ VOLTAGE]
+batt1=40
+batt2=43
+batt3=46
+batt4=3211
+bus=25
+dc source=TAB.146D.0
+
+[DC READ CURRENT]
+batt1=41
+batt2=44
+batt3=47
+batt4=3212
+load1=23
+load2=29
+load3=32
+load4=35
+
+
+[READ TEMPERATURE]
+temperature1=58
+temperature2=2124
+temperature3=2125
+
+[GENERAL DATA]
+total batt current=49
+total load current=39
+
+[ACIF DATA]
+acif alarm register1=TAB.5810.0
+acif alarm register1=TAB.5811.0
+grid pf r phase=TAB.4493.1
+grid pf y phase=TAB.4493.2
+grid pf b phase=TAB.4493.3
+grid kwh=TAB.4024.0
+grid runhr=TAB.3416.0
+
+dg pf r phase=TAB.4494.1
+dg pf y phase=TAB.4494.2
+dg pf b phase=TAB.4494.3
+dg kwh=TAB.4025.0
+dg runhr=TAB.3417.0
+
+[MODEM]
+signal strength=TAB.9052.0
+
+[DG]
+manual mode=TAB.4473.0
+dg alarm byte=TAB.4492.0
+dg alarm byte2=TAB.4497.0
+dg emergency set=TAB.40C.1BE
+battery voltage=TAB.4480.0
+battery current=TAB.4481.0
+
+[ALARM]
+spu fail=ALM.3
+batt fuse fail pfc=TAB.280.65##It is set when any batt fuse fail alarm is set.
+dccb trip=TAB.280.59
+system alarm=TAB.280.A6###It is set when either of critical, major or minor alarm is set.
+controller fail=TAB.280.A7
+system overload=ALM.130
+dc over voltage=ALM.131
+dc voltage low=ALM.132
+llvd-1 disconnect=ALM.133
+llvd-2 disconnect=ALM.134
+llvd-3 disconnect=ALM.135
+llvd-4 disconnect=ALM.136
+battery lvd=ALM.137
+tempcomp cbl fail=ALM.140
+temp-1 low=ALM.177
+temp-2 low=ALM.178
+temp-1 high=ALM.179
+temp-2 high=ALM.180
+fan-1 fail=ALM.183
+fan-2 fail=ALM.184
+fan-3 fail=ALM.185
+fan-4 fail=ALM.186
+fan fail=ALM.191
+mbd=ALM.139
+spi flash fail=ALM.250
+rtc fail=ALM.249
+eeprom1 fail=ALM.247
+eeprom2 fail=ALM.248
+media fail=ALM.245
+media full=ALM.246
+batt temp high=ALM.142
+batt temp low=ALM.141
+batt1 cntr. fail=ALM.165
+batt2 cntr. fail=ALM.166
+batt3 cntr. fail=ALM.167
+batt4 cntr. fail=ALM.168
+batt5 cntr. fail=ALM.169
+batt1 not present=ALM.159
+batt2 not present=ALM.160
+batt3 not present=ALM.161
+batt4 not present=ALM.162
+batt5 not present=ALM.163
+batt1 isolated=ALM.143
+batt2 isolated=ALM.144
+batt3 isolated=ALM.145
+batt4 isolated=ALM.146
+batt5 isolated=ALM.147
+batt1 reverse=ALM.148
+batt2 reverse=ALM.149
+batt3 reverse=ALM.150
+batt4 reverse=ALM.151
+batt5 reverse=ALM.152
+batt bank dischg=ALM.988
+batt1 bank dischg=ALM.172
+batt2 bank dischg=ALM.173
+batt3 bank dischg=ALM.174
+batt4 bank dischg=ALM.175
+batt5 bank dischg=ALM.176
+batt1 mid cell v=ALM.192
+batt2 mid cell v=ALM.193
+batt3 mid cell v=ALM.194
+batt4 mid cell v=ALM.195
+batt1 fuse fail=ALM.153
+batt2 fuse fail=ALM.154
+batt3 fuse fail=ALM.155
+batt4 fuse fail=ALM.156
+batt5 fuse fail=ALM.157
+batt fuse fail=TAB.280.FF
+batt over charged=ALM.164
+battery test=ALM.985
+extd charge mode=ALM.984
+equalization mode=ALM.989
+manual charge=ALM.982
+r phase low=ALM.87
+r phase high=ALM.88
+y phase low=ALM.89
+y phase high=ALM.90
+b phase low=ALM.91
+b phase high=ALM.92
+mains warning=TAB.280.135
+mains fail=ALM.81   
+r phase fail=ALM.82
+y phase fail=ALM.83
+b phase fail=ALM.84
+phase fail=TAB.280.13A It is set when either of phase(r,y,b) fail alarm is set.
+mains high=ALM.85
+mains low=ALM.86
+neu earth fail=TAB.280.13D#########not used
+neutral fault=ALM.93
+ne fail=ALM.95
+earth fault=ALM.94
+dummy=TAB.280.141
+dummy=TAB.280.142
+dummy=TAB.280.143
+line fail=TAB.280.144#########not used
+rec proc mode(fs)=ALM.108
+rec comm fail=ALM.101
+rec fail=ALM.98
+multiple rec fail=ALM.99
+actual rec fail=TAB.280.149#########not used
+all rec fail=ALM.100
+indiv. rec fail=ALM.109
+indiv. rec commf=ALM.110
+rec temp. high=ALM.103
+all rec comm fail=ALM.102
+rec proc mode(ip)=ALM.112
+rec overvoltage=ALM.104
+rec fanfail=ALM.105
+all rec currlimit=ALM.106
+rec 2ph op mode=ALM.111
+ip freq abn=ALM.112
+rec proc mode(fa)=ALM.107
+s-chg comm fail=ALM.236
+s-chg fail=TAB.280.157
+multi s-chg fail=TAB.280.158
+s actual recfail=TAB.280.159
+all schg fail=TAB.280.15A
+indiv schg fail=TAB.280.15B
+indiv schg commf=TAB.280.15C
+s-hvlv comm fail=TAB.280.15D
+all s-hvlv fail=TAB.280.15E
+solar system fail=TAB.280.15F
+ip procmode(hvlv)=TAB.280.163
+controller boot=ALM.255
+can comm fail=ALM.237
+hvlv comm fail=ALM.222
+s-hvlv comm fail=TAB.280.167
+dcif comm fail=ALM.223
+bms comm fail=ALM.276
+cbms comm fail=TAB.280.16A#########not used
+pfc1 comm fail=ALM.225
+pfc2 comm fail=ALM.226
+modem comm fail=ALM.233
+e-dcem comm fail=ALM.232
+acif comm fail=ALM.224
+dgbc comm fail=TAB.280.170#########not used
+fs comm fail=ALM.234
+camera comm fail=TAB.280.172#########not used
+lcu comm fail=TAB.280.173#########not used
+llvd disconnect=TAB.280.177########iT IS SET WHEN EITHER OF LLVD1,2,3,4 IS SET
+battery isolated=TAB.280.178########iT IS SET WHEN EITHER OF 1,2,3,4 IS SET
+batt midcell fail=TAB.280.179########iT IS SET WHEN EITHER OF LLVD1,2,3,4 etc. IS SET i.e. ALM.192 to ALM.201
+batt not present=TAB.280.17A########iT IS SET WHEN EITHER OF LLVD1,2,3,4 etc. IS SET i.e. ALM.159 to ALM.163
+battery reverse=TAB.280.17B########iT IS SET WHEN EITHER OF LLVD1,2,3,4 etc. IS SET i.e. ALM.148 to ALM.152
+batt cntr fail=TAB.280.17C########iT IS SET WHEN EITHER OF LLVD1,2,3,4 etc. IS SET i.e. ALM.165 to ALM.169
+rec int alarms=TAB.280.17F#ramesh sir
+rec proc mode=TAB.280.180#ramesh sir doubt 113
+battery fuse fail=TAB.280.181########iT IS SET WHEN EITHER OF LLVD1,2,3,4 etc. IS SET i.e. ALM.153 to ALM.157
+media alarm=TAB.280.182########iT IS SET WHEN EITHER OF LLVD1,2,3,4 etc. IS SET i.e. ALM.245 to ALM.246
+lvd rmt cmd=TAB.280.186##ramesh sir
+lvd time cmd=TAB.280.187##ramesh sir
+dg contactor on=TAB.280.5E##ramesh sir doubt ALM.719
+eb contactor on=TAB.280.5D##ramesh sir doubt ALM.713
+door open alarm=ALM.1
+smoke alarm=ALM.2
+
+[STATUS]
+float mode=980
+charge mode=981
+manual charge=982
+equalization mode=983
+extended charge=984
+battery test mode=985
+float bcl=986
+charge bcl=987
+batt bank dischg=988
+eco mode=989
+load on solar=990
+
+[SYSTEM CONFIG]
+ac phases type=2777
+no. of battery fuses=2779
+no. of battery lvd=2780
+no. of load lvd=2782
+no. of load current=3228 
+load current sensor=2796 
+dcif card type=3227
+hvlv card=TAB.1027.0
+dcif card= 6049 
+dcif ip card=TAB.108A.0##########Required
+dcif op card=TAB.108B.0###Required###3
+pfc io card= 2928 
+
+smr count=2295
+system overload=2267
+smr type=6297
+ac ip voltage source=2798
+ac ip current source=3382
+site id=2614
+dc source=TAB.1473.0###Required######ramesh sir
+
+
+
+
+temperature1=6957
+temperature2=7007
+temperature3=7008
+
+batt1 hall effect value=2818
+batt2 hall effect value=2819
+batt3 hall effect value=2820
+batt1 shunt value=2804
+batt2 shunt value=2806
+batt3 shunt value=2808
+batt1 shunt mv value=2805
+batt2 shunt mv value=2807
+batt3 shunt mv value=2809
+
+
+load1 hall effect value=2821
+load2 hall effect value=2822
+load3 hall effect value=2823
+load4 hall effect value=3273
+load1 shunt value=2810
+load2 shunt value=2812
+load3 shunt value=2814
+load4 shunt value=2816
+load1 shunt mv value=2811
+load2 shunt mv value=2813
+load3 shunt mv value=2815
+load4 shunt mv value=2817
+
+eco mode=2306
+vrla battery capacity=2185
+lion battery capacity=1216
+vrla bcl factor=2199
+lion bcl factor=1213
+lion module count=1217
+battery type=2784
+
+
+[CALIBRATE DC VOLTAGE]
+batt1=2855
+batt2=2856
+batt3=2857
+bus=2858
+channel1 deadband=1354
+channel2 deadband=1355
+channel3 deadband=1356
+channel4 deadband=1357
+channel5 deadband=1358
+channel6 deadband=1359
+channel7 deadband=TAB.540D.7
+channel1 gain=1360
+channel2 gain=1361
+channel3 gain=1362
+channel4 gain=1363
+channel5 gain=1364
+channel6 gain=1365
+channel7 gain=TAB.5410.7
+
+
+[CALIBRATE CURRENT]
+channel1=1373
+channel2=1374
+channel3=1375
+channel4=1376
+channel5=1377
+channel6=1378
+channel7=1384
+
+channel1 deadband=1379
+channel2 deadband=1380
+channel3 deadband=1381
+channel4 deadband=1382
+channel5 deadband=1383
+channel6 deadband=1385
+channel7 deadband=1386
+
+channel1 gain=1387
+channel2 gain=1388
+channel3 gain=1389
+channel4 gain=1390
+channel5 gain=1391
+channel6 gain=1392
+channel7 gain=1393
+
+channel1 offset=1394
+channel2 offset=1395
+channel3 offset=1396
+channel4 offset=1397
+channel5 offset=1398
+channel6 offset=1399
+channel7 offset=1400
+
+
+[CALIBRATE CURRENT DCIO]
+channel1=23 
+channel2=29
+channel3=32
+channel4=35
+channel5=TAB.1442.1
+channel6=TAB.1442.2
+channel7=TAB.1442.3
+
+channel1 deadband=1379
+channel2 deadband=1380
+channel3 deadband=1381
+channel4 deadband=TAB.5424.1 #######RameshSir
+channel5 deadband=TAB.5424.2#######RameshSir
+channel6 deadband=TAB.5424.3#######RameshSir
+channel7 deadband=TAB.5424.4#######RameshSir
+
+channel1 gain=1387
+channel2 gain=1388
+channel3 gain=1389
+channel4 gain=TAB.5427.1#######RameshSir
+channel5 gain=TAB.5427.2#######RameshSir
+channel6 gain=TAB.5427.3#######RameshSir
+channel7 gain=TAB.5427.4#######RameshSir
+
+channel1 offset=1394
+channel2 offset=1395
+channel3 offset=1396
+channel4 offset=TAB.542A.1#######RameshSir
+channel5 offset=TAB.542A.2#######RameshSir
+channel6 offset=TAB.542A.3#######RameshSir
+channel7 offset=TAB.542A.4#######RameshSir
+
+
+
+[BATTERY ISOLATE]
+batt1=2845
+batt2=2846
+batt3=2847
+
+
+[LOAD ISOLATE]
+load1=TAB.53.1######ramesh sir  ####not in M2000 code
+load2=TAB.53.2######ramesh sir  ####not in M2000 code
+load3=TAB.53.3######ramesh sir  ####not in M2000 code
+load4=TAB.53.4######ramesh sir  ####not in M2000 code
+load5=TAB.53.5######ramesh sir  ####not in M2000 code
+
+[SMR COMMANDS]
+deregister all smr=2304
+smr1 status=65
+smr2 status=66
+smr3 status=67
+smr4 status=68
+smr5 status=69
+smr6 status=70
+smr7 status=71
+smr8 status=72
+smr9 status=73
+smr10 status=74
+smr11 status=75
+smr12 status=76
+smr13 status=77
+smr14 status=78
+smr15 status=79
+smr16 status=80
+smr17 status=81
+smr18 status=82
+smr19 status=83
+smr20 status=84
+smr21 status=85
+smr22 status=86
+smr23 status=87
+smr24 status=88
+smr25 status=89
+smr26 status=90
+smr27 status=91
+smr28 status=92
+smr29 status=93
+smr30 status=94
+smr1 id=186
+smr2 id=202
+smr3 id=218
+smr4 id=234
+smr5 id=250
+smr6 id=266
+smr7 id=282
+smr8 id=298
+smr9 id=314
+smr10 id=330
+smr11 id=346
+smr12 id=362
+smr13 id=378
+smr14 id=394
+smr15 id=410
+smr16 id=426
+smr17 id=442
+smr18 id=458
+smr19 id=474
+smr20 id=490
+smr21 id=506
+smr22 id=522
+smr23 id=538
+smr24 id=554
+smr25 id=570
+smr26 id=586
+smr27 id=602
+smr28 id=618
+smr29 id=634
+smr30 id=650
+smr1 current=197
+smr2 current=213
+smr3 current=229
+smr4 current=245
+smr5 current=261
+smr6 current=277
+smr7 current=293
+smr8 current=309
+smr9 current=325
+smr10 current=341
+smr11 current=357
+smr12 current=373
+smr13 current=389
+smr14 current=405
+smr15 current=421
+smr16 current=437
+smr17 current=453
+smr18 current=469
+smr19 current=485
+smr20 current=501
+smr21 current=517
+smr22 current=533
+smr23 current=549
+smr24 current=565
+smr25 current=581
+smr26 current=597
+smr27 current=613
+smr28 current=629
+smr29 current=645
+smr30 current=661
+smr1 voltage=196
+smr2 voltage=212
+smr3 voltage=228
+smr4 voltage=244
+smr5 voltage=260
+smr6 voltage=276
+smr7 voltage=292
+smr8 voltage=308
+smr9 voltage=324
+smr10 voltage=340
+smr11 voltage=356
+smr12 voltage=372
+smr13 voltage=388
+smr14 voltage=404
+smr15 voltage=420
+smr16 voltage=436
+smr17 voltage=452
+smr18 voltage=468
+smr19 voltage=484
+smr20 voltage=500
+smr21 voltage=516
+smr22 voltage=532
+smr23 voltage=548
+smr24 voltage=564
+smr25 voltage=580
+smr26 voltage=596
+smr27 voltage=612
+smr28 voltage=628
+smr29 voltage=644
+smr30 voltage=660
+
+[ALARM MASK]
+battery lvd=TAB.040C.AF####ramesh sir
+
+[LED]
+led=TAB.50.0###########Not required
+
+[BUZZER]
+buzzer(But this is for enable/disable in M2000 and in M1000 oid it is for buzzer test)=2958
+
+[DCIF 8 OP PFC]
+pfc=TAB.55.0######ramesh sir
+
+[DCIF 8 IP PFC]
+pfc=TAB.5420.0######ramesh sir
+invert pfc=TAB.0412.#######find
+
+[DCIF 2 OP PFC]
+pfc=TAB.54.0######ramesh sir
+
+[RS 485]
+lower port baudrate=1442
+upper port baudrate=1443
+modbus comm=3081 IF value set is 1 then lower port if value set at this item id is 2 then upper port
+lithium ion comm=1219 IF value set is 1 then lower port if value set at this item id is 2 then upper port
+acem comm=1221 only for rjil variant of m2000##not available for others
+dg amf comm=TAB.39C.D ## not available
+solar hvlv comm=TAB.39C.7## not available
+ext dcem comm=3010  IF value set is 1 then lower port if value set at this item id is 2 then upper port
+bnms comm=3144  IF value set is 1 then lower port if value set at this item id is 2 then upper port
+lcu comm=TAB.39C.9## not available
+fuel sensor comm=3012  IF value set is 1 then lower port if value set at this item id is 2 then upper port
+
+[SYSTEM COMMANDS]
+factory restore=3162
+setting restore=2770
+system reset=4050
+system initialize=2770
+ate test=TAB.5A.0#######not required
+site id=2614
+serial number=6299
+part number=6298
+config file version=2764
+m1000 mac id=6048
+software version=5017
+bootloader version=3163
+system serial number=6299
+system part number=6298
+rtc date time=TAB.127.0#######This is not available in combined format 
+rtc date= 2768
+rtc time= 2769
+
+[GENERAL DATA]
+total batt current=49
+total load current=39
+
+[AVIATION LAMP]
+on hour=TAB.3045.0
+on min=TAB.3046.0
+off hour=TAB.3047.0
+off min=TAB.3048.0
+aviation lamp state=TAB.446D.0
+
+[VER REV]
+m1000=2763  
+bootloader=3163
+hvlv=TAB.109B.0###not in m2000 code
+acif=TAB.109C.0###not in m2000 code
+dcif=TAB.109D.0##item id not available#######ask ramesh sir
+config=2764
+pfcio 1=TAB.10A1.0##item id not available#######ask ramesh sir
+pfcio 2=TAB.10A2.0##item id not available#######ask ramesh sir
+dgbc=TAB.10A3.0##not available in code
+
+
+[ACTIVE SESSION TIME]
+active session time=240 for 60 sec.
+

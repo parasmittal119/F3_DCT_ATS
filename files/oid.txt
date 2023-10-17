@@ -1,0 +1,667 @@
+[MAINS SETTING]
+mains low fail set=TAB.5003.0
+mains low fail restore=TAB.5005.0
+mains high fail set=TAB.5002.0
+mains high fail restore=TAB.5004.0
+mains low set=TAB.1428.0
+mains low restore=TAB.1429.0
+mains high set=TAB.1426.0
+mains high restore=TAB.1427.0
+
+[BATTERY SETTING]
+float voltage=TAB.2001.0
+charge voltage=TAB.2002.0
+lion charge voltage=TAB.1069.0
+battery lvd set=TAB.1413.0
+battery lvd restore=TAB.1414.0
+load1 lvd set=TAB.1407.0
+load1 lvd restore=TAB.1408.0
+load2 lvd set=TAB.1409.0
+load2 lvd restore=TAB.140A.0
+load3 lvd set=TAB.140B.0
+load3 lvd restore=TAB.140C.0
+load4 lvd set=TAB.140D.0
+load4 lvd restore=TAB.140E.0
+dc voltage low set=TAB.1405.0
+dc voltage low restore=TAB.1406.0
+
+[DOOR SETTING]
+door open set time=TAB.45.0
+door open restore time=TAB.46.0
+
+[MAINS READ VOLTAGE]
+r phase=TAB.1453.0
+y phase=TAB.1454.0
+b phase=TAB.1455.0
+
+[MAINS READ CURRENT]
+r phase=TAB.1464.0
+y phase=TAB.1468.0
+b phase=TAB.1447.0
+
+[DG READ VOLTAGE]
+r phase=TAB.4456.0
+y phase=TAB.4459.0
+b phase=TAB.445C.0
+
+[DG READ CURRENT]
+r phase=TAB.4457.0
+y phase=TAB.445A.0
+b phase=TAB.445D.0
+
+[DC READ VOLTAGE]
+batt1=TAB.1446.1
+batt2=TAB.1446.2
+batt3=TAB.1446.3
+batt4=TAB.1446.4
+bus=TAB.1450.0
+dc source=TAB.146D.0
+
+[DC READ CURRENT]
+batt1=TAB.1442.1
+batt2=TAB.1442.2
+batt3=TAB.1442.3
+batt4=TAB.1442.4
+load1=TAB.144C.1
+load2=TAB.144C.2
+load3=TAB.144C.3
+load4=TAB.144C.4
+
+
+[READ TEMPERATURE]
+temperature1=TAB.1881.0
+temperature2=TAB.303B.0
+temperature3=TAB.303C.0
+
+[ACIF DATA]
+acif alarm register1=TAB.5810.0
+acif alarm register12=TAB.5811.0
+grid pf r phase=TAB.4493.1
+grid pf y phase=TAB.4493.2
+grid pf b phase=TAB.4493.3
+grid kwh=TAB.4024.0
+grid runhr=TAB.3416.0
+ACIF SOFT VER=TAB.
+dg pf r phase=TAB.4494.1
+dg pf y phase=TAB.4494.2
+dg pf b phase=TAB.4494.3
+dg kwh=TAB.4025.0
+dg runhr=TAB.3417.0
+
+[MODEM]
+signal strength=TAB.9052.0
+
+[DG]
+manual mode=TAB.4473.0
+dg alarm byte=TAB.4492.0
+dg alarm byte2=TAB.4497.0
+dg emergency set=TAB.40C.1BE
+battery voltage=TAB.4480.0
+battery current=TAB.4481.0
+
+[ALARM]
+spu fail=TAB.280.58
+batt fuse fail pfc=TAB.280.65
+dccb trip=TAB.280.59
+system alarm=TAB.280.A6
+controller fail=TAB.280.A7
+system overload=TAB.280.A8
+dc over voltage=TAB.280.A9
+dc voltage low=TAB.280.AA
+llvd-1 disconnect=TAB.280.AB
+llvd-2 disconnect=TAB.280.AC
+llvd-3 disconnect=TAB.280.AD
+llvd-4 disconnect=TAB.280.AE
+battery lvd=TAB.280.AF
+tempcomp cbl fail=TAB.280.B0
+temp-1 low=TAB.280.B1
+temp-2 low=TAB.280.B2
+temp-1 high=TAB.280.B3
+temp-2 high=TAB.280.B4
+fan-1 fail=TAB.280.B5
+fan-2 fail=TAB.280.B6
+fan-3 fail=TAB.280.B7
+fan-4 fail=TAB.280.B8
+
+fan fail=TAB.401.6E
+
+power fan fail=TAB.280.6F
+battery  fan fail=TAB.280.70
+
+mbd=TAB.280.BA
+spi flash fail=TAB.280.C0
+rtc fail=TAB.280.C1
+eeprom1 fail=TAB.280.C2
+eeprom2 fail=TAB.280.C3
+media fail=TAB.280.C4
+media full=TAB.280.C5
+batt temp high=TAB.280.C6
+batt temp low=TAB.280.C7
+batt1 cntr. fail=TAB.280.DC
+batt2 cntr. fail=TAB.280.DD
+batt3 cntr. fail=TAB.280.DE
+batt4 cntr. fail=TAB.280.DF
+batt5 cntr. fail=TAB.280.E0
+batt1 not present=TAB.280.E1
+batt2 not present=TAB.280.E2
+batt3 not present=TAB.280.E3
+batt4 not present=TAB.280.E4
+batt5 not present=TAB.280.E5
+batt1 isolated=TAB.280.E6
+batt2 isolated=TAB.280.E7
+batt3 isolated=TAB.280.E8
+batt4 isolated=TAB.280.E9
+batt5 isolated=TAB.280.EA
+batt1 reverse=TAB.280.EB
+batt2 reverse=TAB.280.EC
+batt3 reverse=TAB.280.ED
+batt4 reverse=TAB.280.EE
+batt5 reverse=TAB.280.EF
+batt bank dischg=TAB.280.F0
+batt1 bank dischg=TAB.280.F1
+batt2 bank dischg=TAB.280.F2
+batt3 bank dischg=TAB.280.F3
+batt4 bank dischg=TAB.280.F4
+batt5 bank dischg=TAB.280.F5
+batt1 mid cell v=TAB.280.F6
+batt2 mid cell v=TAB.280.F7
+batt3 mid cell v=TAB.280.F8
+batt4 mid cell v=TAB.280.F9
+batt1 fuse fail=TAB.280.FA
+batt2 fuse fail=TAB.280.FB
+batt3 fuse fail=TAB.280.FC
+batt4 fuse fail=TAB.280.FD
+batt5 fuse fail=TAB.280.FE
+batt fuse fail=TAB.280.FF
+batt over charged=TAB.280.100
+battery test=TAB.280.101
+extd charge mode=TAB.280.102
+equalization mode=TAB.280.103
+manual charge=TAB.280.104
+r phase low=TAB.280.12F
+r phase high=TAB.280.130
+y phase low=TAB.280.131
+y phase high=TAB.280.132
+b phase low=TAB.280.133
+b phase high=TAB.280.134
+mains warning=TAB.280.135
+mains fail=TAB.280.136
+r phase fail=TAB.280.137
+y phase fail=TAB.280.138
+b phase fail=TAB.280.139
+phase fail=TAB.280.13A
+mains high=TAB.280.13B
+mains low=TAB.280.13C
+neu earth fail=TAB.280.13D
+neutral fault=TAB.280.13E
+ne fail=TAB.280.13F
+earth fault=TAB.280.140
+dummy1=TAB.280.141
+dummy2=TAB.280.142
+dummy3=TAB.280.143
+line fail=TAB.280.144
+rec proc mode(fs)=TAB.280.145
+rec comm fail=TAB.280.146
+rec fail=TAB.280.147
+multiple rec fail=TAB.280.148
+actual rec fail=TAB.280.149
+all rec fail=TAB.280.14A
+indiv. rec fail=TAB.280.14B
+indiv. rec commf=TAB.280.14C
+rec temp. high=TAB.280.14D
+all rec comm fail=TAB.280.14E
+rec proc mode(ip)=TAB.280.14F
+rec overvoltage=TAB.280.150
+rec fanfail=TAB.280.151
+all rec currlimit=TAB.280.152
+rec 2ph op mode=TAB.280.153
+ip freq abn=TAB.280.154
+rec proc mode(fa)=TAB.280.155
+s-chg comm fail=TAB.280.156
+s-chg fail=TAB.280.157
+multi s-chg fail=TAB.280.158
+s actual recfail=TAB.280.159
+all schg fail=TAB.280.15A
+indiv schg fail=TAB.280.15B
+indiv schg commf=TAB.280.15C
+s-hvlv comm fail=TAB.280.15D
+all s-hvlv fail=TAB.280.15E
+solar system fail=TAB.280.15F
+ip procmode(hvlv)=TAB.280.163
+controller boot=TAB.280.164
+can comm fail=TAB.280.165
+hvlv comm fail=TAB.280.166
+s-hvlv comm fail2=TAB.280.167
+dcif comm fail=TAB.280.168
+bms comm fail=TAB.280.169
+cbms comm fail=TAB.280.16A
+pfc1 comm fail=TAB.280.16B
+pfc2 comm fail=TAB.280.16C
+modem comm fail=TAB.280.16D
+e-dcem comm fail=TAB.280.16E
+acif comm fail=TAB.280.16F
+dgbc comm fail=TAB.280.170
+fs comm fail=TAB.280.171
+camera comm fail=TAB.280.172
+lcu comm fail=TAB.280.173
+llvd disconnect=TAB.280.177
+battery isolated=TAB.280.178
+batt midcell fail=TAB.280.179
+batt not present=TAB.280.17A
+battery reverse=TAB.280.17B
+batt cntr fail=TAB.280.17C
+rec int alarms=TAB.280.17F
+rec proc mode=TAB.280.180
+battery fuse fail=TAB.280.181
+media alarm=TAB.280.182
+lvd rmt cmd=TAB.280.186
+lvd time cmd=TAB.280.187
+dg contactor on=TAB.280.5E
+eb contactor on=TAB.280.5D
+door open alarm=TAB.280.56
+
+chiller door open alarm=TAB.280.66
+battery door open alarm=TAB.280.6E
+
+
+smoke alarm=TAB.280.57
+
+[STATUS]
+float mode=TAB.280.2BD
+charge mode=TAB.280.2BE
+manual charge=TAB.280.2BF
+equalization mode=TAB.280.2C0
+extended charge=TAB.280.2C1
+battery test mode=TAB.280.2C2
+float bcl=TAB.280.2C3
+charge bcl=TAB.280.2C4
+batt bank dischg=TAB.280.2C5
+eco mode=TAB.280.2C6
+load on solar=TAB.280.2C7
+
+[SYSTEM CONFIG]
+ac phases type=TAB.1012.0
+no. of battery fuses=TAB.1418.0
+no. of battery lvd=TAB.1416.0
+no. of load lvd=TAB.141A.0
+no. of load current=TAB.1417.0
+load current sensor=TAB.102E.0
+dcif card type=TAB.1093.0
+hvlv card=TAB.1027.0
+dcif card=TAB.103D.0
+dcif ip card=TAB.108A.0
+dcif op card=TAB.108B.0
+pfc io card=TAB.1095.0
+acif card=TAB.1099.0
+dgbc card=TAB.109A.0
+smr count=TAB.2004.0
+system overload=TAB.1401.0
+smr type=TAB.1098.0
+ac ip voltage source=TAB.101B.0
+ac ip current source=TAB.142B.0
+dg phase type=TAB.4460.0
+ipms power logic=TAB.4010.0
+modem type=TAB.1059.0
+site id=TAB.10.0
+dc source=TAB.1473.0
+
+fan fail sense=TAB.301A.0
+lcu present=TAB.1060.0
+ac1 present= TAB.1064.0
+ac2 present= TAB.1062.0
+aviation lamp configuration= TAB.1062.0
+
+temperature1=TAB.1084.0
+temperature2=TAB.1056.0
+temperature3=TAB.1057.0
+
+batt1 hall effect value=TAB.1443.1
+batt2 hall effect value=TAB.1443.2
+batt3 hall effect value=TAB.1443.3
+batt1 shunt value=TAB.1445.1
+batt2 shunt value=TAB.1445.2
+batt3 shunt value=TAB.1445.3
+batt1 shunt mv value=TAB.1444.1
+batt2 shunt mv value=TAB.1444.2
+batt3 shunt mv value=TAB.1444.3
+
+
+load1 hall effect value=TAB.144D.1
+load2 hall effect value=TAB.144D.2
+load3 hall effect value=TAB.144D.3
+load4 hall effect value=TAB.144D.4
+load1 shunt value=TAB.144F.1
+load2 shunt value=TAB.144F.2
+load3 shunt value=TAB.144F.3
+load4 shunt value=TAB.144F.4
+load1 shunt mv value=TAB.144E.1
+load2 shunt mv value=TAB.144E.2
+load3 shunt mv value=TAB.144E.3
+load4 shunt mv value=TAB.144E.4
+
+eco mode=TAB.102A.0
+vrla battery capacity=TAB.1802.0
+lion battery capacity=TAB.1807.0
+vrla bcl factor=TAB.1805.0
+lion bcl factor=TAB.180A.0
+lion module count=TAB.1833.0
+battery type=TAB.184F.0
+
+
+
+[CALIBRATE DC VOLTAGE]
+batt1=TAB.3811.0
+batt2=TAB.3812.0
+batt3=TAB.3813.0
+bus=TAB.3820.0
+channel1 deadband=TAB.540D.1
+channel2 deadband=TAB.540D.2
+channel3 deadband=TAB.540D.3
+channel4 deadband=TAB.540D.4
+channel5 deadband=TAB.540D.5
+channel6 deadband=TAB.540D.6
+channel7 deadband=TAB.540D.7
+channel1 gain=TAB.5410.1
+channel2 gain=TAB.5410.2
+channel3 gain=TAB.5410.3
+channel4 gain=TAB.5410.4
+channel5 gain=TAB.5410.5
+channel6 gain=TAB.5410.6
+channel7 gain=TAB.5410.7
+
+
+[CALIBRATE CURRENT]
+channel1=TAB.541C.1
+channel2=TAB.541C.2
+channel3=TAB.541C.3
+channel4=TAB.541C.4
+channel5=TAB.541C.5
+channel6=TAB.541C.6
+channel7=TAB.541C.7
+
+channel1 deadband=TAB.5406.1
+channel2 deadband=TAB.5406.2
+channel3 deadband=TAB.5406.3
+channel4 deadband=TAB.5406.4
+channel5 deadband=TAB.5406.5
+channel6 deadband=TAB.5406.6
+channel7 deadband=TAB.5406.7
+channel1 gain=TAB.5408.1
+channel2 gain=TAB.5408.2
+channel3 gain=TAB.5408.3
+channel4 gain=TAB.5408.4
+channel5 gain=TAB.5408.5
+channel6 gain=TAB.5408.6
+channel7 gain=TAB.5408.7
+channel1 offset=TAB.540B.1
+channel2 offset=TAB.540B.2
+channel3 offset=TAB.540B.3
+channel4 offset=TAB.540B.4
+channel5 offset=TAB.540B.5
+channel6 offset=TAB.540B.6
+channel7 offset=TAB.540B.7
+
+
+[CALIBRATE CURRENT DCIO]
+channel1=TAB.144C.1
+channel2=TAB.144C.2
+channel3=TAB.144C.3
+channel4=TAB.144C.4
+channel5=TAB.1442.1
+channel6=TAB.1442.2
+channel7=TAB.1442.3
+
+channel1 deadband=TAB.5406.1
+channel2 deadband=TAB.5406.2
+channel3 deadband=TAB.5406.3
+channel4 deadband=TAB.5424.1
+channel5 deadband=TAB.5424.2
+channel6 deadband=TAB.5424.3
+channel7 deadband=TAB.5424.4
+
+channel1 gain=TAB.5408.1
+channel2 gain=TAB.5408.2
+channel3 gain=TAB.5408.3
+channel4 gain=TAB.5427.1
+channel5 gain=TAB.5427.2
+channel6 gain=TAB.5427.3
+channel7 gain=TAB.5427.4
+
+channel1 offset=TAB.540B.1
+channel2 offset=TAB.540B.2
+channel3 offset=TAB.540B.3
+channel4 offset=TAB.542A.1
+channel5 offset=TAB.542A.2
+channel6 offset=TAB.542A.3
+channel7 offset=TAB.542A.4
+
+
+
+[BATTERY ISOLATE]
+batt1=TAB.1856.0
+batt2=TAB.1857.0
+batt3=TAB.1858.0
+
+
+[LOAD ISOLATE]
+load1=TAB.53.1
+load2=TAB.53.2
+load3=TAB.53.3
+load4=TAB.53.4
+load5=TAB.53.5
+
+[SMR COMMANDS]
+deregister all smr=TAB.1420.0
+smr1 status=TAB.1461.1
+smr2 status=TAB.1461.2
+smr3 status=TAB.1461.3
+smr4 status=TAB.1461.4
+smr5 status=TAB.1461.5
+smr6 status=TAB.1461.6
+smr7 status=TAB.1461.7
+smr8 status=TAB.1461.8
+smr9 status=TAB.1461.9
+smr10 status=TAB.1461.A
+smr11 status=TAB.1461.B
+smr12 status=TAB.1461.C
+smr13 status=TAB.1461.D
+smr14 status=TAB.1461.E
+smr15 status=TAB.1461.F
+smr16 status=TAB.1461.10
+smr17 status=TAB.1461.11
+smr18 status=TAB.1461.12
+smr19 status=TAB.1461.13
+smr20 status=TAB.1461.14
+smr21 status=TAB.1461.15
+smr22 status=TAB.1461.16
+smr23 status=TAB.1461.17
+smr24 status=TAB.1461.18
+smr25 status=TAB.1461.19
+smr26 status=TAB.1461.1A
+smr27 status=TAB.1461.1B
+smr28 status=TAB.1461.1C
+smr29 status=TAB.1461.1D
+smr30 status=TAB.1461.1E
+smr1 id=TAB.2009.1
+smr2 id=TAB.2009.2
+smr3 id=TAB.2009.3
+smr4 id=TAB.2009.4
+smr5 id=TAB.2009.5
+smr6 id=TAB.2009.6
+smr7 id=TAB.2009.7
+smr8 id=TAB.2009.8
+smr9 id=TAB.2009.9
+smr10 id=TAB.2009.A
+smr11 id=TAB.2009.B
+smr12 id=TAB.2009.C
+smr13 id=TAB.2009.D
+smr14 id=TAB.2009.E
+smr15 id=TAB.2009.F
+smr16 id=TAB.2009.10
+smr17 id=TAB.2009.11
+smr18 id=TAB.2009.12
+smr19 id=TAB.2009.13
+smr20 id=TAB.2009.14
+smr21 id=TAB.2009.15
+smr22 id=TAB.2009.16
+smr23 id=TAB.2009.17
+smr24 id=TAB.2009.18
+smr25 id=TAB.2009.19
+smr26 id=TAB.2009.1A
+smr27 id=TAB.2009.1B
+smr28 id=TAB.2009.1C
+smr29 id=TAB.2009.1D
+smr30 id=TAB.2009.1E
+smr1 current=TAB.145B.1
+smr2 current=TAB.145B.2
+smr3 current=TAB.145B.3
+smr4 current=TAB.145B.4
+smr5 current=TAB.145B.5
+smr6 current=TAB.145B.6
+smr7 current=TAB.145B.7
+smr8 current=TAB.145B.8
+smr9 current=TAB.145B.9
+smr10 current=TAB.145B.A
+smr11 current=TAB.145B.B
+smr12 current=TAB.145B.C
+smr13 current=TAB.145B.D
+smr14 current=TAB.145B.E
+smr15 current=TAB.145B.F
+smr16 current=TAB.145B.10
+smr17 current=TAB.145B.11
+smr18 current=TAB.145B.12
+smr19 current=TAB.145B.13
+smr20 current=TAB.145B.14
+smr21 current=TAB.145B.15
+smr22 current=TAB.145B.16
+smr23 current=TAB.145B.17
+smr24 current=TAB.145B.18
+smr25 current=TAB.145B.19
+smr26 current=TAB.145B.1A
+smr27 current=TAB.145B.1B
+smr28 current=TAB.145B.1C
+smr29 current=TAB.145B.1D
+smr30 current=TAB.145B.1E
+smr1 voltage=TAB.145C.1
+smr2 voltage=TAB.145C.2
+smr3 voltage=TAB.145C.3
+smr4 voltage=TAB.145C.4
+smr5 voltage=TAB.145C.5
+smr6 voltage=TAB.145C.6
+smr7 voltage=TAB.145C.7
+smr8 voltage=TAB.145C.8
+smr9 voltage=TAB.145C.9
+smr10 voltage=TAB.145C.A
+smr11 voltage=TAB.145C.B
+smr12 voltage=TAB.145C.C
+smr13 voltage=TAB.145C.D
+smr14 voltage=TAB.145C.E
+smr15 voltage=TAB.145C.F
+smr16 voltage=TAB.145C.10
+smr17 voltage=TAB.145C.11
+smr18 voltage=TAB.145C.12
+smr19 voltage=TAB.145C.13
+smr20 voltage=TAB.145C.14
+smr21 voltage=TAB.145C.15
+smr22 voltage=TAB.145C.16
+smr23 voltage=TAB.145C.17
+smr24 voltage=TAB.145C.18
+smr25 voltage=TAB.145C.19
+smr26 voltage=TAB.145C.1A
+smr27 voltage=TAB.145C.1B
+smr28 voltage=TAB.145C.1C
+smr29 voltage=TAB.145C.1D
+smr30 voltage=TAB.145C.1E
+
+[ALARM MASK]
+battery lvd=TAB.040C.AF
+
+[LED]
+led=TAB.50.0
+
+[BUZZER]
+buzzer=TAB.51.0
+
+[DCIF 8 OP PFC]
+pfc=TAB.55.0
+[DCIF 8 IP PFC]
+pfc=TAB.5420.0
+invert pfc=TAB.0412.
+
+[DCIF 2 OP PFC]
+pfc=TAB.54.0
+
+[RS 485]
+lower port baudrate=TAB.393.0
+upper port baudrate=TAB.391.0
+modbus comm=TAB.39C.8
+lithium ion comm=TAB.39C.B
+acem comm=TAB.39C.C
+dg amf comm=TAB.39C.D
+solar hvlv comm=TAB.39C.7
+ext dcem comm=TAB.39C.6
+bnms comm=TAB.39C.3
+lcu comm=TAB.39C.9
+fuel sensor comm=TAB.39C.4
+
+[SYSTEM COMMANDS]
+factory restore=TAB.31.0
+setting restore=TAB.30.0
+system reset=TAB.32.0
+system initialize=TAB.35.0
+ate test=TAB.5A.0
+site id=TAB.10.0
+serial number=TAB.A000.1
+part number=TAB.A005.1
+config file version=TAB.109F.0
+m1000 mac id=TAB.9017.0
+software version=TAB.39E.0
+bootloader version=TAB.39F.0
+system serial number=TAB.36.0
+system part number=TAB.37.0
+rtc date time=TAB.127.0
+
+[GENERAL DATA]
+total batt current=TAB.1466.0
+total load current=TAB.1467.0
+
+[AVIATION LAMP]
+on hour=TAB.3045.0
+on min=TAB.3046.0
+off hour=TAB.3047.0
+off min=TAB.3048.0
+aviation lamp state=TAB.446D.0
+
+[M1000 VER REV]
+m1000=TAB.39E.0
+bootloader=TAB.39F.0
+hvlv=TAB.109B.0
+acif=TAB.109C.0
+dcif=TAB.109D.0
+config=TAB.109F.0
+pfcio 1=TAB.10A1.0
+pfcio 2=TAB.10A2.0
+dgbc=TAB.10A3.0
+
+[M2000 VER REV]
+m1000=TAB.39E.0
+bootloader=TAB.39F.0
+hvlv=TAB.109B.0
+acif=TAB.109C.0
+dcif=TAB.109D.0
+config=TAB.109F.0
+pfcio 1=TAB.10A1.0
+pfcio 2=TAB.10A2.0
+dgbc=TAB.10A3.0
+
+[VER REV]
+m1000=TAB.39E.0
+bootloader=TAB.39F.0
+hvlv=TAB.109B.0
+acif=TAB.109C.0
+dcif=TAB.109D.0
+config=TAB.109F.0
+pfcio 1=TAB.10A1.0
+pfcio 2=TAB.10A2.0
+dgbc=TAB.10A3.0
+

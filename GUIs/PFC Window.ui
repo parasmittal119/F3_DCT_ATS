@@ -1,0 +1,4257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1031</width>
+    <height>506</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PFC Configuration Window</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../images/logo_1.png</normaloff>../images/logo_1.png</iconset>
+  </property>
+  <widget class="QGroupBox" name="groupBox_1">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>481</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="title">
+    <string>PFC-1</string>
+   </property>
+   <widget class="QWidget" name="horizontalLayoutWidget_57">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_57">
+     <item>
+      <widget class="QCheckBox" name="pfc11_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Priority Load</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_57">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc11_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_58">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>30</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_58">
+     <item>
+      <widget class="QCheckBox" name="pfc12_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>R-Phase</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_58">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc12_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_59">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>227</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_59">
+     <item>
+      <widget class="QCheckBox" name="pfc13_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>N-Priority Load 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_59">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc13_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>2</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_60">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>80</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_60">
+     <item>
+      <widget class="QCheckBox" name="pfc14_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Y-Phase</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_60">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc14_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>3</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_61">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>130</y>
+      <width>227</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_61">
+     <item>
+      <widget class="QCheckBox" name="pfc15_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>N-Priority Load 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_61">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc15_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>4</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_62">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>130</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_62">
+     <item>
+      <widget class="QCheckBox" name="pfc16_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>B-Phase</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_62">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc16_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>5</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_63">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>227</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_63">
+     <item>
+      <widget class="QCheckBox" name="pfc17_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>N-Priority Load 3</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_63">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc17_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>6</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_64">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>180</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_64">
+     <item>
+      <widget class="QCheckBox" name="pfc18_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Bus +ve</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_64">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc18_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>7</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_65">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>227</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_65">
+     <item>
+      <widget class="QCheckBox" name="pfc19_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>N-Priority Load 4</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_65">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc19_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>8</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_66">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>230</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_66">
+     <item>
+      <widget class="QCheckBox" name="pfc110_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Load Mains</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_66">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc110_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>9</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_67">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_67">
+     <item>
+      <widget class="QCheckBox" name="pfc111_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Battery 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_67">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc111_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>10</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_68">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>280</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_68">
+     <item>
+      <widget class="QCheckBox" name="pfc112_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Battery Mains</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_68">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc112_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>11</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_69">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>330</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_69">
+     <item>
+      <widget class="QCheckBox" name="pfc113_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Battery 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_69">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc113_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>12</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_70">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>330</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_70">
+     <item>
+      <widget class="QCheckBox" name="pfc114_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Add-on 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_70">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc114_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>13</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_85">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_71">
+     <item>
+      <widget class="QCheckBox" name="pfc115_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Battery 3</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_71">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc115_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>14</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_86">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>380</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_72">
+     <item>
+      <widget class="QCheckBox" name="pfc116_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Add-on 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_72">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc116_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>15</number>
+       </property>
+       <property name="insertPolicy">
+        <enum>QComboBox::InsertAtCurrent</enum>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>30</y>
+      <width>20</width>
+      <height>391</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>413</y>
+      <width>481</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>20</y>
+     <width>481</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="title">
+    <string>PFC-2</string>
+   </property>
+   <widget class="QWidget" name="horizontalLayoutWidget_71">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_73">
+     <item>
+      <widget class="QCheckBox" name="pfc21_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_73">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc21_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_72">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>30</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_74">
+     <item>
+      <widget class="QCheckBox" name="pfc22_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_74">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc22_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_73">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_75">
+     <item>
+      <widget class="QCheckBox" name="pfc23_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 3</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_75">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc23_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>2</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_74">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>80</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_76">
+     <item>
+      <widget class="QCheckBox" name="pfc24_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 4</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_76">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc24_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>3</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_75">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>130</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_77">
+     <item>
+      <widget class="QCheckBox" name="pfc25_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 5</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_77">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc25_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>4</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_76">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>130</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_78">
+     <item>
+      <widget class="QCheckBox" name="pfc26_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 6</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_78">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc26_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>5</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_77">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_79">
+     <item>
+      <widget class="QCheckBox" name="pfc27_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 7</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_79">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc27_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>6</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_78">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>180</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_80">
+     <item>
+      <widget class="QCheckBox" name="pfc28_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 8</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_80">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc28_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>7</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_79">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_81">
+     <item>
+      <widget class="QCheckBox" name="pfc29_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 9</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_81">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc29_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>8</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_80">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>230</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_82">
+     <item>
+      <widget class="QCheckBox" name="pfc210_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 10</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_82">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc210_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>9</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_81">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_83">
+     <item>
+      <widget class="QCheckBox" name="pfc211_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 11</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_83">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc211_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>10</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_82">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>280</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_84">
+     <item>
+      <widget class="QCheckBox" name="pfc212_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 12</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_84">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc212_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>11</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_83">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>330</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_85">
+     <item>
+      <widget class="QCheckBox" name="pfc213_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 13</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_85">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc213_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>12</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_84">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>330</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_86">
+     <item>
+      <widget class="QCheckBox" name="pfc214_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 14</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_86">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc214_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>13</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_87">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_87">
+     <item>
+      <widget class="QCheckBox" name="pfc215_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 15</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_87">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc215_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>14</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_88">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>380</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_90">
+     <item>
+      <widget class="QCheckBox" name="pfc216_select">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>PFC 16</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_90">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pfc216_combo">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>15</number>
+       </property>
+       <property name="insertPolicy">
+        <enum>QComboBox::InsertAtCurrent</enum>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactor1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Contactor16</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>30</y>
+      <width>20</width>
+      <height>391</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>413</y>
+      <width>481</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="get_2">
+   <property name="geometry">
+    <rect>
+     <x>920</x>
+     <y>460</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Apply</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

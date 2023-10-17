@@ -1,0 +1,162 @@
+[PFC 1 PFC]
+p_load = PFC 1
+r_phase = PFC 2
+n_p_load_1 = PFC 3
+y_phase = PFC 4
+n_p_load_2 = PFC 5
+b_phase = PFC 6
+n_p_load_3 = PFC 7
+bus = PFC 8
+n_p_load_4 = PFC 9
+load_mains = PFC 10
+battery_1 = PFC 11
+battery_mains = PFC 12
+battery_2 = PFC 13
+add_on_1 = PFC 14
+battery_3 = PFC 15
+add_on_2 = PFC 16
+
+[PFC 1 STATE]
+p_load = YES
+r_phase = YES
+n_p_load_1 = YES
+y_phase = YES
+n_p_load_2 = YES
+b_phase = YES
+n_p_load_3 = YES
+bus = YES
+n_p_load_4 = YES
+load_mains = YES
+battery_1 = YES
+battery_mains = YES
+battery_2 = YES
+add_on_1 = YES
+battery_3 = YES
+add_on_2 = YES
+
+[PFC 2 PFC]
+pfc 1 = PFC 1
+pfc 2 = PFC 2
+pfc 3 = PFC 3
+pfc 4 = PFC 4
+pfc 5 = PFC 5
+pfc 6 = PFC 6
+pfc 7 = PFC 7
+pfc 8 = PFC 8
+pfc 9 = PFC 9
+pfc 10 = PFC 10
+pfc 11 = PFC 11
+pfc 12 = PFC 12
+pfc 13 = PFC 13
+pfc 14 = PFC 14
+pfc 15 = PFC 15
+pfc 16 = PFC 16
+
+[PFC 2 STATE]
+pfc 1 = YES
+pfc 2 = YES
+pfc 3 = YES
+pfc 4 = YES
+pfc 5 = YES
+pfc 6 = YES
+pfc 7 = YES
+pfc 8 = YES
+pfc 9 = YES
+pfc 10 = YES
+pfc 11 = YES
+pfc 12 = YES
+pfc 13 = YES
+pfc 14 = YES
+pfc 15 = YES
+pfc 16 = YES
+
+[SETTING]
+m1000_ip address = 172.16.66.50
+m1000_user = engg1
+m1000_password = 8M$Ex#engg
+m2000_ip address = 172.16.66.50
+m2000_user = engg1
+m2000_password = 8M$Ex#engg
+db user = root
+db password = test123
+can device name = ixxat
+can device id = HW443335
+can device bitrate = 250K
+rs485 lower port = COM12
+rs485 upper port = COM11
+modbus comm port = COM10
+modbus comm baudrate = 9600
+modbus comm port 2 = COM15
+modbus comm baudrate 2 = 9600
+ac source comm type = GPIB
+ac source gpib id = GPIB1::30::INSTR
+ac source usb id = USB0::0x0A69::0x0844::616120000192
+ate load count = 1
+ate load comm type = GPIB
+dc load gpib id = GPIB0::30::INSTR
+battery load gpib id = GPIB0::30::INSTR
+dc load usb id = USB0::0x0A69::0x0879::63210AH00072::INSTR
+battery load usb id = USB0::0x0A69::0x0879::63210AH00072::INSTR
+2d matrix code = 24
+power meter usb id = USB0::0x0A69::0x086C::662040000475
+cro port = None
+cro baudrate = None
+
+[SETTING STATE]
+m1000_ip address = YES
+m1000_user = YES
+m1000_password = YES
+m2000_ip address = YES
+m2000_user = YES
+m2000_password = YES
+db user = YES
+db password = YES
+can device name = YES
+can device id = YES
+can device bitrate = YES
+rs485 lower port = YES
+rs485 upper port = YES
+modbus comm port = YES
+modbus comm baudrate = YES
+modbus comm port 2 = YES
+modbus comm baudrate 2 = YES
+ac source comm type = YES
+ac source gpib id = YES
+ac source usb id = YES
+ate load count = YES
+ate load comm type = YES
+dc load gpib id = YES
+battery load gpib id = YES
+dc load usb id = YES
+battery load usb id = YES
+2d matrix code = YES
+power meter usb id = YES
+cro port = YES
+cro baudrate = YES
+
+[STATION]
+id = 5
+
+[USERNAME]
+paras = SUPERMASTER
+deepak = SUPERMASTER
+paras_mittal = MASTER
+pratham = ADMIN
+roop = USER
+p = SUPERMASTER
+abhimanyu = USER
+honey = USER
+
+[PASSWORDS]
+paras = 321@exicom
+paras_mittal = 321@mocixe
+deepak = deepak1
+pratham = pratham
+roop = roop
+p = p
+abhimanyu = asdfghjkl
+honey = singh
+
+[TEST ID]
+count = 1043
+

@@ -1,0 +1,25 @@
+[USERNAME]
+paras = SUPERMASTER
+deepak = SUPERMASTER
+paras_mittal = MASTER
+pratham = ADMIN
+roop = USER
+p = SUPERMASTER
+abhimanyu = USER
+honey = USER
+sahil = USER
+
+[PASSWORDS]
+paras = 321@exicom
+paras_mittal = 321@mocixe
+deepak = deepak1
+pratham = pratham
+roop = roop
+p = p
+abhimanyu = asdfghjkl
+honey = singh
+sahil = sahilsandhu
+
+[COMMISSION]
+serial = PG02VQP8
+

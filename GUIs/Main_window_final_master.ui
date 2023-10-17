@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>799</width>
+    <height>599</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>DCT ATS</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>images/logo_1.png</normaloff>images/logo_1.png</iconset>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Triangular</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>290</y>
+      <width>271</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/logo.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>799</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuUser">
+    <property name="title">
+     <string>User</string>
+    </property>
+    <addaction name="actionLogout"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuTest_Menu">
+    <property name="title">
+     <string>Test Menu</string>
+    </property>
+    <addaction name="actionPP_Test_Script"/>
+    <addaction name="separator"/>
+    <addaction name="actionIMPS_Test_Script"/>
+    <addaction name="separator"/>
+    <addaction name="actionRJIL_Test_Script"/>
+    <addaction name="separator"/>
+    <addaction name="actionRJIL_M2000_Test_Script"/>
+   </widget>
+   <widget class="QMenu" name="menuManagement">
+    <property name="title">
+     <string>Management</string>
+    </property>
+    <addaction name="actionUser_Management"/>
+    <addaction name="separator"/>
+    <addaction name="actionHardware_Management"/>
+    <addaction name="separator"/>
+    <addaction name="actionTest_Configuration"/>
+    <addaction name="separator"/>
+    <addaction name="actionPP_Custom_Setting"/>
+    <addaction name="separator"/>
+    <addaction name="actionPP_Add_Customer"/>
+   </widget>
+   <widget class="QMenu" name="menuReports">
+    <property name="title">
+     <string>Reports</string>
+    </property>
+    <addaction name="actionTest_Reports"/>
+    <addaction name="separator"/>
+    <addaction name="actionLogs"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuDebug">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <addaction name="actionTest_Order_Preference"/>
+    <addaction name="separator"/>
+    <addaction name="actionCommunication_Window"/>
+   </widget>
+   <widget class="QMenu" name="menuATS_Control">
+    <property name="title">
+     <string>ATS Control</string>
+    </property>
+    <addaction name="actionPFC_Control"/>
+   </widget>
+   <addaction name="menuUser"/>
+   <addaction name="menuTest_Menu"/>
+   <addaction name="menuManagement"/>
+   <addaction name="menuReports"/>
+   <addaction name="menuDebug"/>
+   <addaction name="menuATS_Control"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionLogout">
+   <property name="text">
+    <string>Logout</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionPP_Test_Script">
+   <property name="text">
+    <string>PP Test Script</string>
+   </property>
+  </action>
+  <action name="actionIMPS_Test_Script">
+   <property name="text">
+    <string>IMPS Test Script</string>
+   </property>
+  </action>
+  <action name="actionRJIL_Test_Script">
+   <property name="text">
+    <string>RJIL Test Script</string>
+   </property>
+  </action>
+  <action name="actionRJIL_M2000_Test_Script">
+   <property name="text">
+    <string>RJIL M2000 Test Script</string>
+   </property>
+  </action>
+  <action name="actionUser_Management">
+   <property name="text">
+    <string>User Management</string>
+   </property>
+  </action>
+  <action name="actionHardware_Management">
+   <property name="text">
+    <string>Hardware Management</string>
+   </property>
+  </action>
+  <action name="actionTest_Configuration">
+   <property name="text">
+    <string>Test Configuration</string>
+   </property>
+  </action>
+  <action name="actionPP_Custom_Setting">
+   <property name="text">
+    <string>PP Custom Setting</string>
+   </property>
+  </action>
+  <action name="actionPP_Add_Customer">
+   <property name="text">
+    <string>PP Add Customer</string>
+   </property>
+  </action>
+  <action name="actionTest_Reports">
+   <property name="text">
+    <string>Test Reports</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionPFC_Control">
+   <property name="text">
+    <string>PFC Control</string>
+   </property>
+  </action>
+  <action name="actionCommunication_Window">
+   <property name="text">
+    <string>Communication Window</string>
+   </property>
+  </action>
+  <action name="actionTest_Order_Preference">
+   <property name="text">
+    <string>Test Order Preference</string>
+   </property>
+  </action>
+  <action name="actionLogs">
+   <property name="text">
+    <string>Logs</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
