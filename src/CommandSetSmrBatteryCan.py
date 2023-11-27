@@ -7,53 +7,52 @@
 from config_done import *
 import time
 from CanModule import CAN
-
+import gui_global
 
 
 def format_voltage(DC_Voltage):
-    format_v=[]
-    temp10=DC_Voltage*10
-    temp10=int(temp10)
-    # print (temp10)
-    temp1=int(temp10/256)
-    temp2=int(temp10%256)
-    # print (hex(temp1))
-    # print (hex(temp2))
-    format_v=[temp2,temp1]
+    format_v = []
+    temp10 = DC_Voltage * 10
+    temp10 = int(temp10)
+    print (temp10)
+    temp1 = int(temp10 / 256)
+    temp2 = int(temp10 % 256)
+    print (hex(temp1))
+    print (hex(temp2))
+    format_v = [temp2, temp1]
     return format_v
 
 
 def SMR_VOLTAGE_PACKET(voltage):
-    p_id=0x6FF
-    p_rtr=0
-    p_len=8
-    p_d0=0x2B
-    p_d1=0x3E # 3E
-    p_d2=0x20
-    p_d3=0x00
-    p_d4=voltage[0]
-    p_d5=voltage[1]
-    p_d6=0x00
-    p_d7=0x00
-    packet=[p_d0,p_d1,p_d2,p_d3,p_d4,p_d5,p_d6,p_d7]
+    p_id = 0x6FF
+    p_rtr = 0
+    p_len = 8
+    p_d0 = 0x2B
+    p_d1 = 0x3E  # 3E
+    p_d2 = 0x20
+    p_d3 = 0x00
+    p_d4 = voltage[0]
+    p_d5 = voltage[1]
+    p_d6 = 0x00
+    p_d7 = 0x00
+    packet = [p_d0, p_d1, p_d2, p_d3, p_d4, p_d5, p_d6, p_d7]
     return packet
+
 
 def SMR_CURRENT_PACKET():
-    p_id=0x6FF
-    p_rtr=0
-    p_len=8
-    p_d0=0x2B
-    p_d1=0x3F
-    p_d2=0x20
-    p_d3=0x00
-    p_d4=0x71
-    p_d5=0x02
-    p_d6=0x00
-    p_d7=0x00
-    packet=[p_d0,p_d1,p_d2,p_d3,p_d4,p_d5,p_d6,p_d7]
+    p_id = 0x6FF
+    p_rtr = 0
+    p_len = 8
+    p_d0 = 0x2B
+    p_d1 = 0x3F
+    p_d2 = 0x20
+    p_d3 = 0x00
+    p_d4 = 0x71
+    p_d5 = 0x02
+    p_d6 = 0x00
+    p_d7 = 0x00
+    packet = [p_d0, p_d1, p_d2, p_d3, p_d4, p_d5, p_d6, p_d7]
     return packet
-
-
 
 
 # def SMR_PACKET(voltage):
@@ -70,22 +69,28 @@ def SMR_CURRENT_PACKET():
 #     p_d7=0x00
 #     packet=[p_id,p_rtr,p_len,p_d0,p_d1,p_d2,p_d3,p_d4,p_d5,p_d6,p_d7]
 #     return packet
-global count
-count = 1
+
+
+
 def SMR_BATTERY_SET_VOLTAGE(DC_Voltage):
-    global count
-    count += 1
+    print(gui_global.count)
+    gui_global.count += 1
+    print(gui_global.count)
     voltage = format_voltage(DC_Voltage)
+    print(f"Voltage {voltage}")
     packet = SMR_VOLTAGE_PACKET(voltage)
     print(packet)
     # CAN.CAN_WRITE(CAN, message_id=1552, packet=packet)
-    if count == 1:
-        CAN.CAN_WRITE(CAN, message_id=1791)
-        CAN.CAN_WRITE(CAN, message_id=770)
+    # if gui_global.count == 1:
     CAN.CAN_WRITE(CAN, message_id=1552, packet=packet)
 
-# for i in range(1,7):
-#     SMR_BATTERY_SET_VOLTAGE(48+i)
-#     time.sleep(5)
-#
-# SMR_BATTERY_SET_VOLTAGE(50)
+
+def register():
+    value = CAN.CAN_WRITE(CAN, message_id=1791)
+    print(f"bhvbjhbm {value}")
+    CAN.CAN_WRITE(CAN, message_id=770, packet=value)
+
+
+
+# register()
+# SMR_BATTERY_SET_VOLTAGE(49)

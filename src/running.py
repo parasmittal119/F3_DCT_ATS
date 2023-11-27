@@ -1,22 +1,22 @@
 import csv
+import datetime
 import getpass
 import os
 import shutil
 import subprocess
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 
-from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QPainter, QColor, QPen
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel
 
 import data_file
-import gui_global
 from Hardware_detection import Hardware_check
-from User_login import Login
 from config_done import *
 from prompts import *
+from exicom_login import Ui_MainWindow
 
 file_data = [data_file.alarmIndex, data_file.calibrate, data_file.config, data_file.default, data_file.filetime, data_file.oid,
              data_file.orderedtelnet, data_file.pfcjig, data_file.profile, data_file.RequiredParameter,
@@ -92,12 +92,18 @@ class CircularProgressBar(QWidget):
 
     def User_login(self):
         if Hardware_check():
-            self.login_window = Login()
+            self.login_window = Ui_MainWindow()  # Login()
+            self.temp_window = QtWidgets.QWidget()
+            self.login_window.setupUi(self.temp_window)
+            self.temp_window.setWindowFlags(Qt.FramelessWindowHint)
+            self.temp_window.setAttribute(Qt.WA_NoSystemBackground, True)
+            self.temp_window.setAttribute(Qt.WA_TranslucentBackground, True)
+            self.temp_window.show()
             # self.login_window.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
             # self.login_window.setAttribute(Qt.WA_NoSystemBackground, True)
             # self.login_window.setAttribute(Qt.WA_TranslucentBackground, True)
-            self.login_window.center()
-            self.login_window.show()
+            # self.login_window.center()
+            # self.login_window.show()
             self.close()
         else:
             error_list = []
@@ -124,14 +130,14 @@ class CircularProgressBar(QWidget):
         painter.setRenderHint(QPainter.Antialiasing)
 
         # Outer circle
-        outer_radius = int(min(width, height) / 2 - 10)
+        outer_radius = int(min(width, height) / 2 - 15)
         outer_center = int(width / 2), int(height / 2)
         outer_circle = QColor(50, 50, 50)
         painter.setPen(QPen(outer_circle, 20))
         painter.drawEllipse(outer_center[0] - outer_radius, outer_center[1] - outer_radius, 2 * outer_radius, 2 * outer_radius)
 
         # Inner circle
-        inner_radius = int(outer_radius - 10)
+        inner_radius = int(outer_radius - 15)
         inner_circle = QColor(150, 150, 150)
         painter.setPen(QPen(inner_circle, 10))
         painter.drawEllipse(outer_center[0] - inner_radius, outer_center[1] - inner_radius, 2 * inner_radius, 2 * inner_radius)
@@ -182,6 +188,7 @@ def systemSerial():
 
 def files_and_values():
     # CHECKING FOR ALL PRESENT DIRECTORIES/ ELSE CREATING THEM
+    global return_dict
     account_user = getpass.getuser()  # to get login account INFO
 
     list_of_dir = ['CRCModules', 'files', 'images', 'logs', 'records', 'reports', 'src',
@@ -254,11 +261,106 @@ def files_and_values():
     systemSerialNumber = systemSerial()
     stored_value = ProfileReading('COMMISSION')['serial']
 
+    # print(f"system num ; {systemSerialNumber}")
+    #
+    # print(f"serial number: {stored_value}")
+
     gui_global.commissioning_status = (systemSerialNumber == stored_value)
+
+    backup_list = [f"D:/backup/backup", "D:/backup/backup/files_backup/original", "D:/backup/backup/records_backup", "D:/backup/backup/log_backup"]
+    for i in range(len(backup_list)):
+        if os.path.exists(backup_list[i]):
+            pass
+        else:
+            os.makedirs(backup_list[i])
+
+    # date_time = str(datetime.datetime.now()).split(" ")[0]
+    date_time = str(datetime.datetime.today().date())
+    date_time = date_time.split("-")
+    day = date_time[2]
+    month = date_time[1]
+    year = date_time[0]
+    # print(day, month, year)
+
+    file_dict = get_last_modified_dict("D:/backup/backup/files_backup/original/.")
+    dict1 = get_last_modified_dict(f"{gui_global.files_directory_location}.")
+
+    if os.path.exists("D:/backup/backup/date_modified.txt"):
+        with open("D:/backup/backup/date_modified.txt") as file:
+            var = file.read()
+        return_dict = eval(var)
+    else:
+        return_dict = {}
+        with open("D:/backup/backup/date_modified.txt", 'w') as file:
+            file.write(str(dict1))
+        file.close()
+
+
+    if file_dict == {}:
+        for i in dict1.keys():
+            shutil.copy(i, f"D:/backup/backup/files_backup/original")
+
+    for i in dict1.keys():
+        if return_dict == {}:
+            pass
+        elif dict1[i] == return_dict[i]:
+            pass
+        else:
+            try:
+                os.makedirs(f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}")
+                shutil.copy(j, f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}/")
+            except:
+                if os.path.exists(f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}"):
+                    os.makedirs(
+                        f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}/backup_{day}_{month}_{year}_{int(time.time())}")
+                    shutil.copy(i,
+                                f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}/backup_{day}_{month}_{year}_{int(time.time())}/")
+            with open("D:/backup/backup/date_modified.txt", 'w') as file:
+                file.write(str(dict1))
+            file.close()
+            break
+
+    # print(str(datetime.datetime.today().date()))
+    # print(str(datetime.datetime.today().date()+datetime.timedelta(days=14)))
+
+
+    if os.path.exists(f"D:/backup/backup/records_backup/"):
+        arr = os.listdir(f"{directory_path}/records/")
+        if "active" in arr[0]:
+            if os.path.exists(f"D:/backup/backup/records_backup/{arr[0][:8]}_{day}_{month}_{year}.csv"):
+                pass
+            else:
+                station_id = SettingRead("STATION")['id']
+                shutil.copy(f"{directory_path}/records/active_{station_id}.csv", f"D:/backup/backup/records_backup/")
+                os.renames(f"D:/backup/backup/records_backup/active_{station_id}.csv", f"D:/backup/backup/records_backup/{arr[0][:8]}_{day}_{month}_{year}.csv")
+                try:
+                    shutil.copy(f"D:/backup/backup/records_backup/{arr[0][:8]}_{day}_{month}_{year}.csv", r'\\SLICE\Data_Share_Temp\temp_folder_to_upload')
+                except:
+                    Prompt.Message(Prompt, "Error!", "Error Connecting to server, kindly check internet connectivity to local server!")
+                    Prompt.Message(Prompt, "Error!", "Failed to upload <b>BACKUP</b> to local server!, due to non-connectivity to local server!")
+
+
+def get_last_modified_dict(path: str) -> dict:
+    data = os.walk(path)
+    return_data = dict()
+    for root, _, files in data:
+        for file in files:
+            file = os.path.join(root, file)
+            return_data[file] = os.stat(file).st_mtime
+    return return_data
+
+
 
 
 if __name__ == '__main__':
+    global return_dict, m
+    from screeninfo import get_monitors
+    for m in get_monitors():
+        # print(m)
+        pass
+    return_dict = []
     app = QApplication(sys.argv)
+    gui_global.ate_name = sys.argv[0].split("\\")[-1].split(".")[0]
     files_and_values()
     main_window = QMainWindow()
     main_widget = QWidget()
@@ -270,6 +372,6 @@ if __name__ == '__main__':
     main_window.setWindowFlag(Qt.FramelessWindowHint)
     main_window.setAttribute(Qt.WA_NoSystemBackground, True)
     main_window.setAttribute(Qt.WA_TranslucentBackground, True)
-    main_window.setGeometry(450, 200, 400, 400)
+    main_window.setGeometry(int(m.width*(450/1366)), int(m.height*(200/768)), int(m.width*(400/1366)), int(m.height*(400/768)))
     main_window.show()
     sys.exit(app.exec_())

@@ -20,14 +20,23 @@ from pfc_window import *
 from report_gui import *
 from test_order_done import *
 from test_script import Ui_Test
+from screeninfo import get_monitors
+global w, h, m
+
+for m in get_monitors():
+    print(m)
+
+w = m.width
+h = m.height
 
 
 class Ui_MainWindow(QMainWindow):
+    global w, h
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.ApplicationModal)
-        MainWindow.resize(799, 599)
+        MainWindow.resize(int(w*0.585), int(h*0.779))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -40,10 +49,10 @@ class Ui_MainWindow(QMainWindow):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.mdiArea = QtWidgets.QMdiArea(self.centralwidget)
-        self.mdiArea.setGeometry(QtCore.QRect(0, 0, 1921, 821))
+        self.mdiArea.setGeometry(QtCore.QRect(0, 0, int(w*1.406296), int(h*1.08)))
         self.mdiArea.setObjectName("mdiArea")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(530, 290, 291, 81))
+        self.label.setGeometry(QtCore.QRect(int(w*0.387994), int(h*0.377604), int(w*0.212299), int(h*0.104167)))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap(f"{gui_global.image_directory_location}exicome logo.png"))
         self.label.setScaledContents(True)
@@ -197,7 +206,7 @@ class Ui_MainWindow(QMainWindow):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "DCT ATS"))
+        MainWindow.setWindowTitle(_translate("MainWindow", f"{gui_global.ate_name}"))
         self.menuUser.setTitle(_translate("MainWindow", "User"))
         self.menuTest_Menu.setTitle(_translate("MainWindow", "Test Menu"))
         self.menuManagement.setTitle(_translate("MainWindow", "Management"))
@@ -223,6 +232,7 @@ class Ui_MainWindow(QMainWindow):
         self.actionCommunication_Window.setText(_translate("MainWindow", "Communication Window"))
         self.actionTest_Order_Preference.setText(_translate("MainWindow", "Test Order Preference"))
         self.actionLogs.setText(_translate("MainWindow", "Logs"))
+
 
     def closeEvent(self, event):
         result = self.confirmClose()

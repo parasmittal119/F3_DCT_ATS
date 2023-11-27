@@ -266,6 +266,7 @@ def DC_LOAD_READ_OUTPUT_POWER(Object,load_type='LOAD'):
     return data
 
 
+
 def DC_LOAD_RESET(Object,load_type='LOAD'):
     Object.DC_LOAD_SET_COMMAND(RESET,load_type)
 

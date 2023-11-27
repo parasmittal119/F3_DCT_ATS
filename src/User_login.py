@@ -7,6 +7,8 @@ import sys
 from PyQt5 import QtGui
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QDesktopWidget
+from PyQt5.QtCore import Qt
+
 
 import Main_window_final
 from Register_login import *

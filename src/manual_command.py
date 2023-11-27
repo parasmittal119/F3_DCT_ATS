@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import gui_global
+from CommandSetSmrBatteryCan import *
 from PFC_control_done import *
 
 
@@ -152,6 +153,22 @@ class Ui_Form(object):
         self.pushButton_29.setGeometry(QtCore.QRect(750, 210, 51, 31))
         self.pushButton_29.setObjectName("pushButton_29")
 
+        self.pushButton_29.clicked.connect(self.smrVoltageSet)
+        self.pushButton_14.clicked.connect(self.startATS)
+        self.pushButton_13.clicked.connect(self.ACActive)
+        self.pushButton.clicked.connect(self.LOAD1)
+        self.pushButton_3.clicked.connect(self.LOAD2)
+        self.pushButton_2.clicked.connect(self.LOAD3)
+        self.pushButton_4.clicked.connect(self.LOAD4)
+        self.pushButton_5.clicked.connect(self.LOAD5)
+        self.pushButton_6.clicked.connect(self.LOADCommon)
+        self.pushButton_7.clicked.connect(self.BATT1)
+        self.pushButton_9.clicked.connect(self.BATT2)
+        self.pushButton_8.clicked.connect(self.BATT3)
+        self.pushButton_10.clicked.connect(self.BATTMAINS)
+        # self.pushButton_11.clicked.connect(self.LOADMAINS)
+        self.pushButton_12.clicked.connect(self.DcBus)
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -168,7 +185,7 @@ class Ui_Form(object):
         self.pushButton_8.setText(_translate("Form", "BATTERY 3 SET"))
         self.pushButton_7.setText(_translate("Form", "BATTERY 1 SET"))
         self.pushButton_9.setText(_translate("Form", "BATTERY 2 SET"))
-        self.pushButton_10.setText(_translate("Form", "BATT COMM SET"))
+        self.pushButton_10.setText(_translate("Form", "BATTERY COMM SET"))
         self.pushButton_11.setText(_translate("Form", "BATT LOAD SET"))
         self.pushButton_12.setText(_translate("Form", "DC LOAD SET"))
         self.label.setText(_translate("Form", "This Contactor is to be used to connect DC Load"))
@@ -180,33 +197,123 @@ class Ui_Form(object):
         self.label_5.setText(_translate("Form", "Contactor as per requirement."))
         self.label_11.setText(_translate("Form", "Set Battery Voltage:"))
         self.pushButton_29.setText(_translate("Form", "SET"))
+        self.count = 0
+        self.smr = 0
+        self.button_status(False)
+
+    def startATS(self):
+        if self.pushButton_14.pressed:
+            self.count += 1
+
+        if self.count == 1:
+            self.button_status(True)
+            self.pushButton_14.setText("CLEAR ATS")
+
+        if self.count == 2:
+            self.button_status(False)
+            self.count = 0
+            self.pushButton_14.setText("START ATS")
+            self.pfc.pfc_set(0, 'all', 0)
+            self.pushButton_6.setText("LOAD COMMON SET")
+            # self.pfc.pfc_set(0, 'battery_mains', 0)
+            self.pushButton_10.setText("BATTERY COMM SET")
+            # self.pfc.pfc_set(0, 'bus', 0)
+            self.pushButton_12.setText("DC LOAD SET")
+
+
+
+    def button_status(self, state: bool):
+        self.all_button = [self.pushButton, self.pushButton_2, self.pushButton_3, self.pushButton_4, self.pushButton_5,
+                           self.pushButton_6, self.pushButton_7, self.pushButton_8, self.pushButton_9,
+                           self.pushButton_10,
+                           self.pushButton_11, self.pushButton_12, self.pushButton_13, self.pushButton_29, self.doubleSpinBox]
+
+        for i in self.all_button:
+            i.setEnabled(state)
+
+
+
+    def smrVoltageSet(self):
+        SMR_BATTERY_SET_VOLTAGE(self.doubleSpinBox.value())
 
     def ACActive(self):
-        self.pfc.pfc_set(0, 0x610, [PFC2, PFC4, PFC6])
+        self.status(self.pushButton_13, 'AC', ["r_phase", "y_phase", "b_phase"])
 
     def LOAD1(self):
-        self.pfc.pfc_set(0,0x610, [PFC1, PFC8])
+        self.status(self.pushButton, 'LOAD 1', ['p_load'])
+        if self.pushButton.text() == "LOAD 1 CLEAR" and self.pushButton_6.text() == "LOAD COMMON SET":
+            self.status(self.pushButton_6, 'LOAD COMMON', ['load_mains'])
+        self.BusCheck(self.pushButton_6, 'LOAD COMMON')
+
 
     def LOAD2(self):
-        self.pfc.pfc_set(0,0x610, [PFC3, PFC8])
+        self.status(self.pushButton_3, 'LOAD 2', ['n_p_load_1'])
+        if self.pushButton_3.text() == "LOAD 2 CLEAR" and self.pushButton_6.text() == "LOAD COMMON SET":
+            self.status(self.pushButton_6, 'LOAD COMMON', ['load_mains'])
+        self.BusCheck(self.pushButton_6, 'LOAD COMMON')
 
     def LOAD3(self):
-        self.pfc.pfc_set(0,0x610, [PFC5, PFC8])
+        self.status(self.pushButton_2, 'LOAD 3', ['n_p_load_2'])
+        if self.pushButton_2.text() == "LOAD 3 CLEAR" and self.pushButton_6.text() == "LOAD COMMON SET":
+            self.status(self.pushButton_6, 'LOAD COMMON', ['load_mains'])
+        self.BusCheck(self.pushButton_6, 'LOAD COMMON')
 
     def LOAD4(self):
-        self.pfc.pfc_set(0,0x610, [PFC7, PFC8])
+        self.status(self.pushButton_4, 'LOAD 4', ['n_p_load_3'])
+        if self.pushButton_4.text() == "LOAD 4 CLEAR" and self.pushButton_6.text() == "LOAD COMMON SET":
+            self.status(self.pushButton_6, 'LOAD COMMON', ['load_mains'])
+        self.BusCheck(self.pushButton_6, 'LOAD COMMON')
 
     def LOAD5(self):
-        self.pfc.pfc_set(0,0x610, [PFC9, PFC8])
+        self.status(self.pushButton_5, 'LOAD 5', ['n_p_load_4'])
+        if self.pushButton_5.text() == "LOAD 5 CLEAR" and self.pushButton_6.text() == "LOAD COMMON SET":
+            self.status(self.pushButton_6, 'LOAD COMMON', ['load_mains'])
+        self.BusCheck(self.pushButton_6, 'LOAD COMMON')
 
     def BATT1(self):
-        self.pfc.pfc_set(0,0x610, [PFC11, PFC12])
+        self.status(self.pushButton_7, 'BATTERY 1', ['battery_1'])
+        if self.pushButton_7.text() == "BATTERY 1 CLEAR" and self.pushButton_10.text() == "BATTERY COMM SET":
+            self.status(self.pushButton_10, 'BATTERY COMM', ['battery_mains'])
+
 
     def BATT2(self):
-        self.pfc.pfc_set(0, 0x610, [PFC13, PFC12])
+        self.status(self.pushButton_9, 'BATTERY 2', ['battery_2'])
+        if self.pushButton_9.text() == "BATTERY 2 CLEAR" and self.pushButton_10.text() == "BATTERY COMM SET":
+            self.status(self.pushButton_10, 'BATTERY COMM', ['battery_mains'])
 
     def BATT3(self):
-        self.pfc.pfc_set(0, 0x610, [PFC15, PFC12])
+        self.status(self.pushButton_8, 'BATTERY 3', ['battery_3'])
+        if self.pushButton_8.text() == "BATTERY 3 CLEAR" and self.pushButton_10.text() == "BATTERY COMM SET":
+            self.status(self.pushButton_10, 'BATTERY COMM', ['battery_mains'])
+
+    def BATTMAINS(self):
+        self.status(self.pushButton_10, 'BATTERY COMM', ['battery_mains'])
+
+    def LOADMAINS(self):
+        self.status(self.pushButton_11, 'BATT LOAD', ['load_mains'])
+
+    def DcBus(self):
+        self.status(self.pushButton_12, "DC LOAD", ['bus'])
+
+    def LOADCommon(self):
+        self.status(self.pushButton_6, 'LOAD COMMON', ['load_mains'])
+
+
+    def BusCheck(self, button, button_text):
+        if button.text() == f"{button_text} CLEAR" and self.pushButton_12.text() == "DC LOAD SET":
+            self.status(self.pushButton_12, "DC LOAD", ['bus'])
+
+    def status(self, pushbutton: str, button_text: str, pfc_name: list):
+        if pushbutton.text() == f'{button_text} SET':
+            for itr in pfc_name:
+                print(itr)
+                self.pfc.pfc_set(0, itr, 1)
+            pushbutton.setText(f"{button_text} CLEAR")
+        elif pushbutton.text() == f'{button_text} CLEAR':
+            for itr in pfc_name:
+                print(itr)
+                self.pfc.pfc_set(0, itr, 0)
+            pushbutton.setText(f"{button_text} SET")
 
 
 if __name__ == "__main__":
