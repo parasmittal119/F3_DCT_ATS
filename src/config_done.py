@@ -4,6 +4,8 @@ import gui_global
 
 config = configparser.ConfigParser()
 
+config1 = configparser.ConfigParser()
+
 
 class AllException(Exception):
     pass

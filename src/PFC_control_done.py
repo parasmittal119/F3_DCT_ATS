@@ -2,6 +2,8 @@ import time
 from config_done import *
 from can import Message
 from can.interfaces.ixxat import IXXATBus, exceptions
+import prompts
+
 
 PFC1 = "PFC1"  # 1
 PFC2 = "PFC2"  # 2
@@ -44,8 +46,6 @@ class pfc_control:
     @staticmethod
     def pfc_set(can_channel, cont, state):
         global data_packet, var, contact_value, card_id
-        cont1 = 0
-        cont2 = 0
         data_packet = []
         var = ''
 
@@ -58,67 +58,101 @@ class pfc_control:
 
 
         def send_cyclic_message(card_id: int, check_id: list, data: list):
-            global msg
-            stats = True
-            count = 0
-            while stats and count < 9:
-                op = Message(arbitration_id=card_id, is_extended_id=False, data=data)
-                print(op)
-                bus.send(op)
-                msg = bus.recv(1)
-                for i in check_id:
-                    if msg.arbitration_id == i:
-                        print(msg)
-                        stats = False
-                count += 1
-            if msg is None:
-                return None
+            if not bus:
+                print("CAN BUS not connected")
             else:
-                return msg.data.hex()
+                try:
+                    global msg
+                    stats = True
+                    cycle_time = time.time() + 5
+                    while time.time() < cycle_time and stats:
+                        if card_id is None:
+                            card_id = 1546
+                        op = Message(arbitration_id=card_id, is_extended_id=False, data=data)
+                        print(op)
+                        bus.send(op)
+                        time.sleep(0.000001)
+                        msg = bus.recv()
+
+                        for i in check_id:
+                            if msg.arbitration_id == i and data[0] == 64 and msg.data.hex()[0:2] == "4b":
+                                print(f'value after reading PFC {msg}')
+                                stats = False
+                            if msg.arbitration_id == i and data[0] == 43 and msg.data.hex()[0:2] == "60":
+                                print(f'value after writing PFC {msg}')
+                                stats = False
+                    if msg is None:
+                        return None
+                    else:
+                        print(f'return data = {msg.data.hex()} {stats}')
+                        return msg.data.hex()
+                except (Exception, exceptions) as error:
+                    print(error)
 
         try:
-            try:
-                if int(PFCRead("PFC 1 PFC")[cont].split(" ")[1]) in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]:
-                    print(f"text value {int(PFCRead('PFC 1 PFC')[cont].split(' ')[1])}")
-                    contact_value = int(PFCRead("PFC 1 PFC")[cont].split(" ")[1])
-                    card_id = 1546
-                print(contact_value, card_id)
-            except:
-                if int(PFCRead("PFC 2 PFC")[cont].split(" ")[1]) in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]:
-                    contact_value = pfc_control.pfc_dict[cont]
-                    card_id = 1547
-                print(contact_value, card_id)
-
-            var = send_cyclic_message(card_id, check_id=[1418, 1419], data=[64, 00, 32, 00, 00, 00, 00, 00])
-            print(var)
-
-            if contact_value == 0:
-                send_cyclic_message(card_id, check_id=[1418], data=[0x2B, 0x00, 0x20, 0x00, 0, 0, 0, 0])
-                bus.shutdown()
-                return
-
-            for i in range(0, len(var) + 1, 2):
-                data_packet.append(var[i:i + 2])
-
-            d = int(data_packet[5] + data_packet[4], 16)
-            bit_calculation = pow(2, contact_value - 1)
-
-            if bit_calculation & d == 0:
-                if state == 1:
-                    d += bit_calculation
+            if not bus:
+                # print("CANbus not connected")
+                prompts.Prompt.Message(prompts.Prompt, "ERROR!", "CAN BUS not connected!")
+                return "NA"
             else:
-                if state == 0:
-                    d -= bit_calculation
+                try:
+                    if cont == 'all':
+                        contact_value = 0
+                        card_id = 1546
+                    elif int(PFCRead("PFC 1 PFC")[cont].split(" ")[1]) in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]:
+                        print(f"text value {int(PFCRead('PFC 1 PFC')[cont].split(' ')[1])}")
+                        contact_value = int(PFCRead("PFC 1 PFC")[cont].split(" ")[1])
+                        card_id = 1546
+                    print(contact_value, card_id)
+                except:
+                    if cont == 'all':
+                        contact_value = 0
+                        card_id = 1547
+                    elif int(PFCRead("PFC 2 PFC")[cont].split(" ")[1]) in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]:
+                        contact_value = pfc_control.pfc_dict[cont]
+                        card_id = 1547
+                    print(contact_value, card_id)
 
-            cont2 = int(d / 256)
-            cont1 = int(d % 256)
+                var = send_cyclic_message(card_id, check_id=[1418, 1419], data=[64, 00, 32, 00, 00, 00, 00, 00])
+                print(f'value of var variable : {var}')
 
-            var = send_cyclic_message(card_id, check_id=[1418], data=[0x2B, 0x00, 0x20, 0x00, cont1, cont2, 0, 0])
+                if contact_value == 0:
+                    send_cyclic_message(card_id, check_id=[1418], data=[0x2B, 0x00, 0x20, 0x00, 0, 0, 0, 0])
+                    bus.shutdown()
+                    return
 
-            print(var)
-            bus.shutdown()
+                for i in range(0, len(var) + 1, 2):
+                    data_packet.append(var[i:i + 2])
+
+                print(f"data packet value is : {data_packet}")
+                d = int(data_packet[5] + data_packet[4], 16)
+                bit_calculation = pow(2, contact_value - 1)
+
+                if bit_calculation & d == 0:
+                    if state == 1:
+                        d += bit_calculation
+                else:
+                    if state == 0:
+                        d -= bit_calculation
+
+                cont2 = int(d / 256)
+                cont1 = int(d % 256)
+
+                var = send_cyclic_message(card_id, check_id=[1418], data=[0x2B, 0x00, 0x20, 0x00, cont1, cont2, 0, 0])
+
+                print(var)
+                bus.shutdown()
 
         except (AttributeError, Exception) as err:
+            if not bus:
+                print("CAN not connected")
+            else:
+                bus.shutdown()
+            if "CAN bit stuff error" in str(err):
+                print("bit error")
+            if "catching classes that do not inherit from BaseException is not allowed" in str(err):
+                prompts.Prompt.Message(prompts.Prompt, "ERROR", "CAN communication is not proper with other devices\nKindly re-verify and re-plug CAN device")
+                return "NA"
             print(cont)
             print(f"Exception occurred: {err}")
 
@@ -160,6 +194,7 @@ class pfc_control:
             return ip_pfc_status
 
         except exceptions as err:
+            bus.shutdown()
             print(err)
 
     @staticmethod
@@ -182,7 +217,9 @@ class pfc_control:
 
             bus.shutdown()
 
+
         except AttributeError:
+            bus.shutdown()
             print("Attribute Error")
 
         print("Stopped!!!!")

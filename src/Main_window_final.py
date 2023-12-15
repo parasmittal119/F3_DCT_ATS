@@ -357,6 +357,7 @@ class Ui_MainWindow(QMainWindow):
         self.window_2.showMaximized()
 
     def log_folder(self):
+        import webbrowser
         webbrowser.open(f"{gui_global.directory_location}logs")
 
     def handle_register_window(self):

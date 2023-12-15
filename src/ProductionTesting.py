@@ -1,5 +1,5 @@
 import test_order_done
-test_order = test_order_done.Ui_Form.get_values(test_order_done.Ui_Form)
+# test_order = test_order_done.Ui_Form.get_values(test_order_done.Ui_Form)
 import time
 import os
 from excel_automation import CSV

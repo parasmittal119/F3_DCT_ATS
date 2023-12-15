@@ -8,6 +8,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import pyvisa
+from config_done import SettingRead
+import gui_global
+
 
 
 class Ui_load(object):
@@ -46,12 +50,18 @@ class Ui_load(object):
         QtCore.QMetaObject.connectSlotsByName(load)
 
     def communication(self):
-        command = '*IDN?'
-        # ID = "COM89"
-        # print(command)
-        # self.rm = pyvisa.ResourceManager()
-        # self.chroma = self.rm.open_resource(ID)
-        # self.chroma.close()
+        try:
+            command = '*IDN?'
+            ID = SettingRead('SETTING')['dc load gpib id']
+
+            # print(command)
+            self.rm = pyvisa.ResourceManager()
+            print(self.rm.list_resources())
+            self.chroma = self.rm.open_resource(ID)
+            print(self.chroma.query("*IDN?"))
+            self.chroma.close()
+        except:
+            print("didn't went well")
         # self.chroma = self.rm.open_resource(ID)
         # value = str(self.chroma.query(command))
         value = command

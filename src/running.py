@@ -16,7 +16,6 @@ import data_file
 from Hardware_detection import Hardware_check
 from config_done import *
 from prompts import *
-from exicom_login import Ui_MainWindow
 
 file_data = [data_file.alarmIndex, data_file.calibrate, data_file.config, data_file.default, data_file.filetime, data_file.oid,
              data_file.orderedtelnet, data_file.pfcjig, data_file.profile, data_file.RequiredParameter,
@@ -181,8 +180,8 @@ def systemSerial():
     cmd = 'wmic bios get serialnumber'
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
-    return_code = process.returncode
-    serial_number = str(output).split(" ")[2].split("n")[1]
+    # return_code = process.returncode
+    serial_number = str(output).split("\\n")[1].split(" ")[0]
     return serial_number
 
 
@@ -191,21 +190,17 @@ def files_and_values():
     global return_dict
     account_user = getpass.getuser()  # to get login account INFO
 
-    list_of_dir = ['CRCModules', 'files', 'images', 'logs', 'records', 'reports', 'src',
-                   'summary']  # List of DIRECTORY REQUIRED
+    list_of_dir = ['CRCModules', 'files', 'images', 'logs', 'records', 'reports', 'src', 'summary']  # List of DIRECTORY REQUIRED
 
     directory_path = f"C:/Users/{account_user}/AppData/Local/DCT_ATS"  # MAIN DIRECTORY PATH
 
     # LOOP FOR ALL DIRECTORY
 
-    for n in range(len(list_of_dir)):
+    for n in list_of_dir:
         # TO CHECK PRESENCE OF DIRECTORY
-        if not os.path.exists(os.path.join(directory_path, list_of_dir[n])):
+        if not os.path.exists(os.path.join(directory_path, n)):
             # If it doesn't exist, create the folder
-            os.makedirs(os.path.join(directory_path, list_of_dir[n]))
-        # TO PASS REQUIRED DIRECTORY FOUND
-        else:
-            pass
+            os.makedirs(os.path.join(directory_path, n))
 
     # CHECKING FOR ALL FILES/ ELSE CREATING THEM WITH DEFAULT DATA
     for i in range(len(list_of_files)):
@@ -216,9 +211,6 @@ def files_and_values():
                 # TO WRITE DEFAULT DATA IN FILES
                 with open(os.path.join(directory_path + "/files/", list_of_files[i]), 'w') as file:
                     file.write(file_data[i])
-            else:
-                # TO PASS IF DATA IS FOUND IN FILE
-                pass
         else:
             # TO CREATE AND WRITE DATA IN FILE
             with open(os.path.join(directory_path + "/files/", list_of_files[i]), 'w') as file:
@@ -335,7 +327,7 @@ def files_and_values():
                 os.renames(f"D:/backup/backup/records_backup/active_{station_id}.csv", f"D:/backup/backup/records_backup/{arr[0][:8]}_{day}_{month}_{year}.csv")
                 try:
                     shutil.copy(f"D:/backup/backup/records_backup/{arr[0][:8]}_{day}_{month}_{year}.csv", r'\\SLICE\Data_Share_Temp\temp_folder_to_upload')
-                except:
+                except :
                     Prompt.Message(Prompt, "Error!", "Error Connecting to server, kindly check internet connectivity to local server!")
                     Prompt.Message(Prompt, "Error!", "Failed to upload <b>BACKUP</b> to local server!, due to non-connectivity to local server!")
 
@@ -350,14 +342,13 @@ def get_last_modified_dict(path: str) -> dict:
     return return_data
 
 
-
-
 if __name__ == '__main__':
     global return_dict, m
     from screeninfo import get_monitors
     for m in get_monitors():
         # print(m)
         pass
+    from exicom_login import Ui_MainWindow
     return_dict = []
     app = QApplication(sys.argv)
     gui_global.ate_name = sys.argv[0].split("\\")[-1].split(".")[0]
@@ -375,3 +366,7 @@ if __name__ == '__main__':
     main_window.setGeometry(int(m.width*(450/1366)), int(m.height*(200/768)), int(m.width*(400/1366)), int(m.height*(400/768)))
     main_window.show()
     sys.exit(app.exec_())
+
+
+
+

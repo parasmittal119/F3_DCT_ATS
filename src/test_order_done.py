@@ -656,6 +656,8 @@ class Ui_Form(object):
     def get_values(self):
         global l
 
+        # import os
+        # if os.path.exists(os.path.join(gui_global.files_directory_location, 'test_order.txt')):
         with open(f"{gui_global.files_directory_location}test_order.txt") as f:
             lines = f.readlines()
 

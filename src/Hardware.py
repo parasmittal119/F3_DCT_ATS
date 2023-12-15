@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import configparser
 
 # Form implementation generated from reading ui file '.\Hardware Configuration.ui'
 #
@@ -825,9 +826,10 @@ class Ui_Hardware(object):
             else:
                 self.pushButton_2.setText("Change")
 
-                config.read(f"{gui_global.files_directory_location}setting.txt")
+                settingread = configparser.ConfigParser()
+                settingread.read(f"{gui_global.files_directory_location}setting.txt")
 
-                SectionCall = config['SETTING']
+                SectionCall = settingread['SETTING']
 
                 parameter_list = [self.IP_edit.text(), self.TelnetUser_edit.text(), self.TelnetPass_edit.text(),
                                   self.IP_edit.text(), self.TelnetUser_edit.text(), self.TelnetPass_edit.text(),
@@ -849,7 +851,7 @@ class Ui_Hardware(object):
                     SectionCall[option] = parameter_list[i]
                     i += 1
 
-                SectionCall = config['SETTING STATE']
+                SectionCall = settingread['SETTING STATE']
 
                 parameter_state_list = [self.IP_checkbox.isChecked(), self.TelnetUser_checkbox.isChecked(),
                                         self.TelnetPassword_checkbox.isChecked(),
@@ -879,7 +881,7 @@ class Ui_Hardware(object):
                     i += 1
 
                 with open(f"{gui_global.files_directory_location}setting.txt", 'w') as configfile:
-                    config.write(configfile)
+                    settingread.write(configfile)
                 configfile.close()
 
         if count == 2:

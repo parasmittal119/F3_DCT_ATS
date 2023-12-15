@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import configparser
 
 # Form implementation generated from reading ui file '.\PFC Window.ui'
 #
@@ -2012,10 +2013,11 @@ class Ui_PFC(object):
 
             if len(pfc_1) == len(set(pfc_1)) and (len(pfc_2) == len(set(pfc_2))):
 
-                config.read(f"{gui_global.files_directory_location}pfcjig.txt")
+                pfcread = configparser.ConfigParser()
+                pfcread.read(f"{gui_global.files_directory_location}pfcjig.txt")
 
-                SectionHead1 = config['PFC 1 PFC']
-                SectionHead2 = config['PFC 2 PFC']
+                SectionHead1 = pfcread['PFC 1 PFC']
+                SectionHead2 = pfcread['PFC 2 PFC']
 
                 i = 0
                 for option in SectionHead1:
@@ -2026,8 +2028,8 @@ class Ui_PFC(object):
                     SectionHead2[option] = parameter_2_pfc[j]
                     j += 1
 
-                SectionHead1 = config['PFC 1 STATE']
-                SectionHead2 = config['PFC 2 STATE']
+                SectionHead1 = pfcread['PFC 1 STATE']
+                SectionHead2 = pfcread['PFC 2 STATE']
 
                 parameter_1_pfc = [self.pfc11_select.isChecked(), self.pfc12_select.isChecked(),
                                    self.pfc13_select.isChecked(), self.pfc14_select.isChecked(),
@@ -2065,7 +2067,7 @@ class Ui_PFC(object):
                     i += 1
 
                 with open(f"{gui_global.files_directory_location}pfcjig.txt", 'w') as configfile:
-                    config.write(configfile)
+                    pfcread.write(configfile)
                 configfile.close()
 
                 Prompt.Message(Prompt, "Message", "Settings Saved")

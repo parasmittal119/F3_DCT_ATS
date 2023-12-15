@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from config_done import *
-
+from prompts import Prompt
 
 class Ui_CommissioningWindow(object):
     def setupUi(self, CommissioningWindow):
@@ -56,16 +56,18 @@ class Ui_CommissioningWindow(object):
 
     def AddingSystem(self):
         system_serial_number = self.lineEdit.text().upper()
+        comm = configparser.ConfigParser()
+        comm.read(f"{gui_global.files_directory_location}profile.txt")
+        Section = comm['COMMISSION']
 
-        config.read(f"{gui_global.files_directory_location}profile.txt")
-        SectionCall = config['COMMISSION']
-
-        for option in SectionCall:
-            SectionCall[option] = system_serial_number
+        for option in Section:
+            Section[option] = system_serial_number
 
         with open(f'{gui_global.files_directory_location}profile.txt', 'w') as conFile:
-            config.write(conFile)
+            comm.write(conFile)
         conFile.close()
+
+        Prompt.Message(Prompt, "Done!", "System serial number accepted ;)")
 
 
 
