@@ -50,27 +50,40 @@ class Ui_load(object):
         QtCore.QMetaObject.connectSlotsByName(load)
 
     def communication(self):
+        global return_value
+        return_value=""
         try:
-            command = '*IDN?'
-            ID = SettingRead('SETTING')['dc load gpib id']
-
-            # print(command)
             self.rm = pyvisa.ResourceManager()
-            print(self.rm.list_resources())
-            self.chroma = self.rm.open_resource(ID)
-            print(self.chroma.query("*IDN?"))
+            list1 = self.rm.list_resources()
+            print(list1)
+            for i in self.rm.list_resources():
+                print(i)
+                if "GPIB" in i:
+                    address = str(i).split("::INSTR")[0]
+                    self.chroma = self.rm.open_resource(address)
+                    return_value = str(self.chroma.query("*IDN?")).split(",")[1]
+
+
+
+            print(return_value)
+            # self.chroma.close()
+            self.chroma.clear()
             self.chroma.close()
+            self.rm.close()
+            if "632" in return_value:
+                self.label_2.setText("PASS")
+                self.label_2.setStyleSheet("color:GREEN")
+            else:
+                self.label_2.setText("FAIL")
+                self.label_2.setStyleSheet("color:RED")
         except:
             print("didn't went well")
-        # self.chroma = self.rm.open_resource(ID)
-        # value = str(self.chroma.query(command))
-        value = command
-        if value == "*IDN?":
-            self.label_2.setText("PASS")
-            self.label_2.setStyleSheet("color:GREEN")
-        else:
+            return_value = ""
             self.label_2.setText("FAIL")
             self.label_2.setStyleSheet("color:RED")
+        # self.chroma = self.rm.open_resource(ID)
+        # value = str(self.chroma.query(command))
+
 
 
     def retranslateUi(self, load):

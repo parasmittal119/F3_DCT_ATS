@@ -6,7 +6,7 @@ import time
 import os
 import sys
 import exception
-import serial
+from serial import Serial
 from random import randint
 from config_done import *
 from TelnetCommandSet import *

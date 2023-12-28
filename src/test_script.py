@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os.path
+import time
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from screeninfo import get_monitors
 import CommandSetDcLoadUsb
@@ -792,7 +794,7 @@ class Ui_Test(object):
         test_detail_flag: bool ==> Result of details in Test Details Box are correctly filled
         testing_flag: bool ==> signifies the status of IS TESTING ACTIVE, initially TRUE
         """
-        test_order = test_order_done.Ui_Form.get_values(test_order_done.Ui_Form)
+        self.test_order = test_order_done.Ui_Form.get_values(test_order_done.Ui_Form)
         self.start.setDisabled(True)
         global final_output
         testing_flag = True
@@ -819,7 +821,7 @@ class Ui_Test(object):
 
             while testing_flag:
                 final_output = []
-                for i in range(1, len(test_order) + 1):
+                for i in range(1, len(self.test_order) + 1):
 
                     function_status = self.run_test(i)  # Running test sequences
 
@@ -870,7 +872,7 @@ class Ui_Test(object):
         self.start.setDisabled(False)
 
     def run_test(self, test_number):
-        if test_number == int(test_order[0]):
+        if test_number == int(self.test_order[0]):
             # controller_health_check_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             controller_health_check_variable = self.physical_check(BYPASS=False)
             if controller_health_check_variable:
@@ -880,7 +882,7 @@ class Ui_Test(object):
                 self.controller_health_status.setText("FAIL")
                 self.controller_health_status.setStyleSheet("color: RED")
             return controller_health_check_variable
-        elif test_number == int(test_order[1]):
+        elif test_number == int(self.test_order[1]):
             # unit_comm_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             unit_comm_variable = self.CARD_COMMUNICATION()
             if unit_comm_variable:
@@ -890,7 +892,7 @@ class Ui_Test(object):
                 self.unit_comm_status.setText('FAIL')
                 self.unit_comm_status.setStyleSheet('color:RED')
             return unit_comm_variable
-        elif test_number == int(test_order[2]):
+        elif test_number == int(self.test_order[2]):
             # temp_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             temp_variable = self.TEMPERATURE_MEASUREMENT()
             if temp_variable:
@@ -900,7 +902,7 @@ class Ui_Test(object):
                 self.temp_status.setText('FAIL')
                 self.temp_status.setStyleSheet('color:RED')
             return temp_variable
-        elif test_number == int(test_order[3]):
+        elif test_number == int(self.test_order[3]):
             # out_pfc_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             out_pfc_variable = self.OP_PFC_CHECK()
             if out_pfc_variable:
@@ -910,7 +912,7 @@ class Ui_Test(object):
                 self.output_pfc_status.setText('FAIL')
                 self.output_pfc_status.setStyleSheet('color:RED')
             return out_pfc_variable
-        elif test_number == int(test_order[4]):
+        elif test_number == int(self.test_order[4]):
             # input_pfc_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             input_pfc_variable = self.IP_PFC_CHECK()
             if input_pfc_variable:
@@ -920,7 +922,7 @@ class Ui_Test(object):
                 self.input_pfc_status.setText('FAIL')
                 self.input_pfc_status.setStyleSheet('color:RED')
             return input_pfc_variable
-        elif test_number == int(test_order[5]):
+        elif test_number == int(self.test_order[5]):
             # dc_voltage_check = self.prompt.User_prompt("Do you want to pass this test and continue?")
             dc_voltage_check = self.DC_VOLTAGE_MEASUREMENT()
             print(f"dc_voltage : {dc_voltage_check}")
@@ -931,7 +933,7 @@ class Ui_Test(object):
                 self.dc_voltage_check_status.setText('FAIL')
                 self.dc_voltage_check_status.setStyleSheet('color:RED')
             return dc_voltage_check
-        elif test_number == int(test_order[6]):
+        elif test_number == int(self.test_order[6]):
             # dc_voltage_calib_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             dc_voltage_calib_variable = self.CALIBRATE_DC_VOLTAGE()
             print(f"dc_voltage_calib : {dc_voltage_calib_variable}")
@@ -942,7 +944,7 @@ class Ui_Test(object):
                 self.dc_voltage_calib_status.setText('FAIL')
                 self.dc_voltage_calib_status.setStyleSheet('color:RED')
             return dc_voltage_calib_variable
-        elif test_number == int(test_order[7]):
+        elif test_number == int(self.test_order[7]):
             dc_current_discharge_variable = self.prompt.User_prompt("Do you want to pass this test and continue?"
                                                                     "s")
             if dc_current_discharge_variable:
@@ -952,7 +954,7 @@ class Ui_Test(object):
                 self.dc_current_check_discharge_status.setText('FAIL')
                 self.dc_current_check_discharge_status.setStyleSheet('color:RED')
             return dc_current_discharge_variable
-        elif test_number == int(test_order[8]):
+        elif test_number == int(self.test_order[8]):
             smr_registration_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             if smr_registration_variable:
                 self.smr_register_status.setText('PASS')
@@ -961,7 +963,7 @@ class Ui_Test(object):
                 self.smr_register_status.setText('FAIL')
                 self.smr_register_status.setStyleSheet('color:RED')
             return smr_registration_variable
-        elif test_number == int(test_order[9]):
+        elif test_number == int(self.test_order[9]):
             dc_current_charge_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             if dc_current_charge_variable:
                 self.dc_current_check_charge_status.setText('PASS')
@@ -970,7 +972,7 @@ class Ui_Test(object):
                 self.dc_current_check_charge_status.setText('FAIL')
                 self.dc_current_check_charge_status.setStyleSheet('color:RED')
             return dc_current_charge_variable
-        elif test_number == int(test_order[10]):
+        elif test_number == int(self.test_order[10]):
             dc_current_calib_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             if dc_current_calib_variable:
                 self.dc_current_calib_status.setText('PASS')
@@ -979,7 +981,7 @@ class Ui_Test(object):
                 self.dc_current_calib_status.setText('FAIL')
                 self.dc_current_calib_status.setStyleSheet('color:RED')
             return dc_current_calib_variable
-        elif test_number == int(test_order[11]):
+        elif test_number == int(self.test_order[11]):
             lvd_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             if lvd_variable:
                 self.lvd_status.setText('PASS')
@@ -988,7 +990,7 @@ class Ui_Test(object):
                 self.lvd_status.setText('FAIL')
                 self.lvd_status.setStyleSheet('color:RED')
             return lvd_variable
-        elif test_number == int(test_order[12]):
+        elif test_number == int(self.test_order[12]):
             ac_phase_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             if ac_phase_variable:
                 self.ac_phase_status.setText('PASS')
@@ -997,7 +999,7 @@ class Ui_Test(object):
                 self.ac_phase_status.setText('FAIL')
                 self.ac_phase_status.setStyleSheet('color:RED')
             return ac_phase_variable
-        elif test_number == int(test_order[13]):
+        elif test_number == int(self.test_order[13]):
             current_sharing_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             if current_sharing_variable:
                 self.current_sharing_status.setText('PASS')
@@ -1006,7 +1008,7 @@ class Ui_Test(object):
                 self.current_sharing_status.setText('FAIL')
                 self.current_sharing_status.setStyleSheet('color:RED')
             return current_sharing_variable
-        elif test_number == int(test_order[14]):
+        elif test_number == int(self.test_order[14]):
             rs485_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             if rs485_variable:
                 self.rs485_status.setText('PASS')
@@ -1015,7 +1017,7 @@ class Ui_Test(object):
                 self.rs485_status.setText('FAIL')
                 self.rs485_status.setStyleSheet('color:RED')
             return rs485_variable
-        elif test_number == int(test_order[15]):
+        elif test_number == int(self.test_order[15]):
             default_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             if default_variable:
                 self.default_status.setText('PASS')

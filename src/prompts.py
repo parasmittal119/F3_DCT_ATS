@@ -1,14 +1,17 @@
+import time
+
 from PyQt5.QtWidgets import QMessageBox, QInputDialog
 from PyQt5.QtGui import QIcon
 from PyQt5 import QtWidgets, QtGui, QtCore
 import gui_global
+from PyQt5.QtCore import QTimer
 
 
 class Prompt:
     def __init__(self):
         pass
 
-    def Message(self, title: str = "MESSAGE", prompt: str=""):
+    def Message(self, title: str = "MESSAGE", prompt: str = ""):
         self.message = QMessageBox()
         self.message.setWindowTitle(title)
         self.message.setWindowIcon(QIcon(f"{gui_global.image_directory_location}logo_1.png"))
@@ -39,7 +42,7 @@ class Prompt:
         msg_box = QMessageBox()
         msg_box.setWindowIcon(QtGui.QIcon(QtGui.QPixmap(f"{gui_global.image_directory_location}logo_1.png")))
         response = msg_box.question(QtWidgets.QDialog(), "USER PROMPT", user_prompt,
-                                                  QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+                                    QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
         if response == QtWidgets.QMessageBox.StandardButton.Yes:
             self.prompt = True
         elif response == QtWidgets.QMessageBox.StandardButton.No:
@@ -50,7 +53,6 @@ class Prompt:
         # self.response = None
         messagebox = TimerMessageBox(title, prompt_message, int(timeout))
         messagebox.exec_()
-        # self.response = True
 
 
 class TimerMessageBox(QMessageBox):
@@ -80,3 +82,4 @@ class TimerMessageBox(QMessageBox):
     def closeEvent(self, event):
         self.timer.stop()
         event.accept()
+

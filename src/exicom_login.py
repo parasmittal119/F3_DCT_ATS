@@ -263,8 +263,6 @@ class Ui_MainWindow(object):
 
                     try:
                         username = ProfileReading('USERNAME')[self.edit_username.text().lower()]
-                        print(username)
-                        print(self.edit_username.text())
                     except KeyError:
                         username = 1
                         Prompt.Message(Prompt, "ERROR", "Username is not registered")
@@ -273,9 +271,9 @@ class Ui_MainWindow(object):
                     if user_available:
                         try:
                             password = ProfileReading("PASSWORDS")[self.edit_password.text().lower()]
-                            print(self.edit_password.text())
                             print(password)
-                        except KeyError:
+                        except KeyError as err:
+                            print(err)
                             password = 1
                             Prompt.Message(Prompt, 'Error', 'Input Password is wrong')
 
@@ -364,14 +362,14 @@ class Ui_MainWindow(object):
 
     def super_master_login(self):
         if not gui_global.commissioning_bit:
-            print('master login')
+            # print('master login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
             self.MainWindow_2.showMaximized()
 
         elif gui_global.commissioning_status:
-            print('master login')
+            # print('master login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
@@ -379,7 +377,7 @@ class Ui_MainWindow(object):
             # #self.ui.actionCommissioning.setDisabled(True)
 
         else:
-            print('master login')
+            # print('master login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
@@ -395,7 +393,7 @@ class Ui_MainWindow(object):
 
     def master_login(self):
         if gui_global.commissioning_status:
-            print('Admin login')
+            # print('Admin login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
@@ -403,7 +401,7 @@ class Ui_MainWindow(object):
             # self.ui.actionCommissioning.setDisabled(True)
             self.MainWindow_2.showMaximized()
         else:
-            print('master login')
+            # print('master login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
@@ -420,7 +418,7 @@ class Ui_MainWindow(object):
     def admin_login(self):
         if gui_global.commissioning_status:
             gui_global.admin_login = True
-            print('Manager login')
+            # print('Manager login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
@@ -429,7 +427,7 @@ class Ui_MainWindow(object):
             # self.ui.actionCommissioning.setDisabled(True)
             self.MainWindow_2.showMaximized()
         else:
-            print('master login')
+            # print('master login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
@@ -445,7 +443,7 @@ class Ui_MainWindow(object):
 
     def user_login(self):
         if gui_global.commissioning_status:
-            print('Employee login')
+            # print('Employee login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
@@ -455,7 +453,7 @@ class Ui_MainWindow(object):
             # self.ui.actionCommissioning.setDisabled(True)
             self.MainWindow_2.showMaximized()
         else:
-            print('master login')
+            # print('master login')
             self.MainWindow_2 = QtWidgets.QMainWindow()
             self.ui = Main_window_final.Ui_MainWindow()
             self.ui.setupUi(self.MainWindow_2)
