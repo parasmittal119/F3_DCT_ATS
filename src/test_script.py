@@ -12,6 +12,9 @@ import gui_global
 import test_order_done
 from ModbusServer import MODBUS_CHECK
 from config_done import SettingRead
+from report_gui import *
+from PyQt5.QtCore import pyqtSignal, QObject
+
 
 global w, h, m, factor
 
@@ -19,7 +22,6 @@ global w, h, m, factor
 try:
     factor = round(abs(eval(SettingRead('MULTIPLY')['factor'])))
     if factor <= 0 or factor >= 2:
-
         factor = 1
 except TypeError:
     with open(f'{gui_global.files_directory_location}setting.txt', 'a') as file:
@@ -77,6 +79,11 @@ def get_date_time(date=0, time=0):
         return time_only
 
 
+class WindowSignalHandler(QObject):
+    openWindow = pyqtSignal()
+
+
+
 class Ui_Test(object):
     global w, h
 
@@ -89,144 +96,168 @@ class Ui_Test(object):
         MainWindow.setWindowIcon(QtGui.QIcon(f"{gui_global.image_directory_location}logo_1.png"))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.heading_box = QtWidgets.QGroupBox(self.centralwidget)
-        self.heading_box.setGeometry(
-            QtCore.QRect(int(w * 0.28505), int(h * 0.052083), int(w * 0.3806), int(h * 0.0651)))
-        self.heading_box.setTitle("")
-        self.heading_box.setObjectName("heading_box")
-        self.heading = QtWidgets.QLabel(self.heading_box)
-        self.heading.setGeometry(QtCore.QRect(width(0), height(0), width(521), height(51)))
+        # self.heading_box = QtWidgets.QGroupBox(self.centralwidget)
+        # self.heading_box.setGeometry(
+        #     QtCore.QRect(int(w * 0.28505), int(h * 0.052083), int(w * 0.3806), int(h * 0.0651)))
+        # self.heading_box.setTitle("")
+        # self.heading_box.setObjectName("heading_box")
+        self.heading = QtWidgets.QLabel(self.centralwidget)
+        self.heading.setGeometry(QtCore.QRect(width(410), int(h * 0.039), int(w * 0.3806), int(h * 0.0651)))
         font = QtGui.QFont()
         font.setPointSize(width(22))
         font.setBold(True)
         font.setWeight(width(75))
+        self.heading.setStyleSheet("QLabel{\n\nborder-top: 5px solid black;\nborder-bottom: 5px solid black;\n\n}")
         self.heading.setFont(font)
         self.heading.setAlignment(QtCore.Qt.AlignCenter)
         self.heading.setObjectName("heading")
         self.test_detail_box = QtWidgets.QGroupBox(self.centralwidget)
         self.test_detail_box.setEnabled(True)
         self.test_detail_box.setGeometry(QtCore.QRect(width(30), height(150), width(330), height(461)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(width(50))
-        self.test_detail_box.setFont(font)
+        self.font8_BF_UF_50 = QtGui.QFont()
+        self.font8_BF_UF_50.setPointSize(width(8))
+        self.font8_BF_UF_50.setBold(False)
+        self.font8_BF_UF_50.setUnderline(False)
+        self.font8_BF_UF_50.setWeight(width(50))
+        self.test_detail_box.setStyleSheet(
+            "QGroupBox{background-color:rgba(42,58,86,255);color:rgba(255,255,255,255); border-top-right-radius:50px; border-bottom-left-radius:50px; padding-top:10px}")
+        self.test_detail_box.setFont(self.font8_BF_UF_50)
         self.test_detail_box.setObjectName("test_detail_box")
         self.test_id = QtWidgets.QLabel(self.test_detail_box)
         self.test_id.setGeometry(QtCore.QRect(width(20), height(60), width(71), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(width(50))
-        self.test_id.setFont(font)
+        self.font11_BF_UF_50 = QtGui.QFont()
+        self.font11_BF_UF_50.setPointSize(width(11))
+        self.font11_BF_UF_50.setBold(False)
+        self.font11_BF_UF_50.setUnderline(False)
+        self.font11_BF_UF_50.setWeight(width(50))
+        self.test_id.setStyleSheet("color:rgba(255,255,255,255)")
+        self.test_id.setFont(self.font11_BF_UF_50)
         self.test_id.setObjectName("test_id")
         self.system_part_no = QtWidgets.QLabel(self.test_detail_box)
         self.system_part_no.setGeometry(QtCore.QRect(width(20), height(90), width(141), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(width(50))
-        self.system_part_no.setFont(font)
+        self.system_part_no.setStyleSheet("color:rgba(255,255,255,255)")
+        self.system_part_no.setFont(self.font11_BF_UF_50)
         self.system_part_no.setObjectName("system_part_no")
         self.dut_serial_number = QtWidgets.QLabel(self.test_detail_box)
         self.dut_serial_number.setGeometry(QtCore.QRect(width(20), height(120), width(101), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(width(50))
-        self.dut_serial_number.setFont(font)
+        self.dut_serial_number.setStyleSheet("color:rgba(255,255,255,255)")
+        self.dut_serial_number.setFont(self.font11_BF_UF_50)
         self.dut_serial_number.setObjectName("dut_serial_number")
         self.test_id_edit = QtWidgets.QLineEdit(self.test_detail_box)
         self.test_id_edit.setGeometry(QtCore.QRect(width(150), height(60), width(151), height(20)))
+        self.test_id_edit.setStyleSheet(
+            "QLineEdit\n{\nbackground-color:rgba(0,0,0,0);\nborder:none;\nborder-bottom:2px solid rgba(42,226,230,255);\ncolor:rgba(255,255,255,255);\npadding-bottom:7px;\n}")
         self.test_id_edit.setObjectName("test_id_edit")
         self.test_id_edit.setReadOnly(True)
+        self.test_id_edit.setPlaceholderText("Test ID will be shown here")
+        self.test_id_edit.setStyleSheet(
+            "QLineEdit\n{\nbackground-color:rgba(0,0,0,0);\nborder:none;\nborder-bottom:2px solid rgba(42,226,230,255);\ncolor:rgba(255,255,255,255);\npadding-bottom:7px;\n}")
+        self.test_id_edit.setFont(self.font8_BF_UF_50)
+
         self.system_part_no_edit = QtWidgets.QLineEdit(self.test_detail_box)
         self.system_part_no_edit.setGeometry(QtCore.QRect(width(150), height(90), width(151), height(20)))
         self.system_part_no_edit.setObjectName("system_part_no_edit")
+        self.system_part_no_edit.setStyleSheet(
+            "QLineEdit\n{\nbackground-color:rgba(0,0,0,0);\nborder:none;\nborder-bottom:2px solid rgba(42,226,230,255);\ncolor:rgba(255,255,255,255);\npadding-bottom:7px;\n}")
+        self.system_part_no_edit.setPlaceholderText("System Part Code")
+        self.system_part_no_edit.setFont(self.font8_BF_UF_50)
         self.dut_serial_number_edit = QtWidgets.QLineEdit(self.test_detail_box)
         self.dut_serial_number_edit.setGeometry(QtCore.QRect(width(150), height(120), width(151), height(20)))
         self.dut_serial_number_edit.setObjectName("dut_serial_number_edit")
+        self.dut_serial_number_edit.setStyleSheet(
+            "QLineEdit\n{\nbackground-color:rgba(0,0,0,0);\nborder:none;\nborder-bottom:2px solid rgba(42,226,230,255);\ncolor:rgba(255,255,255,255);\npadding-bottom:7px;\n}")
+        self.dut_serial_number_edit.setPlaceholderText("System Serial Number")
+        self.dut_serial_number_edit.setFont(self.font8_BF_UF_50)
         self.customer_name = QtWidgets.QLabel(self.test_detail_box)
         self.customer_name.setGeometry(QtCore.QRect(width(20), height(150), width(131), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(width(50))
-        self.customer_name.setFont(font)
+        self.customer_name.setStyleSheet("color:rgba(255,255,255,255)")
+        self.customer_name.setFont(self.font11_BF_UF_50)
         self.customer_name.setObjectName("customer_name")
         self.associate_name = QtWidgets.QLabel(self.test_detail_box)
         self.associate_name.setGeometry(QtCore.QRect(width(20), height(180), width(131), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(width(50))
-        self.associate_name.setFont(font)
+        self.associate_name.setStyleSheet("color:rgba(255,255,255,255)")
+        self.associate_name.setFont(self.font11_BF_UF_50)
         self.associate_name.setObjectName("associate_name")
         self.associate_name_edit = QtWidgets.QLineEdit(self.test_detail_box)
         self.associate_name_edit.setGeometry(QtCore.QRect(width(150), height(180), width(151), height(20)))
         self.associate_name_edit.setObjectName("associate_name_edit")
+        self.associate_name_edit.setStyleSheet(
+            "QLineEdit\n{\nbackground-color:rgba(0,0,0,0);\nborder:none;\nborder-bottom:2px solid rgba(42,226,230,255);\ncolor:rgba(255,255,255,255);\npadding-bottom:7px;\n}")
+        self.associate_name_edit.setPlaceholderText("Enter Associate Name")
+        self.associate_name_edit.setFont(self.font8_BF_UF_50)
         self.customer_name_edit = QtWidgets.QLineEdit(self.test_detail_box)
         self.customer_name_edit.setGeometry(QtCore.QRect(width(150), height(150), width(151), height(20)))
         self.customer_name_edit.setObjectName("customer_name_edit")
         self.customer_name_edit.setReadOnly(True)
+
+        self.customer_name_edit.setStyleSheet(
+            "QLineEdit\n{\nbackground-color:rgba(0,0,0,0);\nborder:none;\nborder-bottom:2px solid rgba(42,226,230,255);\ncolor:rgba(255,255,255,255);\npadding-bottom:7px;\n}")
+        self.customer_name_edit.setPlaceholderText("Cust. Name will be shown here")
+
+        self.customer_name_edit.setFont(self.font8_BF_UF_50)
+
         self.start_time_edit = QtWidgets.QLineEdit(self.test_detail_box)
         self.start_time_edit.setGeometry(QtCore.QRect(width(150), height(220), width(151), height(20)))
         self.start_time_edit.setObjectName("start_time_edit")
         self.start_time_edit.setReadOnly(True)
+
+        self.start_time_edit.setStyleSheet(
+            "QLineEdit\n{\nbackground-color:rgba(0,0,0,0);\nborder:none;\nborder-bottom:2px solid rgba(42,226,230,255);\ncolor:rgba(255,255,255,255);\npadding-bottom:7px;\n}")
+        self.start_time_edit.setPlaceholderText("Start time of test")
+        self.start_time_edit.setFont(self.font8_BF_UF_50)
+
         self.end_time_edit = QtWidgets.QLineEdit(self.test_detail_box)
         self.end_time_edit.setGeometry(QtCore.QRect(width(150), height(250), width(151), height(20)))
         self.end_time_edit.setObjectName("end_time_edit")
         self.end_time_edit.setReadOnly(True)
+
+        self.end_time_edit.setStyleSheet(
+            "QLineEdit\n{\nbackground-color:rgba(0,0,0,0);\nborder:none;\nborder-bottom:2px solid rgba(42,226,230,255);\ncolor:rgba(255,255,255,255);\npadding-bottom:7px;\n}")
+        self.end_time_edit.setPlaceholderText("End time of test")
+        self.end_time_edit.setFont(self.font8_BF_UF_50)
+
         self.end_time = QtWidgets.QLabel(self.test_detail_box)
         self.end_time.setGeometry(QtCore.QRect(width(20), height(250), width(141), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(height(50))
-        self.end_time.setFont(font)
+        self.end_time.setStyleSheet("color:rgba(255,255,255,255)")
+        self.end_time.setFont(self.font11_BF_UF_50)
         self.end_time.setObjectName("end_time")
         self.start_time = QtWidgets.QLabel(self.test_detail_box)
         self.start_time.setGeometry(QtCore.QRect(width(20), height(220), width(161), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(False)
-        font.setUnderline(False)
-        font.setWeight(width(50))
-        self.start_time.setFont(font)
+        self.start_time.setFont(self.font11_BF_UF_50)
         self.start_time.setObjectName("start_time")
+        self.start_time.setStyleSheet("color:rgba(255,255,255,255)")
         self.barcode_check = QtWidgets.QCheckBox(self.test_detail_box)
         self.barcode_check.setGeometry(QtCore.QRect(width(20), height(30), width(91), height(17)))
         self.barcode_check.setObjectName("barcode_check")
+        self.barcode_check.setFont(self.font11_BF_UF_50)
+        self.barcode_check.setStyleSheet("color:rgba(255,255,255,255)")
+
         self.custom_check = QtWidgets.QCheckBox(self.test_detail_box)
         self.custom_check.setGeometry(QtCore.QRect(width(20), height(300), width(141), height(21)))
+        self.custom_check.setFont(self.font11_BF_UF_50)
+        self.custom_check.setStyleSheet("color:rgba(255,255,255,255)")
         self.custom_check.setObjectName("custom_check")
         self.manual_checkbox = QtWidgets.QCheckBox(self.test_detail_box)
         self.manual_checkbox.setGeometry(QtCore.QRect(width(165), height(300), width(151), height(21)))
         # self.manual_checkbox.setStyleSheet("QCheckBox::indicator { width: 50px; height: 50px;}")
+        self.manual_checkbox.setFont(self.font11_BF_UF_50)
+        self.manual_checkbox.setStyleSheet("color:rgba(255,255,255,255)")
         self.manual_checkbox.setObjectName("manual_checkbox")
         self.start = QtWidgets.QPushButton(self.test_detail_box)
-        self.start.setGeometry(QtCore.QRect(width(25), height(360), width(121), height(61)))
+        self.start.setGeometry(QtCore.QRect(width(0), height(335), width(330), height(41)))
         font = QtGui.QFont()
         font.setPointSize(width(15))
         font.setBold(True)
         font.setUnderline(False)
         font.setWeight(width(75))
-        self.start.setStyleSheet("QPushButton{ background-color: rgba(0,230,0,255)}"
-                                 "\nQPushButton::hover{background-color: qlineargradient(spread:reflect, x1:1, y1:0.00568182, x2:0.488636, y2:0.011, stop:0.494318 rgba(0, 192, 0, 255), stop:0.994318 rgba(255, 255, 255, 0), stop:1 rgba(0, 255, 0, 0));}\n"
-                                 "QPushButton::pressed{padding-left:10px;padding-top:15px; background-color:rgba(0, 200, 13, 200)}")
+        self.start.setStyleSheet(
+            "QPushButton{\nbackground-color:rgba(42,226,230,255);\nfont: 75 25pt 'MS Shell Dlg 2';\nborder-bottom-left-radius:0px;\n}\nQPushButton::hover{\nfont: 75 35pt 'MS Shell Dlg 2';\nbackground-color:rgba(42,226,230,255);\n}\nQPushButton::pressed{\nfont: 75 35pt 'MS Shell Dlg 2';\nbackground-color:rgba(42,226,230,255);\npadding-top:10px;\n}")
         self.start.setFont(font)
         # self.start.setToolTip("Starts the test")
         self.start.setObjectName("start")
         self.start.clicked.connect(self.start_function)
         self.stop = QtWidgets.QPushButton(self.test_detail_box)
-        self.stop.setGeometry(QtCore.QRect(width(175), height(360), width(121), height(61)))
+        self.stop.setGeometry(QtCore.QRect(width(0), height(390), width(330), height(41)))
         font = QtGui.QFont()
         font.setPointSize(width(15))
         font.setBold(True)
@@ -234,356 +265,290 @@ class Ui_Test(object):
         font.setWeight(width(75))
         self.stop.setFont(font)
         self.stop.setObjectName("stop")
-        self.stop.setStyleSheet(("QPushButton{ background-color: rgba(230,0,0,255)}"
-                                 "\nQPushButton::hover{background-color: qlineargradient(spread:reflect, x1:1, y1:0.00568182, x2:0.488636, y2:0.011, stop:0.494318 rgba(192, 0, 0, 255), stop:0.994318 rgba(255, 255, 255, 0), stop:1 rgba(200, 0, 0, 0));}\n"
-                                 "QPushButton::pressed{padding-left:10px;padding-top:15px; background-color:rgba(200, 0, 13, 200)}"))
+        self.stop.setStyleSheet(
+            "QPushButton{\nbackground-color:rgba(42,226,230,255);\nfont: 75 25pt 'MS Shell Dlg 2';\nborder-bottom-left-radius:5fpx;\n}\nQPushButton::hover{\nfont: 75 35pt 'MS Shell Dlg 2';\nbackground-color:rgba(42,226,230,255);\n}\nQPushButton::pressed{\nfont: 75 35pt 'MS Shell Dlg 2';\nbackground-color:rgba(42,226,230,255);\npadding-top:10px;\n}")
         self.stop.clicked.connect(self.stop_function)
+
+        """
+        FONT FOR TEST ITEM GROUP BOX
+        """
+
+        self.font11_UF = QtGui.QFont()
+        self.font11_UF.setPointSize(width(11))
+        self.font11_UF.setUnderline(False)
+
         self.test_item_box = QtWidgets.QGroupBox(self.centralwidget)
-        self.test_item_box.setGeometry(QtCore.QRect(width(390), height(100), width(521), height(571)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.test_item_box.setFont(font)
+        self.test_item_box.setGeometry(QtCore.QRect(width(410), height(100), width(521), height(571)))
+        self.test_item_box.setFont(self.font11_BF_UF_50)
+        self.test_item_box.setStyleSheet("QGroupBox{border:5px solid black; border-top-left-radius:80px; border-bottom-right-radius:80px; border-top-right-radius:8px; border-bottom-left-radius:8px;}")
         self.test_item_box.setObjectName("test_item_box")
         self.test_item_label = QtWidgets.QLabel(self.test_item_box)
         self.test_item_label.setGeometry(QtCore.QRect(width(70), height(50), width(101), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(True)
-        font.setUnderline(True)
-        font.setWeight(width(75))
-        self.test_item_label.setFont(font)
+        self.test_item_label.setFont(self.font11_UF)
         self.test_item_label.setObjectName("test_item_label")
         self.status_label = QtWidgets.QLabel(self.test_item_box)
         self.status_label.setGeometry(QtCore.QRect(width(430), height(50), width(61), height(21)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(True)
-        font.setUnderline(True)
-        font.setWeight(width(75))
-        self.status_label.setFont(font)
+        self.status_label.setFont(self.font11_UF)
         self.status_label.setObjectName("status_label")
         self.serial_label = QtWidgets.QLabel(self.test_item_box)
         self.serial_label.setGeometry(QtCore.QRect(width(10), height(50), width(41), height(16)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setBold(True)
-        font.setUnderline(True)
-        font.setWeight(width(75))
-        self.serial_label.setFont(font)
+        self.serial_label.setFont(self.font11_UF)
         self.serial_label.setObjectName("serial_label")
         self.serial1 = QtWidgets.QLabel(self.test_item_box)
         self.serial1.setGeometry(QtCore.QRect(width(20), height(80), width(21), height(31)))
+        self.serial1.setFont(self.font11_UF)
         self.serial1.setObjectName("serial1")
         self.controller_health_label = QtWidgets.QLabel(self.test_item_box)
         self.controller_health_label.setGeometry(QtCore.QRect(width(70), height(85), width(121), height(21)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.controller_health_label.setFont(font)
+        self.controller_health_label.setFont(self.font11_UF)
         self.controller_health_label.setObjectName("controller_health_label")
         self.controller_health_status = QtWidgets.QLabel(self.test_item_box)
         self.controller_health_status.setGeometry(QtCore.QRect(width(430), height(80), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.controller_health_status.setFont(font)
+        self.controller_health_status.setFont(self.font11_UF)
         self.controller_health_status.setObjectName("controller_health_status")
         self.serial2 = QtWidgets.QLabel(self.test_item_box)
         self.serial2.setGeometry(QtCore.QRect(width(20), height(110), width(21), height(31)))
         self.serial2.setObjectName("serial2")
+        self.serial2.setFont(self.font11_UF)
         self.serial3 = QtWidgets.QLabel(self.test_item_box)
         self.serial3.setGeometry(QtCore.QRect(width(20), height(140), width(21), height(31)))
         self.serial3.setObjectName("serial3")
+        self.serial3.setFont(self.font11_UF)
         self.serial4 = QtWidgets.QLabel(self.test_item_box)
         self.serial4.setGeometry(QtCore.QRect(width(20), height(170), width(21), height(31)))
         self.serial4.setObjectName("serial4")
+        self.serial4.setFont(self.font11_UF)
         self.serial5 = QtWidgets.QLabel(self.test_item_box)
         self.serial5.setGeometry(QtCore.QRect(width(20), height(200), width(21), height(31)))
         self.serial5.setObjectName("serial5")
+        self.serial5.setFont(self.font11_UF)
         self.serial6 = QtWidgets.QLabel(self.test_item_box)
         self.serial6.setGeometry(QtCore.QRect(width(20), height(230), width(21), height(31)))
         self.serial6.setObjectName("serial6")
+        self.serial6.setFont(self.font11_UF)
         self.serial7 = QtWidgets.QLabel(self.test_item_box)
         self.serial7.setGeometry(QtCore.QRect(width(20), height(260), width(21), height(31)))
         self.serial7.setObjectName("serial7")
+        self.serial7.setFont(self.font11_UF)
         self.serial8 = QtWidgets.QLabel(self.test_item_box)
         self.serial8.setGeometry(QtCore.QRect(width(20), height(290), width(21), height(31)))
         self.serial8.setObjectName("serial8")
+        self.serial8.setFont(self.font11_UF)
         self.serial9 = QtWidgets.QLabel(self.test_item_box)
         self.serial9.setGeometry(QtCore.QRect(width(20), height(320), width(21), height(31)))
         self.serial9.setObjectName("serial9")
+        self.serial9.setFont(self.font11_UF)
         self.serial10 = QtWidgets.QLabel(self.test_item_box)
         self.serial10.setGeometry(QtCore.QRect(width(20), height(350), width(21), height(31)))
         self.serial10.setObjectName("serial10")
+        self.serial10.setFont(self.font11_UF)
         self.serial11 = QtWidgets.QLabel(self.test_item_box)
         self.serial11.setGeometry(QtCore.QRect(width(20), height(380), width(21), height(31)))
         self.serial11.setObjectName("serial11")
+        self.serial11.setFont(self.font11_UF)
         self.unit_comm_label = QtWidgets.QLabel(self.test_item_box)
         self.unit_comm_label.setGeometry(QtCore.QRect(width(70), height(110), width(141), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.unit_comm_label.setFont(font)
+        self.unit_comm_label.setFont(self.font11_UF)
         self.unit_comm_label.setObjectName("unit_comm_label")
         self.temp_label = QtWidgets.QLabel(self.test_item_box)
         self.temp_label.setGeometry(QtCore.QRect(width(70), height(140), width(191), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.temp_label.setFont(font)
+        self.temp_label.setFont(self.font11_UF)
         self.temp_label.setObjectName("temp_label")
         self.output_pfc_label = QtWidgets.QLabel(self.test_item_box)
         self.output_pfc_label.setGeometry(QtCore.QRect(width(70), height(170), width(121), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.output_pfc_label.setFont(font)
+        self.output_pfc_label.setFont(self.font11_UF)
         self.output_pfc_label.setObjectName("output_pfc_label")
         self.input_pfc_label = QtWidgets.QLabel(self.test_item_box)
         self.input_pfc_label.setGeometry(QtCore.QRect(width(70), height(200), width(121), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.input_pfc_label.setFont(font)
+        self.input_pfc_label.setFont(self.font11_UF)
         self.input_pfc_label.setObjectName("input_pfc_label")
         self.dc_voltage_check_label = QtWidgets.QLabel(self.test_item_box)
         self.dc_voltage_check_label.setGeometry(QtCore.QRect(width(70), height(230), width(171), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_voltage_check_label.setFont(font)
+        self.dc_voltage_check_label.setFont(self.font11_UF)
         self.dc_voltage_check_label.setObjectName("dc_voltage_check_label")
         self.dc_voltage_calib_label = QtWidgets.QLabel(self.test_item_box)
         self.dc_voltage_calib_label.setGeometry(QtCore.QRect(width(70), height(260), width(241), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_voltage_calib_label.setFont(font)
+        self.dc_voltage_calib_label.setFont(self.font11_UF)
         self.dc_voltage_calib_label.setObjectName("dc_voltage_calib_label")
         self.dc_current_check_discharge_label = QtWidgets.QLabel(self.test_item_box)
         self.dc_current_check_discharge_label.setGeometry(QtCore.QRect(width(70), height(290), height(251), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_current_check_discharge_label.setFont(font)
+        self.dc_current_check_discharge_label.setFont(self.font11_UF)
         self.dc_current_check_discharge_label.setObjectName("dc_current_check_discharge_label")
         self.smr_register_label = QtWidgets.QLabel(self.test_item_box)
         self.smr_register_label.setGeometry(QtCore.QRect(width(70), height(320), width(121), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.smr_register_label.setFont(font)
+        self.smr_register_label.setFont(self.font11_UF)
         self.smr_register_label.setObjectName("smr_register_label")
         self.dc_current_check_charge_label = QtWidgets.QLabel(self.test_item_box)
         self.dc_current_check_charge_label.setGeometry(QtCore.QRect(width(70), height(350), width(241), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_current_check_charge_label.setFont(font)
+        self.dc_current_check_charge_label.setFont(self.font11_UF)
         self.dc_current_check_charge_label.setObjectName("dc_current_check_charge_label")
         self.dc_current_calib_label = QtWidgets.QLabel(self.test_item_box)
         self.dc_current_calib_label.setGeometry(QtCore.QRect((width(70)), height(380), width(241), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize((width(11)))
-        font.setUnderline(False)
-        self.dc_current_calib_label.setFont(font)
+        self.dc_current_calib_label.setFont(self.font11_UF)
         self.dc_current_calib_label.setObjectName("dc_current_calib_label")
         self.lvd_label = QtWidgets.QLabel(self.test_item_box)
         self.lvd_label.setGeometry(QtCore.QRect(width(70), height(410), width(111), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.lvd_label.setFont(font)
+        self.lvd_label.setFont(self.font11_UF)
         self.lvd_label.setObjectName("lvd_label")
         self.ac_phase_label = QtWidgets.QLabel(self.test_item_box)
         self.ac_phase_label.setGeometry(QtCore.QRect(width(70), height(440), width(131), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.ac_phase_label.setFont(font)
+        self.ac_phase_label.setFont(self.font11_UF)
         self.ac_phase_label.setObjectName("ac_phase_label")
         self.current_sharing_label = QtWidgets.QLabel(self.test_item_box)
         self.current_sharing_label.setGeometry(QtCore.QRect(width(70), height(470), width(181), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.current_sharing_label.setFont(font)
+        self.current_sharing_label.setFont(self.font11_UF)
         self.current_sharing_label.setObjectName("current_sharing_label")
         self.rs485_label = QtWidgets.QLabel(self.test_item_box)
         self.rs485_label.setGeometry(QtCore.QRect(width(70), height(500), width(71), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.rs485_label.setFont(font)
+        self.rs485_label.setFont(self.font11_UF)
         self.rs485_label.setObjectName("rs485_label")
         self.default_label = QtWidgets.QLabel(self.test_item_box)
         self.default_label.setGeometry(QtCore.QRect(width(70), height(530), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.default_label.setFont(font)
+        self.default_label.setFont(self.font11_UF)
         self.default_label.setObjectName("default_label")
         self.serial12 = QtWidgets.QLabel(self.test_item_box)
         self.serial12.setGeometry(QtCore.QRect(width(20), height(410), width(21), height(31)))
         self.serial12.setObjectName("serial12")
+        self.serial12.setFont(self.font11_UF)
         self.serial13 = QtWidgets.QLabel(self.test_item_box)
         self.serial13.setGeometry(QtCore.QRect(width(20), height(440), width(21), height(31)))
         self.serial13.setObjectName("serial13")
+        self.serial13.setFont(self.font11_UF)
         self.serial14 = QtWidgets.QLabel(self.test_item_box)
         self.serial14.setGeometry(QtCore.QRect(width(20), height(470), width(21), height(31)))
         self.serial14.setObjectName("serial14")
+        self.serial14.setFont(self.font11_UF)
         self.serial15 = QtWidgets.QLabel(self.test_item_box)
         self.serial15.setGeometry(QtCore.QRect(width(20), height(500), width(21), height(31)))
         self.serial15.setObjectName("serial15")
+        self.serial15.setFont(self.font11_UF)
         self.serial16 = QtWidgets.QLabel(self.test_item_box)
         self.serial16.setGeometry(QtCore.QRect(width(20), height(530), width(21), height(31)))
         self.serial16.setObjectName("serial16")
+        self.serial16.setFont(self.font11_UF)
         self.unit_comm_status = QtWidgets.QLabel(self.test_item_box)
         self.unit_comm_status.setGeometry(QtCore.QRect(width(430), height(110), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.unit_comm_status.setFont(font)
+        self.unit_comm_status.setFont(self.font11_UF)
         self.unit_comm_status.setObjectName("unit_comm_status")
         self.temp_status = QtWidgets.QLabel(self.test_item_box)
         self.temp_status.setGeometry(QtCore.QRect(width(430), height(140), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.temp_status.setFont(font)
+        self.temp_status.setFont(self.font11_UF)
         self.temp_status.setObjectName("temp_status")
         self.output_pfc_status = QtWidgets.QLabel(self.test_item_box)
         self.output_pfc_status.setGeometry(QtCore.QRect(width(430), height(170), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.output_pfc_status.setFont(font)
+        self.output_pfc_status.setFont(self.font11_UF)
         self.output_pfc_status.setObjectName("output_pfc_status")
         self.input_pfc_status = QtWidgets.QLabel(self.test_item_box)
         self.input_pfc_status.setGeometry(QtCore.QRect(width(430), height(200), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.input_pfc_status.setFont(font)
+        self.input_pfc_status.setFont(self.font11_UF)
         self.input_pfc_status.setObjectName("input_pfc_status")
         self.dc_voltage_check_status = QtWidgets.QLabel(self.test_item_box)
         self.dc_voltage_check_status.setGeometry(QtCore.QRect(width(430), height(230), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_voltage_check_status.setFont(font)
+        self.dc_voltage_check_status.setFont(self.font11_UF)
         self.dc_voltage_check_status.setObjectName("dc_voltage_check_status")
         self.dc_voltage_calib_status = QtWidgets.QLabel(self.test_item_box)
         self.dc_voltage_calib_status.setGeometry(QtCore.QRect(width(430), height(260), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_voltage_calib_status.setFont(font)
+        self.dc_voltage_calib_status.setFont(self.font11_UF)
         self.dc_voltage_calib_status.setObjectName("dc_voltage_calib_status")
         self.dc_current_check_discharge_status = QtWidgets.QLabel(self.test_item_box)
         self.dc_current_check_discharge_status.setGeometry(QtCore.QRect(width(430), height(290), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_current_check_discharge_status.setFont(font)
+        self.dc_current_check_discharge_status.setFont(self.font11_UF)
         self.dc_current_check_discharge_status.setObjectName("dc_current_check_discharge_status")
         self.smr_register_status = QtWidgets.QLabel(self.test_item_box)
         self.smr_register_status.setGeometry(QtCore.QRect(width(430), height(320), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.smr_register_status.setFont(font)
+        self.smr_register_status.setFont(self.font11_UF)
         self.smr_register_status.setObjectName("smr_register_status")
         self.dc_current_check_charge_status = QtWidgets.QLabel(self.test_item_box)
         self.dc_current_check_charge_status.setGeometry(QtCore.QRect(width(430), height(350), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_current_check_charge_status.setFont(font)
+        self.dc_current_check_charge_status.setFont(self.font11_UF)
         self.dc_current_check_charge_status.setObjectName("dc_current_check_charge_status")
         self.dc_current_calib_status = QtWidgets.QLabel(self.test_item_box)
         self.dc_current_calib_status.setGeometry(QtCore.QRect(width(430), height(380), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.dc_current_calib_status.setFont(font)
+        self.dc_current_calib_status.setFont(self.font11_UF)
         self.dc_current_calib_status.setObjectName("dc_current_calib_status")
         self.lvd_status = QtWidgets.QLabel(self.test_item_box)
         self.lvd_status.setGeometry(QtCore.QRect(width(430), height(410), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.lvd_status.setFont(font)
+        self.lvd_status.setFont(self.font11_UF)
         self.lvd_status.setObjectName("lvd_status")
         self.ac_phase_status = QtWidgets.QLabel(self.test_item_box)
         self.ac_phase_status.setGeometry(QtCore.QRect(width(430), height(440), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.ac_phase_status.setFont(font)
+        self.ac_phase_status.setFont(self.font11_UF)
         self.ac_phase_status.setObjectName("ac_phase_status")
         self.current_sharing_status = QtWidgets.QLabel(self.test_item_box)
         self.current_sharing_status.setGeometry(QtCore.QRect(width(430), height(470), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.current_sharing_status.setFont(font)
+        self.current_sharing_status.setFont(self.font11_UF)
         self.current_sharing_status.setObjectName("current_sharing_status")
         self.default_status = QtWidgets.QLabel(self.test_item_box)
         self.default_status.setGeometry(QtCore.QRect(width(430), height(530), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.default_status.setFont(font)
+        self.default_status.setFont(self.font11_UF)
         self.default_status.setObjectName("default_status")
         self.rs485_status = QtWidgets.QLabel(self.test_item_box)
         self.rs485_status.setGeometry(QtCore.QRect(width(430), height(500), width(61), height(31)))
-        font = QtGui.QFont()
-        font.setPointSize(width(11))
-        font.setUnderline(False)
-        self.rs485_status.setFont(font)
+        self.rs485_status.setFont(self.font11_UF)
         self.rs485_status.setObjectName("rs485_status")
-        self.log_window = QtWidgets.QTextEdit(self.centralwidget)
-        self.log_window.setGeometry(QtCore.QRect(width(980), height(80), width(341), height(481)))
+
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setGeometry(QtCore.QRect(width(980), height(80), width(341), height(481)))
+        self.frame.setObjectName("frame_window")
+        self.frame.setStyleSheet(
+            "QFrame {\nborder-top-right-radius: 50px;\nbackground-color:rgba(240,240,240,255);\nborder-bottom-right-radius: 50px;\n}\n")
+
+        self.log_window = QtWidgets.QTextBrowser(self.frame)
+        self.log_window.setGeometry(QtCore.QRect(width(0), height(0), width(341), height(481)))
         self.log_window.setObjectName("log_window")
+        self.log_window.setStyleSheet(
+            "QTextBrowser{\nborder:2px solid black;\nborder-top-left-radius:20px;\nborder-top-right-radius:20px;\nborder-bottom-left-radius:20px;\nborder-bottom-right-radius:20px;\n}")
         self.test_log = QtWidgets.QLabel(self.centralwidget)
-        self.test_log.setGeometry(QtCore.QRect(width(980), height(40), width(101), height(41)))
-        font = QtGui.QFont()
-        font.setPointSize(width(12))
-        font.setBold(True)
-        font.setUnderline(True)
-        font.setWeight(width(75))
-        self.test_log.setFont(font)
+        self.test_log.setGeometry(QtCore.QRect(width(985), height(42), width(101), height(41)))
+        self.test_log.setFont(self.font11_BF_UF_50)
+        self.test_log.setOpenExternalLinks(True)
         self.test_log.setObjectName("test_log")
+
+        self.report = QtWidgets.QLabel(self.centralwidget)
+        self.report.setGeometry(QtCore.QRect(width(1120), height(40), width(130), height(41)))
+        self.report.setFont(self.font11_BF_UF_50)
+        self.report.setStyleSheet("QLabel{color:Blue;}")
+        self.report.mousePressEvent = self.report_function
+        self.report.setObjectName("test_log")
+
         self.log_clear = QtWidgets.QPushButton(self.centralwidget)
         self.log_clear.setGeometry(QtCore.QRect(width(1240), height(50), width(75), height(23)))
+        self.log_clear.setStyleSheet(
+            "QPushButton{\nbackground-color:rgba(42,226,230,255);\nfont: 75 15pt 'MS Shell Dlg 2';\nborder-bottom-left-radius:0px;border:2px solid black;\n"
+            "border-top-left-radius:15px;border-bottom-right-radius:15px;}QPushButton::pressed{padding-top:5px;}")
+
         self.log_clear.setObjectName("log_clear")
-        self.final_status_box = QtWidgets.QGroupBox(self.centralwidget)
-        self.final_status_box.setGeometry(QtCore.QRect(width(980), height(580), width(341), height(71)))
-        self.final_status_box.setTitle("")
-        self.final_status_box.setObjectName("final_status_box")
-        self.final_status = QtWidgets.QLabel(self.final_status_box)
-        self.final_status.setGeometry(QtCore.QRect(width(6), height(4), width(331), height(55)))
+        # self.final_status_box = QtWidgets.QGroupBox(self.centralwidget)
+        # self.final_status_box.setGeometry(QtCore.QRect(width(980), height(580), width(341), height(71)))
+        # self.final_status_box.setTitle("")
+        # self.final_status_box.setObjectName("final_status_box")
+        self.final_status = QtWidgets.QLabel(self.centralwidget)
+        self.final_status.setGeometry(QtCore.QRect(width(980), height(580), width(341), height(71)))
         font = QtGui.QFont()
         font.setPointSize(width(28))
         font.setBold(True)
         font.setWeight(width(75))
         self.final_status.setFont(font)
+        self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;}")
         self.final_status.setScaledContents(True)
         self.final_status.setAlignment(QtCore.Qt.AlignCenter)
         self.final_status.setObjectName("final_status")
         self.ate_logo = QtWidgets.QLabel(self.centralwidget)
-        self.ate_logo.setGeometry(QtCore.QRect(width(50), height(50), width(251), height(71)))
+        self.ate_logo.setGeometry(QtCore.QRect(width(70), height(50), width(251), height(71)))
         self.ate_logo.setText("")
         self.ate_logo.setPixmap(QtGui.QPixmap(f"{gui_global.image_directory_location}exicome logo.png"))
         self.ate_logo.setScaledContents(True)
+        # self.ate_logo.setStyleSheet("QLabel{border:2px solid black; border-bottom-right-radius:50px; border-top-left-radius:50px}")
         self.ate_logo.setAlignment(QtCore.Qt.AlignCenter)
         self.ate_logo.setObjectName("ate_logo")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
+        self.system_part_no_edit.setText("HE517512")
+        self.dut_serial_number_edit.setText("123456789012345")
+        self.associate_name_edit.setText("Paras")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -593,7 +558,7 @@ class Ui_Test(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", ""))
         self.heading.setText(_translate("MainWindow", "Power Plant Production ATS"))
-        self.test_detail_box.setTitle(_translate("MainWindow", "Test Details"))
+        self.test_detail_box.setTitle(_translate("MainWindow", ""))
         self.test_id.setText(_translate("MainWindow", "Test ID"))
         self.system_part_no.setText(_translate("MainWindow", "System Part No."))
         self.dut_serial_number.setText(_translate("MainWindow", "DUT Serial No."))
@@ -659,11 +624,11 @@ class Ui_Test(object):
         self.current_sharing_status.setText(_translate("MainWindow", "Pending"))
         self.default_status.setText(_translate("MainWindow", "Pending"))
         self.rs485_status.setText(_translate("MainWindow", "Pending"))
-        self.test_log.setText(_translate("MainWindow", "Test Log"))
+        self.test_log.setText(_translate("MainWindow", f"<a href='file:{gui_global.directory_location}logs'>Log Folder</a>"))
+        self.report.setText(_translate("MainWindow", "Reports"))
         self.log_clear.setText(_translate("MainWindow", "Log Clear"))
         self.final_status.setText(_translate("MainWindow", ""))
         self.start.setToolTip(_translate("MainWindow", "Starts the test"))
-
         self.prompt = Prompt()
         self.M2000 = M2000.M2000CommandSet()
         self.pfc = PFC_control_done.pfc_control()
@@ -743,7 +708,7 @@ class Ui_Test(object):
 
     def initials(self):
         self.final_status.setText("")
-        self.final_status.setStyleSheet("")
+        self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;}")
         self.controller_health_status.setText("Pending")
         self.controller_health_status.setStyleSheet("")
         self.unit_comm_status.setText("Pending")
@@ -834,7 +799,7 @@ class Ui_Test(object):
                         final_output.append(function_status)
 
                     else:
-                        user_response = self.prompt.User_prompt("Do you want to skip\nthis test and continue?")
+                        user_response = self.prompt.userPrompt("Do you want to skip\nthis test and continue?")
                         if user_response:
                             testing_flag = True
                             final_output.append(function_status)
@@ -856,12 +821,14 @@ class Ui_Test(object):
 
             if console_output_flag:
                 self.final_status.setText("PASS")
-                self.final_status.setFont(QtGui.QFont("Calibri", 50))
-                self.final_status.setStyleSheet("color:GREEN")
+                # self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;}")
+                self.final_status.setFont(QtGui.QFont("Calibri", 80))
+                self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;color:GREEN;}")
             else:
                 self.final_status.setText("FAIL")
-                self.final_status.setFont(QtGui.QFont("Calibri", 50))
-                self.final_status.setStyleSheet("color:RED")
+                # self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;}")
+                self.final_status.setFont(QtGui.QFont("Calibri", 80))
+                self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;color:RED;}")
 
             self.end_time_edit.setText(str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 
@@ -873,8 +840,8 @@ class Ui_Test(object):
 
     def run_test(self, test_number):
         if test_number == int(self.test_order[0]):
-            # controller_health_check_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
-            controller_health_check_variable = self.physical_check(BYPASS=False)
+            controller_health_check_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            # controller_health_check_variable = self.physical_check(BYPASS=False)
             if controller_health_check_variable:
                 self.controller_health_status.setText("PASS")
                 self.controller_health_status.setStyleSheet("color: GREEN")
@@ -883,8 +850,8 @@ class Ui_Test(object):
                 self.controller_health_status.setStyleSheet("color: RED")
             return controller_health_check_variable
         elif test_number == int(self.test_order[1]):
-            # unit_comm_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
-            unit_comm_variable = self.CARD_COMMUNICATION()
+            unit_comm_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            # unit_comm_variable = self.CARD_COMMUNICATION()
             if unit_comm_variable:
                 self.unit_comm_status.setText('PASS')
                 self.unit_comm_status.setStyleSheet('color:GREEN')
@@ -893,8 +860,8 @@ class Ui_Test(object):
                 self.unit_comm_status.setStyleSheet('color:RED')
             return unit_comm_variable
         elif test_number == int(self.test_order[2]):
-            # temp_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
-            temp_variable = self.TEMPERATURE_MEASUREMENT()
+            temp_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            # temp_variable = self.TEMPERATURE_MEASUREMENT()
             if temp_variable:
                 self.temp_status.setText('PASS')
                 self.temp_status.setStyleSheet('color:GREEN')
@@ -903,8 +870,8 @@ class Ui_Test(object):
                 self.temp_status.setStyleSheet('color:RED')
             return temp_variable
         elif test_number == int(self.test_order[3]):
-            # out_pfc_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
-            out_pfc_variable = self.OP_PFC_CHECK()
+            out_pfc_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            # out_pfc_variable = self.OP_PFC_CHECK()
             if out_pfc_variable:
                 self.output_pfc_status.setText('PASS')
                 self.output_pfc_status.setStyleSheet('color:GREEN')
@@ -913,8 +880,8 @@ class Ui_Test(object):
                 self.output_pfc_status.setStyleSheet('color:RED')
             return out_pfc_variable
         elif test_number == int(self.test_order[4]):
-            # input_pfc_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
-            input_pfc_variable = self.IP_PFC_CHECK()
+            input_pfc_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            # input_pfc_variable = self.IP_PFC_CHECK()
             if input_pfc_variable:
                 self.input_pfc_status.setText('PASS')
                 self.input_pfc_status.setStyleSheet('color:GREEN')
@@ -923,8 +890,8 @@ class Ui_Test(object):
                 self.input_pfc_status.setStyleSheet('color:RED')
             return input_pfc_variable
         elif test_number == int(self.test_order[5]):
-            # dc_voltage_check = self.prompt.User_prompt("Do you want to pass this test and continue?")
-            dc_voltage_check = self.DC_VOLTAGE_MEASUREMENT()
+            dc_voltage_check = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            # dc_voltage_check = self.DC_VOLTAGE_MEASUREMENT()
             print(f"dc_voltage : {dc_voltage_check}")
             if dc_voltage_check:
                 self.dc_voltage_check_status.setText('PASS')
@@ -934,8 +901,8 @@ class Ui_Test(object):
                 self.dc_voltage_check_status.setStyleSheet('color:RED')
             return dc_voltage_check
         elif test_number == int(self.test_order[6]):
-            # dc_voltage_calib_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
-            dc_voltage_calib_variable = self.CALIBRATE_DC_VOLTAGE()
+            dc_voltage_calib_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            # dc_voltage_calib_variable = self.CALIBRATE_DC_VOLTAGE()
             print(f"dc_voltage_calib : {dc_voltage_calib_variable}")
             if dc_voltage_calib_variable:
                 self.dc_voltage_calib_status.setText('PASS')
@@ -945,7 +912,7 @@ class Ui_Test(object):
                 self.dc_voltage_calib_status.setStyleSheet('color:RED')
             return dc_voltage_calib_variable
         elif test_number == int(self.test_order[7]):
-            dc_current_discharge_variable = self.prompt.User_prompt("Do you want to pass this test and continue?"
+            dc_current_discharge_variable = self.prompt.userPrompt("Do you want to pass this test and continue?"
                                                                     "s")
             if dc_current_discharge_variable:
                 self.dc_current_check_discharge_status.setText('PASS')
@@ -955,7 +922,7 @@ class Ui_Test(object):
                 self.dc_current_check_discharge_status.setStyleSheet('color:RED')
             return dc_current_discharge_variable
         elif test_number == int(self.test_order[8]):
-            smr_registration_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            smr_registration_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
             if smr_registration_variable:
                 self.smr_register_status.setText('PASS')
                 self.smr_register_status.setStyleSheet('color:GREEN')
@@ -964,7 +931,7 @@ class Ui_Test(object):
                 self.smr_register_status.setStyleSheet('color:RED')
             return smr_registration_variable
         elif test_number == int(self.test_order[9]):
-            dc_current_charge_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            dc_current_charge_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
             if dc_current_charge_variable:
                 self.dc_current_check_charge_status.setText('PASS')
                 self.dc_current_check_charge_status.setStyleSheet('color:GREEN')
@@ -973,7 +940,7 @@ class Ui_Test(object):
                 self.dc_current_check_charge_status.setStyleSheet('color:RED')
             return dc_current_charge_variable
         elif test_number == int(self.test_order[10]):
-            dc_current_calib_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            dc_current_calib_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
             if dc_current_calib_variable:
                 self.dc_current_calib_status.setText('PASS')
                 self.dc_current_calib_status.setStyleSheet('color:GREEN')
@@ -982,7 +949,7 @@ class Ui_Test(object):
                 self.dc_current_calib_status.setStyleSheet('color:RED')
             return dc_current_calib_variable
         elif test_number == int(self.test_order[11]):
-            lvd_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            lvd_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
             if lvd_variable:
                 self.lvd_status.setText('PASS')
                 self.lvd_status.setStyleSheet('color:GREEN')
@@ -991,7 +958,7 @@ class Ui_Test(object):
                 self.lvd_status.setStyleSheet('color:RED')
             return lvd_variable
         elif test_number == int(self.test_order[12]):
-            ac_phase_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            ac_phase_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
             if ac_phase_variable:
                 self.ac_phase_status.setText('PASS')
                 self.ac_phase_status.setStyleSheet('color:GREEN')
@@ -1000,7 +967,7 @@ class Ui_Test(object):
                 self.ac_phase_status.setStyleSheet('color:RED')
             return ac_phase_variable
         elif test_number == int(self.test_order[13]):
-            current_sharing_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            current_sharing_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
             if current_sharing_variable:
                 self.current_sharing_status.setText('PASS')
                 self.current_sharing_status.setStyleSheet('color:GREEN')
@@ -1009,7 +976,7 @@ class Ui_Test(object):
                 self.current_sharing_status.setStyleSheet('color:RED')
             return current_sharing_variable
         elif test_number == int(self.test_order[14]):
-            rs485_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            rs485_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
             if rs485_variable:
                 self.rs485_status.setText('PASS')
                 self.rs485_status.setStyleSheet('color:GREEN')
@@ -1018,7 +985,7 @@ class Ui_Test(object):
                 self.rs485_status.setStyleSheet('color:RED')
             return rs485_variable
         elif test_number == int(self.test_order[15]):
-            default_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            default_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
             if default_variable:
                 self.default_status.setText('PASS')
                 self.default_status.setStyleSheet('color:GREEN')
@@ -1050,21 +1017,21 @@ class Ui_Test(object):
             RESULT = []
             self.print_console("PHYSICAL CHECK TEST STARTED...")
 
-            physical_state = self.prompt.User_prompt("Is all bus-bar/ screws tight?")
+            physical_state = self.prompt.userPrompt("Is all bus-bar/ screws tight?")
             if physical_state:
                 RESULT_TEMP = True
             else:
                 RESULT_TEMP = False
             RESULT.append(RESULT_TEMP)
 
-            physical_state = self.prompt.User_prompt("Is AC/Battery/LOAD/PFC/RS-485(if any) connection tightly done?")
+            physical_state = self.prompt.userPrompt("Is AC/Battery/LOAD/PFC/RS-485(if any) connection tightly done?")
             if physical_state:
                 RESULT_TEMP = True
             else:
                 RESULT_TEMP = False
             RESULT.append(RESULT_TEMP)
 
-            physical_state = self.prompt.User_prompt("Is connection to optional AC MCB is correct?")
+            physical_state = self.prompt.userPrompt("Is connection to optional AC MCB is correct?")
             if physical_state:
                 RESULT_TEMP = True
             else:
@@ -1074,6 +1041,13 @@ class Ui_Test(object):
             self.print_console("PHYSICAL CHECK TEST FINISHED....")
 
             return CALCULATE_RESULT(RESULT)
+
+    def report_function(self, event):
+        report = QtWidgets.QDialog()
+        report.ui = Ui_report()
+        report.ui.setupUi(report)
+        report.exec_()
+        report.show()
 
     def controller_health_method(self):
         global SITE_ID
@@ -2103,7 +2077,7 @@ class Ui_Test(object):
                 alarm = False
         self.print_console("DOOR OPEN ALARM TEST STARTED...")
 
-        user_state = self.prompt.User_prompt("DO YOU WANT TO TEST DOOR ALARM. PRESS ENTER TO PROCEED!")
+        user_state = self.prompt.userPrompt("DO YOU WANT TO TEST DOOR ALARM. PRESS ENTER TO PROCEED!")
 
         if user_state:
             read_restore_time = int(self.MCM_READ_COMMAND('DOOR SETTING', 'door open restore time'))
@@ -2135,7 +2109,7 @@ class Ui_Test(object):
 
         self.print_console("SMOKE ALARM TEST STARTED...")
 
-        user_state = self.prompt.User_prompt("DO YOU WANT TO TEST SMOKE ALARM. PRESS ENTER TO PROCEED!")
+        user_state = self.prompt.userPrompt("DO YOU WANT TO TEST SMOKE ALARM. PRESS ENTER TO PROCEED!")
 
         if user_state:
             ip_pfc_state = True
@@ -2163,10 +2137,10 @@ class Ui_Test(object):
 
         self.print_console("POWER POINT/ AVIATION ALARM TEST STARTED...")
 
-        user_state = self.prompt.User_prompt("DO YOU WANT TO TEST POWER POINT/ AVIATION. PRESS ENTER TO PROCEED!")
+        user_state = self.prompt.userPrompt("DO YOU WANT TO TEST POWER POINT/ AVIATION. PRESS ENTER TO PROCEED!")
 
         if user_state:
-            power_point = self.prompt.User_prompt("IS POWER POINT/ AVIATION CONTINUITY IS OKAY?")
+            power_point = self.prompt.userPrompt("IS POWER POINT/ AVIATION CONTINUITY IS OKAY?")
             if power_point:
                 RESULT_P_TEMP = True
                 self.print_console("POWER POINT/ AVIATION TEST OK")
@@ -2182,10 +2156,10 @@ class Ui_Test(object):
 
         self.print_console("FAN TEST STARTED...")
 
-        user_state = self.prompt.User_prompt("DO YOU WANT TO TEST FAN FUNCTIONALITY. PRESS ENTER TO PROCEED!")
+        user_state = self.prompt.userPrompt("DO YOU WANT TO TEST FAN FUNCTIONALITY. PRESS ENTER TO PROCEED!")
 
         if user_state:
-            power_point = self.prompt.User_prompt("INCREASE TEMPERATURE OF TEMPERATURE SENSOR, IS FAN RUNNING?")
+            power_point = self.prompt.userPrompt("INCREASE TEMPERATURE OF TEMPERATURE SENSOR, IS FAN RUNNING?")
             if power_point:
                 RESULT_P_TEMP = True
                 self.print_console("FAN TEST TEST OK")
@@ -2765,7 +2739,7 @@ class Ui_Test(object):
 
         self.print_console("DC_CURRENT_MEASUREMENT_BATT_DISCHARGE TEST FINISHED...")
 
-        user_state = self.prompt.User_prompt(
+        user_state = self.prompt.userPrompt(
             "DO YOU WANT TO TEST LOAD FUSE FAIL/DC MCCB TRIP ALARM.PRESS ENTER TO PROCEED!")
         if user_state:
             print("Testing Load MCB TRIP alarm")
@@ -2887,7 +2861,7 @@ class Ui_Test(object):
         self.MCM_WRITE_COMMAND('SYSTEM CONFIG', 'smr count', max_smr_count)
         self.print_console("SMR REGISTRATION TEST FINISHED...")
 
-        user_response = self.prompt.User_prompt("DO YOU WANT TO TEST BATTERY SENSING WIRING? PRESS OK TO CONTINUE..")
+        user_response = self.prompt.userPrompt("DO YOU WANT TO TEST BATTERY SENSING WIRING? PRESS OK TO CONTINUE..")
 
         if user_response:
             self.print_console("BATTERY SENSE TEST STARTED...")

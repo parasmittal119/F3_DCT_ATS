@@ -19,3 +19,4 @@ directory_location = f"C:/Users/{account_user}/AppData/Local/DCT_ATS/"
 files_directory_location = f"C:/Users/{account_user}/AppData/Local/DCT_ATS/files/"
 image_directory_location = f"C:/Users/{account_user}/AppData/Local/DCT_ATS/images/"
 ate_name = ''
+user_prompt = False

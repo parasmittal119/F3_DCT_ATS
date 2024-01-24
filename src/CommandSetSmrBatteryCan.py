@@ -91,6 +91,6 @@ def register():
     CAN.CAN_WRITE(CAN, message_id=770, packet=value)
 
 
-print("hjo")
+# print("hjo")
 # register()
 # SMR_BATTERY_SET_VOLTAGE(49)

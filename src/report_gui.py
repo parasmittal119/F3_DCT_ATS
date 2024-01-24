@@ -159,7 +159,7 @@ class Ui_report(object):
         self.searchcheck.setObjectName("searchcheck")
         self.searchcheck.clicked.connect(self.Search)
         self.report = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        self.report.setGeometry(QtCore.QRect(10, 70, 111, 31))
+        self.report.setGeometry(QtCore.QRect(10, 70, 130, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
