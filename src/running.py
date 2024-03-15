@@ -31,15 +31,16 @@ list_of_files = ['AlarmIndex.txt', 'calibrate.txt', 'config.ini', 'default.txt',
                  'systemversion.txt', 'telnetgetcommandparameters.txt', 'test_order.txt', 'tO DO.txt']
 
 '''IMAGES AND SOURCES'''
-source_path = [r'\\SLICE\Data_Share_Temp\Paras\about.png', r'\\SLICE\Data_Share_Temp\Paras\exicome logo.png',
-               r'\\SLICE\Data_Share_Temp\Paras\logo_1.png', r'\\SLICE\Data_Share_Temp\Paras\logo.png',
-               r'\\SLICE\Data_Share_Temp\Paras\report_format_page.jpg']
+source_path = [r'\\\SLICE\Data_Share_Temp\temp_folder_to_upload\images\about.png', r'\\\SLICE\Data_Share_Temp\temp_folder_to_upload\images\exicome logo.png',
+               r'\\\SLICE\Data_Share_Temp\temp_folder_to_upload\images\logo_1.png', r'\\\SLICE\Data_Share_Temp\temp_folder_to_upload\images\logo.png',
+               r'\\\SLICE\Data_Share_Temp\temp_folder_to_upload\images\report_format_page.jpg',r'\\\SLICE\Data_Share_Temp\temp_folder_to_upload\images\hide.png',
+               r'\\\SLICE\Data_Share_Temp\temp_folder_to_upload\images\exit.png', r'\\\SLICE\Data_Share_Temp\temp_folder_to_upload\images\show.png']
 
 '''CRC MODULES SOURCES'''
-module_source = [r'\\SLICE\\Data_Share_Temp\\Paras\\CRC16.py', r'\\SLICE\\Data_Share_Temp\\Paras\\CRC16DNP.py',
-                 r'\\SLICE\\Data_Share_Temp\\Paras\\CRC16Kermit.py', r'\\SLICE\\Data_Share_Temp\\Paras\\CRC16SICK.py',
-                 r'\\SLICE\\Data_Share_Temp\\Paras\\CRC32.py', r'\\SLICE\\Data_Share_Temp\\Paras\\CRCCCITT.py',
-                 r'\\SLICE\\Data_Share_Temp\\Paras\\__init__.py']
+module_source = [r'\SLICE\Data_Share_Temp\temp_folder_to_upload\CRCModules\CRC16.py', r'\SLICE\Data_Share_Temp\temp_folder_to_upload\CRCModules\CRC16DNP.py',
+                 r'\SLICE\Data_Share_Temp\temp_folder_to_upload\CRCModules\CRC16Kermit.py', r'\SLICE\Data_Share_Temp\temp_folder_to_upload\CRCModules\\CRC16SICK.py',
+                 r'\SLICE\Data_Share_Temp\temp_folder_to_upload\CRCModules\CRC32.py', r'\SLICE\Data_Share_Temp\temp_folder_to_upload\CRCModules\CRCCCITT.py',
+                 r'\SLICE\Data_Share_Temp\temp_folder_to_upload\CRCModules\__init__.py']
 
 
 account_user = getpass.getuser()
