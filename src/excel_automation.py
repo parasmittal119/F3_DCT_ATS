@@ -2,7 +2,7 @@ import configparser
 import csv
 import datetime
 import os
-
+import openpyxl
 import gui_global
 # from macpath import split
 from config_done import *
@@ -62,17 +62,13 @@ class CSV:
 
     def Update_CSV_Test_Result(self, filename):
         new_rows = []
-
         with open(filename) as csvfile:
-
             reader = csv.reader(csvfile)
-
             for row in reader:
                 new_row = row
                 if new_row[0] == str(sno):
                     new_row[12] == "YES"
                 new_rows.append(new_row)
-
         with open(filename, "w") as f:
             writer = csv.writer(f)
             writer.writerows(new_rows)
@@ -95,3 +91,54 @@ class CSV:
         detail_file.write('\n')
         detail_file.close()
         return filename
+
+
+class CSVHandler:
+    def __init__(self, file_path):
+        self.file_path = file_path
+        self.headers = self.get_headers()
+        self.last_row_index = self.get_last_row_index()
+
+    def get_headers(self):
+        with open(self.file_path, 'r', newline='') as file:
+            reader = csv.reader(file)
+            headers = next(reader)
+            return headers
+
+    def get_last_row_index(self):
+        with open(self.file_path, 'r', newline='') as file:
+            reader = csv.reader(file)
+            rows = list(reader)
+            return len(rows) - 1  # Subtract 1 for 0-based indexing
+
+    def append_row(self, data):
+        with open(self.file_path, 'a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(data)
+        self.last_row_index += 1
+
+    def update_cell(self, column_name, value):
+        if column_name in self.headers:
+            with open(self.file_path, 'r', newline='') as file:
+                reader = csv.DictReader(file)
+                rows = list(reader)
+                last_row = rows[-1]
+                last_row[column_name] = value
+
+            with open(self.file_path, 'w', newline='') as file:
+                writer = csv.DictWriter(file, fieldnames=self.headers)
+                writer.writeheader()
+                writer.writerows(rows)
+
+    def get_column_length(self):
+        return len(self.headers)
+
+    def get_last_row_first_column_value(self):
+        with open(self.file_path, 'r', newline='') as file:
+            reader = csv.reader(file)
+            rows = list(reader)
+            last_row = rows[-1]
+            return last_row[0] if last_row else None
+
+# while True:
+#     excel.update_cell(input("enter column Name"), input("Enter Value"))

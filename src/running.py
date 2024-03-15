@@ -41,6 +41,7 @@ module_source = [r'\\SLICE\\Data_Share_Temp\\Paras\\CRC16.py', r'\\SLICE\\Data_S
                  r'\\SLICE\\Data_Share_Temp\\Paras\\CRC32.py', r'\\SLICE\\Data_Share_Temp\\Paras\\CRCCCITT.py',
                  r'\\SLICE\\Data_Share_Temp\\Paras\\__init__.py']
 
+
 account_user = getpass.getuser()
 directory_path = f"C:/Users/{account_user}/AppData/Local/DCT_ATS"
 

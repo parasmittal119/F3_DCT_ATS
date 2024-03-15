@@ -8,10 +8,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import pyvisa
 from config_done import SettingRead
 import gui_global
-
+import pyvisa
+# pyvisa.log_to_screen()
 
 
 class Ui_load(object):
@@ -45,46 +45,46 @@ class Ui_load(object):
         self.pushButton.setObjectName("pushButton")
         self.pushButton.clicked.connect(self.communication)
         self.horizontalLayout.addWidget(self.pushButton)
+        # self.rm = pyvisa.ResourceManager()
+        # self.chroma = None
 
         self.retranslateUi(load)
         QtCore.QMetaObject.connectSlotsByName(load)
 
     def communication(self):
-        global return_value
-        return_value=""
-        try:
-            self.rm = pyvisa.ResourceManager()
-            list1 = self.rm.list_resources()
-            print(list1)
-            for i in self.rm.list_resources():
-                print(i)
-                if "GPIB" in i:
-                    address = str(i).split("::INSTR")[0]
+        import pyvisa
+        global return_value, address
+        return_value = ""
+
+        self.rm = pyvisa.ResourceManager()  # Create resource manager outside try/except
+
+        while True:  # Reconnection loop
+            try:
+                list1 = self.rm.list_resources()
+                for i in list1:
+                    if "GPIB" in i:
+                        address = str(i).split("::INSTR")[0]
+                    elif "USB" in i:
+                        address = str(i).split("::INSTR")[0]
                     self.chroma = self.rm.open_resource(address)
                     return_value = str(self.chroma.query("*IDN?")).split(",")[1]
+                    break  # Exit loop if device found
+                print(return_value)
+                if "632" in return_value:
+                    self.label_2.setText("PASS")
+                    self.label_2.setStyleSheet("color:GREEN")
+                else:
+                    self.label_2.setText("FAIL")
+                    self.label_2.setStyleSheet("color:RED")
+                return  # Exit function if communication successful
 
+            except Exception as e:
+                print(f"Error: {e}")
+                time.sleep(5)  # Delay before retrying
 
-
-            print(return_value)
-            # self.chroma.close()
-            self.chroma.clear()
-            self.chroma.close()
-            self.rm.close()
-            if "632" in return_value:
-                self.label_2.setText("PASS")
-                self.label_2.setStyleSheet("color:GREEN")
-            else:
-                self.label_2.setText("FAIL")
-                self.label_2.setStyleSheet("color:RED")
-        except:
-            print("didn't went well")
-            return_value = ""
-            self.label_2.setText("FAIL")
-            self.label_2.setStyleSheet("color:RED")
-        # self.chroma = self.rm.open_resource(ID)
-        # value = str(self.chroma.query(command))
-
-
+        # Close resources (only reached if all connection attempts fail)
+        self.chroma.close()
+        self.rm.close()
 
     def retranslateUi(self, load):
         _translate = QtCore.QCoreApplication.translate

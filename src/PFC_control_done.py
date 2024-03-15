@@ -69,7 +69,6 @@ class pfc_control:
                         if card_id is None:
                             card_id = 1546
                         op = Message(arbitration_id=card_id, is_extended_id=False, data=data)
-                        print(op)
                         bus.send(op)
                         time.sleep(0.000001)
                         msg = bus.recv()

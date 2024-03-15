@@ -91,29 +91,46 @@ class DC_LOAD():
                 self.ID = SettingRead('SETTING')['battery load ethernet id']
                 self.read_termination = '\r\n'
 
-        while source_status and count<3:
-            count+=1
-            try:
-                # self.chroma=visa.instrument(self.ID)
-##                pyvisa.log_to_screen()
-                if (SettingRead('SETTING')['ate load comm type'] == 'USB') or (SettingRead('SETTING')['ate load comm type']=='GPIB'):
-                    self.rm = pyvisa.ResourceManager()
-                    self.chroma = self.rm.open_resource(self.ID)
-                    print (self.chroma)
+#         while source_status and count<3:
+#             count+=1
+#             try:
+#                 # self.chroma=visa.instrument(self.ID)
+# ##                pyvisa.log_to_screen()
+#                 if (SettingRead('SETTING')['ate load comm type'] == 'USB') or (SettingRead('SETTING')['ate load comm type']=='GPIB'):
+#                     self.rm = pyvisa.ResourceManager()
+#                     self.chroma = self.rm.open_resource(self.ID)
+#                     print (self.chroma)
+#                 else:
+#                     self.rm = pyvisa.ResourceManager()
+#                     self.chroma = self.rm.open_resource(self.ID, read_termination=self.read_termination)
+#                     print (self.chroma)
+#                 source_status=False
+#                 #print "dc load open ok"
+#             except Exception as err:
+#                 print ('initialization err:' + str(err))
+# ##                #print "globalvarialbles.APP_STOP_FLAG: "+str(globalvarialbles.APP_STOP_FLAG)
+#                 if globalvarialbles.APP_STOP_FLAG==True:
+#                     return None
+# ##                #print"usb not found / "+self.load_name+" not found"
+#                 time.sleep(1)
+#                 pass
+
+
+        self.rm = pyvisa.ResourceManager()
+        device_listed = self.rm.list_resources()
+
+        for i in device_listed:
+            if "USB" in i:
+                if "::632" in i:
+                    address = str(i).split("::INSTR")[0]
+                    self.chroma = self.rm.open_resource(address)
                 else:
-                    self.rm = pyvisa.ResourceManager()
-                    self.chroma = self.rm.open_resource(self.ID, read_termination=self.read_termination)
-                    print (self.chroma)
-                source_status=False
-                #print "dc load open ok"
-            except Exception as err:
-                print ('initialization err:' + str(err))
-##                #print "globalvarialbles.APP_STOP_FLAG: "+str(globalvarialbles.APP_STOP_FLAG)
-                if globalvarialbles.APP_STOP_FLAG==True:
-                    return None
-##                #print"usb not found / "+self.load_name+" not found"
-                time.sleep(1)
-                pass
+                    pass
+            elif "GPIB" in i:
+                self.chroma = self.rm.open_resource(i)
+
+        print(self.chroma.query("*IDN?"))
+
 
 
 

@@ -6,7 +6,7 @@ import test_order_done
 test_order = test_order_done.Ui_Form.get_values(test_order_done.Ui_Form)
 import time
 import os
-from excel_automation import CSV
+from excel_automation import ExcelHandler
 from config_done import *
 import ByteConvertor
 import CanModule

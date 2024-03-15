@@ -21,6 +21,7 @@ class CAN:
 
 
     def CAN_WRITE(self, can_channel=0, message_id=0x610, packet: list = None):
+        message_id = packet[0]
         global serial_no_packet, value_temp
         if packet is None:
             packet = []
@@ -38,13 +39,14 @@ class CAN:
                 bus = None
 
             try:
+                print(f"packet data {packet}")
                 if gui_global.APP_STOP_FLAG == True:
                     return None
                 if message_id == 1791:
                     value_flag = True
                     count = 0
                     while value_flag and count < 5:
-                        message = Message(arbitration_id=message_id, is_extended_id=False, data=[64, 1, 64, 0, 0, 0, 0, 0])
+                        message = Message(arbitration_id=message_id, is_extended_id=False, data=[packet[3], packet[4], packet[5], packet[6], packet[7], packet[8], packet[9], packet[10]])
                         print(message)
                         bus.send(message)
                         # time.sleep(0.2)
@@ -83,7 +85,7 @@ class CAN:
                     bus.shutdown()
                     return "passed"
 
-                if message_id == 1552:
+                elif message_id == 1552:
                     value_flag = True
                     count = 0
                     while value_flag and count < 5:
@@ -94,8 +96,14 @@ class CAN:
                         print(bus.recv(4))
                     bus.shutdown()
                     return "passed"
+                else:
+                    value_flag = True
+                    count = 0
+                    while value_flag and count < 5:
+                        break
                 gui_global.CLEAR_JIG_FLAG = True
                 count = 3
+
 
             except (Exception, AttributeError) as err:
                 bus.shutdown()

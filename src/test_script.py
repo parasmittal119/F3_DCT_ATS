@@ -2,7 +2,7 @@
 import datetime
 import os.path
 import time
-
+from excel_automation import CSVHandler
 from PyQt5 import QtCore, QtGui, QtWidgets
 from screeninfo import get_monitors
 import CommandSetDcLoadUsb
@@ -14,7 +14,8 @@ from ModbusServer import MODBUS_CHECK
 from config_done import SettingRead
 from report_gui import *
 from PyQt5.QtCore import pyqtSignal, QObject
-
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect
+from PyQt5.QtGui import QColor
 
 global w, h, m, factor
 
@@ -81,7 +82,6 @@ def get_date_time(date=0, time=0):
 
 class WindowSignalHandler(QObject):
     openWindow = pyqtSignal()
-
 
 
 class Ui_Test(object):
@@ -278,9 +278,10 @@ class Ui_Test(object):
         self.font11_UF.setUnderline(False)
 
         self.test_item_box = QtWidgets.QGroupBox(self.centralwidget)
-        self.test_item_box.setGeometry(QtCore.QRect(width(410), height(100), width(521), height(571)))
+        self.test_item_box.setGeometry(QtCore.QRect(width(410), height(105), width(521), height(566)))
         self.test_item_box.setFont(self.font11_BF_UF_50)
-        self.test_item_box.setStyleSheet("QGroupBox{border:5px solid black; border-top-left-radius:80px; border-bottom-right-radius:80px; border-top-right-radius:8px; border-bottom-left-radius:8px;}")
+        self.test_item_box.setStyleSheet(
+            "QGroupBox{border:5px solid black; border-top-left-radius:80px; border-bottom-right-radius:80px; border-top-right-radius:8px; border-bottom-left-radius:8px;}")
         self.test_item_box.setObjectName("test_item_box")
         self.test_item_label = QtWidgets.QLabel(self.test_item_box)
         self.test_item_label.setGeometry(QtCore.QRect(width(70), height(50), width(101), height(16)))
@@ -545,10 +546,14 @@ class Ui_Test(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
-        self.system_part_no_edit.setText("HE517512")
-        self.dut_serial_number_edit.setText("123456789012345")
-        self.associate_name_edit.setText("Paras")
+        try:
+            test_mode = SettingRead('TEST MODE')['test_mode']
+            if test_mode == "test":
+                self.system_part_no_edit.setText("HE517512")
+                self.dut_serial_number_edit.setText("123456789012345")
+                self.associate_name_edit.setText("Paras")
+        except Exception:
+            pass
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -624,7 +629,8 @@ class Ui_Test(object):
         self.current_sharing_status.setText(_translate("MainWindow", "Pending"))
         self.default_status.setText(_translate("MainWindow", "Pending"))
         self.rs485_status.setText(_translate("MainWindow", "Pending"))
-        self.test_log.setText(_translate("MainWindow", f"<a href='file:{gui_global.directory_location}logs'>Log Folder</a>"))
+        self.test_log.setText(
+            _translate("MainWindow", f"<a href='file:{gui_global.directory_location}logs'>Log Folder</a>"))
         self.report.setText(_translate("MainWindow", "Reports"))
         self.log_clear.setText(_translate("MainWindow", "Log Clear"))
         self.final_status.setText(_translate("MainWindow", ""))
@@ -778,11 +784,20 @@ class Ui_Test(object):
                 self.print_console(f"CONFIGURATION FILE VERSION: {self.configversion}")
             self.print_console(f"TEST START DATE TIME: {get_date_time(date=1, time=1)}")
             self.print_console(f"ASSOCIATE NAME: {self.associate_name_edit.text()}")
-            self.print_console("s")
 
             print(f"Test detail flag: {test_detail_flag}")  # Shows Boolean expression of test_detail_flag
 
             '''Starting testing'''
+            self.excel_handler = CSVHandler(os.path.join(gui_global.directory_location + "/records/", "active_" + str(SettingRead("STATION")['id']) + ".csv"))
+            value = self.excel_handler.get_last_row_first_column_value() or "0"
+            value = value if value != "SR NO" else "0"
+            # Incrementing the value by 1
+            last_cell = int(value) + 1
+
+            # Generating bulk upload data
+            bulk_upload = [str(last_cell)] + ["FAIL"] * (len(self.excel_handler.get_headers()) - 1)
+
+            self.excel_handler.append_row(bulk_upload)
 
             while testing_flag:
                 final_output = []
@@ -799,7 +814,7 @@ class Ui_Test(object):
                         final_output.append(function_status)
 
                     else:
-                        user_response = self.prompt.userPrompt("Do you want to skip\nthis test and continue?")
+                        user_response = self.prompt.User_prompt("Do you want to skip\nthis test and continue?")
                         if user_response:
                             testing_flag = True
                             final_output.append(function_status)
@@ -819,182 +834,189 @@ class Ui_Test(object):
                 if results == False:
                     console_output_flag = False
 
-            if console_output_flag:
+            if all(final_output):
                 self.final_status.setText("PASS")
                 # self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;}")
-                self.final_status.setFont(QtGui.QFont("Calibri", 80))
-                self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;color:GREEN;}")
+                self.final_status.setFont(QtGui.QFont("Calibri", 90))
+                self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;color:DARKGREEN;}")
+                self.excel_handler.update_cell("RESULT", "PASS")
             else:
                 self.final_status.setText("FAIL")
                 # self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;}")
-                self.final_status.setFont(QtGui.QFont("Calibri", 80))
+                self.final_status.setFont(QtGui.QFont("Calibri", 90))
                 self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;color:RED;}")
+                self.excel_handler.update_cell("RESULT", "FAIL")
+            self.shadowFunction(self.final_status, (0, 0, 0, 255), 35, (10, 10))
 
             self.end_time_edit.setText(str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 
-            # self.log()
+            self.log()
         else:
             self.prompt.Message("Error!", "Kindly complete Test Details")
 
         self.start.setDisabled(False)
 
+    def shadowFunction(self, element, colors_alpha=(0, 0, 0, 0), blurRadius=0, offset=(0, 0)):
+        effect = QGraphicsDropShadowEffect()
+        effect.setBlurRadius(blurRadius)
+        effect.setColor(QColor(colors_alpha[0], colors_alpha[1], colors_alpha[2], colors_alpha[3]))
+        effect.setOffset(offset[0], offset[1])
+        element.setGraphicsEffect(effect)
+
     def run_test(self, test_number):
         if test_number == int(self.test_order[0]):
-            controller_health_check_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            controller_health_check_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             # controller_health_check_variable = self.physical_check(BYPASS=False)
+            self.setStatus(self.controller_health_status)
+            self.excel_handler.update_cell("PHYSICAL TEST", "FAIL")
             if controller_health_check_variable:
-                self.controller_health_status.setText("PASS")
-                self.controller_health_status.setStyleSheet("color: GREEN")
-            else:
-                self.controller_health_status.setText("FAIL")
-                self.controller_health_status.setStyleSheet("color: RED")
+                self.setStatus(self.controller_health_status, 1)
+                self.excel_handler.update_cell("PHYSICAL TEST", "PASS")
             return controller_health_check_variable
         elif test_number == int(self.test_order[1]):
-            unit_comm_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            unit_comm_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             # unit_comm_variable = self.CARD_COMMUNICATION()
+            self.setStatus(self.unit_comm_status)
+            self.excel_handler.update_cell("COMMUNICATION TEST", "FAIL")
             if unit_comm_variable:
-                self.unit_comm_status.setText('PASS')
-                self.unit_comm_status.setStyleSheet('color:GREEN')
-            else:
-                self.unit_comm_status.setText('FAIL')
-                self.unit_comm_status.setStyleSheet('color:RED')
+                self.setStatus(self.unit_comm_status, 1)
+                self.excel_handler.update_cell("COMMUNICATION TEST", "PASS")
             return unit_comm_variable
         elif test_number == int(self.test_order[2]):
-            temp_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            temp_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             # temp_variable = self.TEMPERATURE_MEASUREMENT()
+            self.setStatus(self.temp_status)
+            self.excel_handler.update_cell("TEMPERATURE TEST", "FAIL")
             if temp_variable:
-                self.temp_status.setText('PASS')
-                self.temp_status.setStyleSheet('color:GREEN')
-            else:
-                self.temp_status.setText('FAIL')
-                self.temp_status.setStyleSheet('color:RED')
+                self.setStatus(self.temp_status, 1)
+                self.excel_handler.update_cell("TEMPERATURE TEST", "PASS")
             return temp_variable
         elif test_number == int(self.test_order[3]):
-            out_pfc_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            out_pfc_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             # out_pfc_variable = self.OP_PFC_CHECK()
+            self.excel_handler.update_cell("OUTPUT/INPUT PFC", "FAIL")
+            self.setStatus(self.output_pfc_status)
             if out_pfc_variable:
-                self.output_pfc_status.setText('PASS')
-                self.output_pfc_status.setStyleSheet('color:GREEN')
-            else:
-                self.output_pfc_status.setText('FAIL')
-                self.output_pfc_status.setStyleSheet('color:RED')
+                self.setStatus(self.output_pfc_status, 1)
+                self.excel_handler.update_cell("OUTPUT/INPUT PFC", "PASS")
             return out_pfc_variable
         elif test_number == int(self.test_order[4]):
-            input_pfc_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            input_pfc_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             # input_pfc_variable = self.IP_PFC_CHECK()
+            self.setStatus(self.input_pfc_status)
+            self.excel_handler.update_cell("OUTPUT/INPUT PFC", "FAIL")
             if input_pfc_variable:
-                self.input_pfc_status.setText('PASS')
-                self.input_pfc_status.setStyleSheet('color:GREEN')
-            else:
-                self.input_pfc_status.setText('FAIL')
-                self.input_pfc_status.setStyleSheet('color:RED')
+                self.setStatus(self.input_pfc_status, 1)
+                self.excel_handler.update_cell("OUTPUT/INPUT PFC", "PASS")
             return input_pfc_variable
         elif test_number == int(self.test_order[5]):
-            dc_voltage_check = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            dc_voltage_check = self.prompt.User_prompt("Do you want to pass this test and continue?")
             # dc_voltage_check = self.DC_VOLTAGE_MEASUREMENT()
-            print(f"dc_voltage : {dc_voltage_check}")
+            self.setStatus(self.dc_voltage_check_status)
+            self.excel_handler.update_cell("DC VOLTAGE TEST", "FAIL")
             if dc_voltage_check:
-                self.dc_voltage_check_status.setText('PASS')
-                self.dc_voltage_check_status.setStyleSheet('color:GREEN')
-            else:
-                self.dc_voltage_check_status.setText('FAIL')
-                self.dc_voltage_check_status.setStyleSheet('color:RED')
+                self.setStatus(self.dc_voltage_check_status, 1)
+                self.excel_handler.update_cell("DC VOLTAGE TEST", "PASS")
             return dc_voltage_check
         elif test_number == int(self.test_order[6]):
-            dc_voltage_calib_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            dc_voltage_calib_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
             # dc_voltage_calib_variable = self.CALIBRATE_DC_VOLTAGE()
-            print(f"dc_voltage_calib : {dc_voltage_calib_variable}")
+            self.excel_handler.update_cell("DC VOLTAGE CALIBRATION", "FAIL")
+            self.setStatus(self.dc_voltage_calib_status)
             if dc_voltage_calib_variable:
-                self.dc_voltage_calib_status.setText('PASS')
-                self.dc_voltage_calib_status.setStyleSheet('color:GREEN')
-            else:
-                self.dc_voltage_calib_status.setText('FAIL')
-                self.dc_voltage_calib_status.setStyleSheet('color:RED')
+                self.setStatus(self.dc_voltage_calib_status, 1)
+                self.excel_handler.update_cell("DC VOLTAGE CALIBRATION", "PASS")
             return dc_voltage_calib_variable
         elif test_number == int(self.test_order[7]):
-            dc_current_discharge_variable = self.prompt.userPrompt("Do you want to pass this test and continue?"
-                                                                    "s")
+            dc_current_discharge_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # dc_current_discharge_variable = self.DC_CURRENT_MEASUREMENT_BATT_DISCHARGE()
+            self.setStatus(self.dc_current_check_discharge_status)
+            self.excel_handler.update_cell("DC CURRENT TEST", "FAIL")
             if dc_current_discharge_variable:
-                self.dc_current_check_discharge_status.setText('PASS')
-                self.dc_current_check_discharge_status.setStyleSheet('color:GREEN')
-            else:
-                self.dc_current_check_discharge_status.setText('FAIL')
-                self.dc_current_check_discharge_status.setStyleSheet('color:RED')
+                self.setStatus(self.dc_current_check_discharge_status, 1)
+                self.excel_handler.update_cell("DC CURRENT TEST", "PASS")
             return dc_current_discharge_variable
         elif test_number == int(self.test_order[8]):
-            smr_registration_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            smr_registration_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # smr_registration_variable = self.SMR_REGISTRATION()
+            self.setStatus(self.smr_register_status)
+            self.excel_handler.update_cell("SMR REGISTRATION TEST", "FAIL")
             if smr_registration_variable:
-                self.smr_register_status.setText('PASS')
-                self.smr_register_status.setStyleSheet('color:GREEN')
-            else:
-                self.smr_register_status.setText('FAIL')
-                self.smr_register_status.setStyleSheet('color:RED')
+                self.setStatus(self.smr_register_status, 1)
+                self.excel_handler.update_cell("SMR REGISTRATION TEST", "PASS")
             return smr_registration_variable
         elif test_number == int(self.test_order[9]):
-            dc_current_charge_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            dc_current_charge_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # dc_current_charge_variable = self.DC_CURRENT_MEASUREMENT_BATT_CHARGE()
+            self.setStatus(self.dc_current_check_charge_status)
+            self.excel_handler.update_cell("DC CURRENT CALIBRATION", "FAIL")
             if dc_current_charge_variable:
-                self.dc_current_check_charge_status.setText('PASS')
-                self.dc_current_check_charge_status.setStyleSheet('color:GREEN')
-            else:
-                self.dc_current_check_charge_status.setText('FAIL')
-                self.dc_current_check_charge_status.setStyleSheet('color:RED')
+                self.setStatus(self.dc_current_check_charge_status, 1)
+                self.excel_handler.update_cell("DC CURRENT CALIBRATION", "PASS")
             return dc_current_charge_variable
         elif test_number == int(self.test_order[10]):
-            dc_current_calib_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            dc_current_calib_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # dc_current_calib_variable = self.CALIBRATE_DC_CURRENT()
+            self.setStatus(self.dc_current_calib_status)
+            self.excel_handler.update_cell("DC CURRENT CALIBRATION", "FAIL")
             if dc_current_calib_variable:
-                self.dc_current_calib_status.setText('PASS')
-                self.dc_current_calib_status.setStyleSheet('color:GREEN')
-            else:
-                self.dc_current_calib_status.setText('FAIL')
-                self.dc_current_calib_status.setStyleSheet('color:RED')
+                self.setStatus(self.dc_current_calib_status, 1)
+                self.excel_handler.update_cell("DC CURRENT CALIBRATION", "PASS")
             return dc_current_calib_variable
         elif test_number == int(self.test_order[11]):
-            lvd_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            lvd_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # lvd_variable = self.LVD_CONTACTOR_CHECK()
+            self.setStatus(self.lvd_status)
+            self.excel_handler.update_cell("LVD TEST", "FAIL")
             if lvd_variable:
-                self.lvd_status.setText('PASS')
-                self.lvd_status.setStyleSheet('color:GREEN')
-            else:
-                self.lvd_status.setText('FAIL')
-                self.lvd_status.setStyleSheet('color:RED')
+                self.setStatus(self.lvd_status, 1)
+                self.excel_handler.update_cell("LVD TEST", "PASS")
             return lvd_variable
         elif test_number == int(self.test_order[12]):
-            ac_phase_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            ac_phase_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # ac_phase_variable = self.PHASE_ALLOCATION()
+            self.setStatus(self.ac_phase_status)
+            self.excel_handler.update_cell("AC PHASE ALLOCATION TEST", "FAIL")
             if ac_phase_variable:
-                self.ac_phase_status.setText('PASS')
-                self.ac_phase_status.setStyleSheet('color:GREEN')
-            else:
-                self.ac_phase_status.setText('FAIL')
-                self.ac_phase_status.setStyleSheet('color:RED')
+                self.setStatus(self.ac_phase_status, 1)
+                self.excel_handler.update_cell("AC PHASE ALLOCATION TEST", "PASS")
             return ac_phase_variable
         elif test_number == int(self.test_order[13]):
-            current_sharing_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            current_sharing_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # current_sharing_variable = self.CURRENT_SHARING()
+            self.setStatus(self.current_sharing_status)
+            self.excel_handler.update_cell("DC CURRENT SHARING/ BUS DROP TEST", "FAIL")
             if current_sharing_variable:
-                self.current_sharing_status.setText('PASS')
-                self.current_sharing_status.setStyleSheet('color:GREEN')
-            else:
-                self.current_sharing_status.setText('FAIL')
-                self.current_sharing_status.setStyleSheet('color:RED')
+                self.setStatus(self.current_sharing_status, 1)
+                self.excel_handler.update_cell("DC CURRENT SHARING/ BUS DROP TEST", "PASS")
             return current_sharing_variable
         elif test_number == int(self.test_order[14]):
-            rs485_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            rs485_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # rs485_variable = self.RS_485_CHECK()
+            self.setStatus(self.rs485_status)
+            self.excel_handler.update_cell("RS-485 TEST", "FAIL")
             if rs485_variable:
-                self.rs485_status.setText('PASS')
-                self.rs485_status.setStyleSheet('color:GREEN')
-            else:
-                self.rs485_status.setText('FAIL')
-                self.rs485_status.setStyleSheet('color:RED')
+                self.setStatus(self.rs485_status, 1)
+                self.excel_handler.update_cell("RS-485 TEST", "PASS")
             return rs485_variable
         elif test_number == int(self.test_order[15]):
-            default_variable = self.prompt.userPrompt("Do you want to pass this test and continue?")
+            default_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            # self.default_status = self.DEFAULT_SETTING()
+            self.setStatus(self.default_status)
+            self.excel_handler.update_cell("DEFAULT SETTING", "FAIL")
             if default_variable:
-                self.default_status.setText('PASS')
-                self.default_status.setStyleSheet('color:GREEN')
-            else:
-                self.default_status.setText('FAIL')
-                self.default_status.setStyleSheet('color:RED')
+                self.setStatus(self.default_status, 1)
+                self.excel_handler.update_cell("DEFAULT SETTING", "PASS")
             return default_variable
         else:
             return False
+
+    def setStatus(self, element, status=0):
+        element.setText("FAIL")
+        element.setStyleSheet("color:RED")
+        if status:
+            element.setText("PASS")
+            element.setStyleSheet("color:GREEN")
 
     def print_console(self, text="", color="BLUE"):
         if color == "RED":
@@ -1005,7 +1027,7 @@ class Ui_Test(object):
             self.log_window.setTextColor(QtCore.Qt.darkGreen)
         self.log_window.append(str(text))
         QtWidgets.qApp.processEvents()
-        time.sleep(0.01)
+        time.sleep(0.0001)
 
     def physical_check(self, BYPASS=False):
         if BYPASS:
@@ -1017,21 +1039,21 @@ class Ui_Test(object):
             RESULT = []
             self.print_console("PHYSICAL CHECK TEST STARTED...")
 
-            physical_state = self.prompt.userPrompt("Is all bus-bar/ screws tight?")
+            physical_state = self.prompt.User_prompt("Is all bus-bar/ screws tight?")
             if physical_state:
                 RESULT_TEMP = True
             else:
                 RESULT_TEMP = False
             RESULT.append(RESULT_TEMP)
 
-            physical_state = self.prompt.userPrompt("Is AC/Battery/LOAD/PFC/RS-485(if any) connection tightly done?")
+            physical_state = self.prompt.User_prompt("Is AC/Battery/LOAD/PFC/RS-485(if any) connection tightly done?")
             if physical_state:
                 RESULT_TEMP = True
             else:
                 RESULT_TEMP = False
             RESULT.append(RESULT_TEMP)
 
-            physical_state = self.prompt.userPrompt("Is connection to optional AC MCB is correct?")
+            physical_state = self.prompt.User_prompt("Is connection to optional AC MCB is correct?")
             if physical_state:
                 RESULT_TEMP = True
             else:
@@ -1048,6 +1070,42 @@ class Ui_Test(object):
         report.ui.setupUi(report)
         report.exec_()
         report.show()
+
+    def GETTIME(self):
+        time_var = datetime.datetime.now()
+        time_var = str(time_var.date()) + "_" + str(time_var.time().hour) + "_" + str(
+            time_var.time().minute) + "_" + str(time_var.time().second)
+        return time_var
+
+    def log(self):
+        root, extension = os.path.splitext(os.path.basename(sys.argv[0]))
+        """Log Creation"""
+        # if os.path.exists(f'{os.path.dirname(os.getcwd())}\\logs'):
+        #     pass
+        # else:
+        #     os.system("mkdir logs")
+        filename = f"{gui_global.directory_location}logs\\log_" + str(
+            self.dut_serial_number_edit.text()).upper() + "_" + str(
+            self.associate_name_edit.text()).upper() + "_" + str(self.GETTIME()) + '.txt'
+        myfile = open(filename, 'w')
+        myfile.write("DUT SERIAL NUMBER: " + self.dut_serial_number_edit.text().upper())
+        myfile.write('\n\n')
+        myfile.write(f"DUT PART NUMBER : {self.system_part_no_edit.text().upper()}")
+        myfile.write('\n\n')
+        myfile.write("Testing Engg. Name: " + self.associate_name_edit.text().upper())
+        myfile.write('\n\n')
+        myfile.write("ATE Version: " + root)
+        myfile.write('\n\n')
+        myfile.write(self.log_window.toPlainText())
+        myfile.write('\n')
+        myfile.write(f"Test Ended : {self.get_current_datetime()}")
+        myfile.close()
+
+    def get_current_datetime(self):
+        current_datetime = datetime.datetime.now()
+        formatted_datetime = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
+        return formatted_datetime
+
 
     def controller_health_method(self):
         global SITE_ID
@@ -1080,6 +1138,8 @@ class Ui_Test(object):
         self.print_console("CONTROLLER_HEALTH_CHECK TEST FINISHED.")
 
         return CALCULATE_RESULT(RESULT)
+
+
 
     def RTC_SET(self):
         self.print_console("RTC SET STARTED...")
@@ -1639,9 +1699,11 @@ class Ui_Test(object):
             if alarm_comm_fail == 0:
                 RESULT_TEMP = True
                 self.print_console("CAN COMM OK")
+                self.excel_handler.update_cell("UNIT COMMUNICATION", "PASS")
             else:
                 RESULT_TEMP = False
                 self.print_console("CAN COMM FAIL", "RED")
+                self.excel_handler.update_cell("UNIT COMMUNICATION", "FAIL")
             RESULT.append(RESULT_TEMP)
 
             if hvlv_card_state == "PRESENT":
@@ -1699,7 +1761,65 @@ class Ui_Test(object):
 
             # return True
         elif self.mcm_type == 2:
-            return True
+            alarm_comm_fail = int(self.MCM_READ_COMMAND("ALARM", "can comm fail"))
+            if alarm_comm_fail == 0:
+                self.print_console("CAN COMM OK")
+                self.excel_handler.update_cell("UNIT COMMUNICATION", "PASS")
+                RESULT_TEMP = True
+            else:
+                RESULT_TEMP = False
+                self.print_console('CAN COMM FAIL')
+                self.excel_handler.update_cell("UNIT COMMUNICATION", "FAIL")
+            RESULT.append(RESULT_TEMP)
+
+            if hvlv_card_state == "PRESENT":
+                if ac_phase_type == "SINGLE PHASE":
+                    print("Single phase voltage")
+                    ACSET(self.pfc, 1, 1)
+                else:
+                    ACSET(self.pfc, 3, 1)
+                time.sleep(8)
+                self.print_console("HVLV CARD IS PRESENT")
+                alarm_comm_fail = int(self.MCM_READ_COMMAND("alarm", "hvlv comm fail"))
+                if alarm_comm_fail == 0:
+                    RESULT_TEMP = True
+                    self.print_console("HVLV COMM OK")
+                else:
+                    RESULT_TEMP = False
+                    self.print_console("HVLV COMM FAIL", "RED")
+                ACSET(self.pfc, 3, 0)
+            else:
+                self.print_console("HVLV CARD IS NOT PRESENT", "RED")
+                RESULT_TEMP = True
+            RESULT.append(RESULT_TEMP)
+
+            if dcif_card_state == "PRESENT":
+                alarm_comm_fail = int(self.MCM_READ_COMMAND("ALARM", 'dcif comm fail'))
+                if alarm_comm_fail == 0:
+                    RESULT_TEMP = True
+                    self.print_console("DCIF COMM OK")
+                else:
+                    RESULT_TEMP = False
+                    self.print_console("DCIF COMM FAIL", "RED")
+            else:
+                RESULT_TEMP = True
+            RESULT.append(RESULT_TEMP)
+
+            if pfcio_card_state == "PRESENT":
+                alarm_comm_fail = int(self.MCM_READ_COMMAND('ALARM', 'pfc1 comm fail'))
+                if alarm_comm_fail == 0:
+                    RESULT_TEMP = True
+                    self.print_console("CAN PFC IO COMM OK")
+                else:
+                    RESULT_TEMP = False
+                    self.print_console("CAN PFC IO COMM FAIL", "RED")
+            else:
+                RESULT_TEMP = True
+            RESULT.append(RESULT_TEMP)
+
+            self.print_console("CARD COMMUNICATION TEST FINISHED....")
+            return CALCULATE_RESULT(RESULT)
+
 
     def TEMPERATURE_MEASUREMENT(self):
         global temperature_text
@@ -2077,7 +2197,7 @@ class Ui_Test(object):
                 alarm = False
         self.print_console("DOOR OPEN ALARM TEST STARTED...")
 
-        user_state = self.prompt.userPrompt("DO YOU WANT TO TEST DOOR ALARM. PRESS ENTER TO PROCEED!")
+        user_state = self.prompt.User_prompt("DO YOU WANT TO TEST DOOR ALARM. PRESS ENTER TO PROCEED!")
 
         if user_state:
             read_restore_time = int(self.MCM_READ_COMMAND('DOOR SETTING', 'door open restore time'))
@@ -2109,7 +2229,7 @@ class Ui_Test(object):
 
         self.print_console("SMOKE ALARM TEST STARTED...")
 
-        user_state = self.prompt.userPrompt("DO YOU WANT TO TEST SMOKE ALARM. PRESS ENTER TO PROCEED!")
+        user_state = self.prompt.User_prompt("DO YOU WANT TO TEST SMOKE ALARM. PRESS ENTER TO PROCEED!")
 
         if user_state:
             ip_pfc_state = True
@@ -2137,10 +2257,10 @@ class Ui_Test(object):
 
         self.print_console("POWER POINT/ AVIATION ALARM TEST STARTED...")
 
-        user_state = self.prompt.userPrompt("DO YOU WANT TO TEST POWER POINT/ AVIATION. PRESS ENTER TO PROCEED!")
+        user_state = self.prompt.User_prompt("DO YOU WANT TO TEST POWER POINT/ AVIATION. PRESS ENTER TO PROCEED!")
 
         if user_state:
-            power_point = self.prompt.userPrompt("IS POWER POINT/ AVIATION CONTINUITY IS OKAY?")
+            power_point = self.prompt.User_prompt("IS POWER POINT/ AVIATION CONTINUITY IS OKAY?")
             if power_point:
                 RESULT_P_TEMP = True
                 self.print_console("POWER POINT/ AVIATION TEST OK")
@@ -2156,10 +2276,10 @@ class Ui_Test(object):
 
         self.print_console("FAN TEST STARTED...")
 
-        user_state = self.prompt.userPrompt("DO YOU WANT TO TEST FAN FUNCTIONALITY. PRESS ENTER TO PROCEED!")
+        user_state = self.prompt.User_prompt("DO YOU WANT TO TEST FAN FUNCTIONALITY. PRESS ENTER TO PROCEED!")
 
         if user_state:
-            power_point = self.prompt.userPrompt("INCREASE TEMPERATURE OF TEMPERATURE SENSOR, IS FAN RUNNING?")
+            power_point = self.prompt.User_prompt("INCREASE TEMPERATURE OF TEMPERATURE SENSOR, IS FAN RUNNING?")
             if power_point:
                 RESULT_P_TEMP = True
                 self.print_console("FAN TEST TEST OK")
@@ -2739,7 +2859,7 @@ class Ui_Test(object):
 
         self.print_console("DC_CURRENT_MEASUREMENT_BATT_DISCHARGE TEST FINISHED...")
 
-        user_state = self.prompt.userPrompt(
+        user_state = self.prompt.User_prompt(
             "DO YOU WANT TO TEST LOAD FUSE FAIL/DC MCCB TRIP ALARM.PRESS ENTER TO PROCEED!")
         if user_state:
             print("Testing Load MCB TRIP alarm")
@@ -2861,7 +2981,7 @@ class Ui_Test(object):
         self.MCM_WRITE_COMMAND('SYSTEM CONFIG', 'smr count', max_smr_count)
         self.print_console("SMR REGISTRATION TEST FINISHED...")
 
-        user_response = self.prompt.userPrompt("DO YOU WANT TO TEST BATTERY SENSING WIRING? PRESS OK TO CONTINUE..")
+        user_response = self.prompt.User_prompt("DO YOU WANT TO TEST BATTERY SENSING WIRING? PRESS OK TO CONTINUE..")
 
         if user_response:
             self.print_console("BATTERY SENSE TEST STARTED...")
@@ -3416,7 +3536,6 @@ class Ui_Test(object):
 
         return CALCULATE_RESULT(RESULT)
 
-    @property
     def PHASE_ALLOCATION(self):
         global phase
         if self.mcm_type == 1:
@@ -3976,7 +4095,92 @@ class Ui_Test(object):
         return CALCULATE_RESULT(RESULT)
 
     def DEFAULT_SETTING(self):
+        self.MCM_WRITE_COMMAND('SYSTEM COMMANDS', 'factory restore', 1)
+        self._prevent_gui_hang()
+        time.sleep(5)
+        self._prevent_gui_hang()
 
+        if self.mcm_type == 1:
+            self.MCM_WRITE_COMMAND('SYSTEM COMMANDS', 'ate test', "TEST_M1000_ATE")
+
+        site_id = self.MCM_READ_COMMAND('SYSTEM CONFIG', 'site id')
+        self.print_console("Controller Healthy") if site_id is not None else self.print_console("Controller OFF")
+        RESULT_TEMP = True if site_id is not None else False
+
+        if self.custom_check.isChecked():
+            self._set_custom_settings()
+        else:
+            self._set_default_settings()
+
+        float_voltage, charge_voltage, battery_lvd_set, battery_lvd_restore, load_lvd_count, \
+            load_lvd_set, load_lvd_restore, dc_v_low_set, dc_v_low_restore, \
+            main_low_fail_set, main_low_fail_restore, main_high_fail_set, \
+            main_high_fail_restore, smr_count, m1000_mac_id, m1000_serial_number = self._get_battery_settings()
+
+        battery_capacity_vrla, bcl_factor_vrla = self._get_battery_config_vrla()
+        battery_capacity, bcl_factor, module_count = self._get_battery_config_lion()
+
+        self._prevent_gui_hang()
+        self._update_excel_handler(float_voltage, charge_voltage, battery_lvd_set, battery_lvd_restore,
+                                   load_lvd_set, load_lvd_restore, dc_v_low_set, dc_v_low_restore,
+                                   main_low_fail_set, main_low_fail_restore, main_high_fail_set,
+                                   main_high_fail_restore, smr_count, m1000_mac_id, m1000_serial_number,
+                                   battery_capacity_vrla, bcl_factor_vrla, battery_capacity, bcl_factor, module_count)
+
+        return RESULT_TEMP
+
+    def _prevent_gui_hang(self):
+        QtGui.qApp.processEvents()
+
+    def _set_custom_settings(self):
+        self.print_console("Custom settings will be programmed to controller")
+        default_settings = DefaultRead('DEFAULT SETTING')
+        for setting in ['smr count', 'system overload', 'battery ah']:
+            if default_settings[setting] == 'YES':
+                self.MCM_WRITE_COMMAND('SYSTEM CONFIG', setting, int(default_settings[setting]))
+
+    def _set_default_settings(self):
+        self.print_console("Default setting are as per Config file")
+
+    def _get_battery_settings(self):
+        settings = ['float voltage', 'charge voltage', 'battery lvd set', 'battery lvd restore',
+                    'no. of load lvd', 'load1 lvd set', 'load1 lvd restore', 'dc voltage low set',
+                    'dc voltage low restore', 'mains low fail set', 'mains low fail restore',
+                    'mains high fail set', 'mains high fail restore', 'smr count', 'm1000 mac id',
+                    'serial number']
+        return [float(self.MCM_READ_COMMAND('BATTERY SETTING', setting)) for setting in settings]
+
+    def _get_battery_config_vrla(self):
+        return int(self.MCM_READ_COMMAND('SYSTEM CONFIG', 'vrla battery capacity')), \
+            int(self.MCM_READ_COMMAND('SYSTEM CONFIG', 'vrla bcl factor'))
+
+    def _get_battery_config_lion(self):
+        return int(self.MCM_READ_COMMAND('SYSTEM CONFIG', 'lion battery capacity')), \
+            int(self.MCM_READ_COMMAND('SYSTEM CONFIG', 'lion bcl factor')), \
+            int(self.MCM_READ_COMMAND('SYSTEM CONFIG', 'lion module count'))
+
+    def _update_excel_handler(self, float_voltage, charge_voltage, battery_lvd_set, battery_lvd_restore,
+                              load_lvd_set, load_lvd_restore, dc_v_low_set, dc_v_low_restore,
+                              main_low_fail_set, main_low_fail_restore, main_high_fail_set,
+                              main_high_fail_restore, smr_count, m1000_mac_id, m1000_serial_number,
+                              battery_capacity_vrla, bcl_factor_vrla, battery_capacity, bcl_factor, module_count):
+        self.excel_handler.update_cell("FLOAT VOLTAGE (VDC)", str(float_voltage))
+        self.excel_handler.update_cell("CHARGE VOLTAGE (VDC)", str(charge_voltage))
+        self.excel_handler.update_cell("BATTERY LVD SET(VDC)/RESTORE(VDC)", f"{battery_lvd_set}/{battery_lvd_restore}")
+        self.excel_handler.update_cell("LOAD LVD SET(VDC)/RESTORE(VDC)", f"{load_lvd_set}/{load_lvd_restore}")
+        self.excel_handler.update_cell("DC VOLTAGE LOW(VDC)/RESTORE(VDC)", f"{dc_v_low_set}/{dc_v_low_restore}")
+        self.excel_handler.update_cell("AC LOW CUT-OFF(VAC)/CUT-IN(VAC)",
+                                       f"{main_low_fail_set}/{main_low_fail_restore}")
+        self.excel_handler.update_cell("AC HIGH CUT-OFF(VAC)/CUT-IN(VAC)",
+                                       f"{main_high_fail_set}/{main_high_fail_restore}")
+        self.excel_handler.update_cell("SMR COUNT/ SOLAR CHARGER COUNT", f"{smr_count}/NA")
+        self.excel_handler.update_cell("VRLA: BATTERY CAPACITY/ FACTOR", f"{battery_capacity_vrla}/{bcl_factor_vrla}")
+        self.excel_handler.update_cell("LI-ON BATTERY/ FACTOR", f"{battery_capacity}/{bcl_factor}/{module_count}")
+        self._prevent_gui_hang()
+
+    def DEFAULT_SETTING1(self):
+
+        global battery_capacity_vrla, bcl_factor_vrla, battery_capacity, bcl_factor, module_count
         self.MCM_WRITE_COMMAND('SYSTEM COMMANDS', 'factory restore', 1)
         QtGui.qApp.processEvents()  # ADDED TO PREVENT GUI HANG PROBLEM,PARAS MITTAL
         time.sleep(5)
@@ -4045,7 +4249,7 @@ class Ui_Test(object):
         smr_count = self.MCM_READ_COMMAND('SYSTEM CONFIG', 'smr count')
         m1000_mac_id = self.MCM_READ_COMMAND('SYSTEM COMMANDS', 'm1000 mac id')
         m1000_serial_number = self.MCM_READ_COMMAND('SYSTEM COMMANDS', 'serial number')
-        QtGui.qApp.processEvents()  # ADDED TO PREVENT GUI HANG PROBLEM,KUSHAGRAB MITTAL,24/10/2016
+        QtGui.qApp.processEvents()  # ADDED TO PREVENT GUI HANG PROBLEM, PARAS MITTAL, 12/03/2024
         battery_type = ConfigRead('DUT CONFIGURATION')['battery type']
         if battery_type == 'VRLA':
             battery_capacity_vrla = int(self.MCM_READ_COMMAND('SYSTEM CONFIG', 'vrla battery capacity'))
@@ -4061,143 +4265,18 @@ class Ui_Test(object):
         test_sub_id = 0
         test_sub_id += 1
 
-        QtGui.qApp.processEvents()  # ADDED TO PREVENT GUI HANG PROBLEM,KUSHAGRAB MITTAL,24/10/2016
-
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'FLOAT VOLTAGE'",
-        #                                                        test_sub_id, "''", str(float_voltage), RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        #
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'CHARGE VOLTAGE'",
-        #                                                        test_sub_id, "''", str(charge_voltage), RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'BATTERY LVD SET'",
-        #                                                        test_sub_id, "''", str(battery_lvd_set), RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                        "'BATTERY LVD RESTORE'", test_sub_id, "''",
-        #                                                        str(battery_lvd_restore), RESULT_DEFAULT)
-        #
-        # if load_lvd_set == 'NA':
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'LOAD LVD SET'",
-        #                                                            test_sub_id, "''", "'NA'", RESULT_DEFAULT)
-        # else:
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'LOAD LVD SET'",
-        #                                                            test_sub_id, "''", str(load_lvd_set), RESULT_DEFAULT)
-        #
-        # if load_lvd_restore == 'NA':
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'LOAD LVD RESTORE'", test_sub_id, "''", "'NA'",
-        #                                                            RESULT_DEFAULT)
-        # else:
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'LOAD LVD RESTORE'", test_sub_id, "''",
-        #                                                            str(load_lvd_restore), RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                        "'DC VOLTAGE LOW SET'", test_sub_id, "''",
-        #                                                        str(dc_v_low_set), RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                        "'DC VOLTAGE LOW RESTORE'", test_sub_id, "''",
-        #                                                        str(dc_v_low_restore), RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'AC LOW CUT-OFF'",
-        #                                                        test_sub_id, "''", str(main_low_fail_set),
-        #                                                        RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'AC LOW CUT-IN'",
-        #                                                        test_sub_id, "''", str(main_low_fail_restore),
-        #                                                        RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'AC HIGH CUT-OFF'",
-        #                                                        test_sub_id, "''", str(main_high_fail_set),
-        #                                                        RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'AC HIGH CUT-IN'",
-        #                                                        test_sub_id, "''", str(main_high_fail_restore),
-        #                                                        RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                        "'INSTALLED SMR COUNT'", test_sub_id, "''",
-        #                                                        str(smr_count), RESULT_DEFAULT)
-        # if battery_type == 'VRLA':
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'BATTERY CAPACITY'", test_sub_id, "''",
-        #                                                            str(battery_capacity_vrla), RESULT_DEFAULT)
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'BCL FACTOR'",
-        #                                                            test_sub_id, "''", str(bcl_factor_vrla),
-        #                                                            RESULT_DEFAULT)
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'LI-ION BATTERY CAPACITY'", test_sub_id, "''",
-        #                                                            "'NA'", RESULT_DEFAULT)
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'LI-ION MODULE COUNT'", test_sub_id, "''", "'NA'",
-        #                                                            RESULT_DEFAULT)
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'LI-ION BCL FACTOR'", test_sub_id, "''", "'NA'",
-        #                                                            RESULT_DEFAULT)
-        #
-        # elif battery_type == 'LION':
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'BATTERY CAPACITY'", test_sub_id, "''",
-        #                                                            str(battery_capacity_vrla), RESULT_DEFAULT)
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'BCL FACTOR'",
-        #                                                            test_sub_id, "''", str(bcl_factor_vrla),
-        #                                                            RESULT_DEFAULT)
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'LI-ION BATTERY CAPACITY'", test_sub_id, "''",
-        #                                                            str(battery_capacity), RESULT_DEFAULT)
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'LI-ION MODULE COUNT'", test_sub_id, "''",
-        #                                                            str(module_count), RESULT_DEFAULT)
-        #
-        #     test_sub_id += 1
-        #     self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'",
-        #                                                            "'LI-ION BCL FACTOR'", test_sub_id, "''",
-        #                                                            str(bcl_factor), RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'M1000 MAC ID'",
-        #                                                        test_sub_id, "''", "'" + str(m1000_mac_id) + "'",
-        #                                                        RESULT_DEFAULT)
-        #
-        # test_sub_id += 1
-        # self.sql.SQL_TEST_ITEM_RUN_DETAIL_RESULTS_INSERT_QUERY(self.test_id, "'DEFAULT_SETTING'", "'M1000 SNO'",
-        #                                                        test_sub_id, "''", "'" + str(m1000_serial_number) + "'",
-        #                                                        RESULT_DEFAULT)
-
-        QtGui.qApp.processEvents()  # ADDED TO PREVENT GUI HANG PROBLEM,KUSHAGRAB MITTAL,24/10/2016
+        QtGui.qApp.processEvents()  # ADDED TO PREVENT GUI HANG PROBLEM,Paras MITTAL,24/10/2016
+        self.excel_handler.update_cell("FLOAT VOLTAGE (VDC)", str(float_voltage))
+        self.excel_handler.update_cell("CHARGE VOLTAGE (VDC)", str(charge_voltage))
+        self.excel_handler.update_cell("BATTERY LVD SET(VDC)/RESTORE(VDC)", str(battery_lvd_set)+"/"+str(battery_lvd_restore))
+        self.excel_handler.update_cell("LOAD LVD SET(VDC)/RESTORE(VDC)", str(load_lvd_set) + "/" + str(load_lvd_restore))
+        self.excel_handler.update_cell("DC VOLTAGE LOW(VDC)/RESTORE(VDC)", str(dc_v_low_set) + "/" + str(dc_v_low_restore))
+        self.excel_handler.update_cell("AC LOW CUT-OFF(VAC)/CUT-IN(VAC)", str(main_low_fail_set) + "/" + str(main_low_fail_restore))
+        self.excel_handler.update_cell("AC HIGH CUT-OFF(VAC)/CUT-IN(VAC)", str(main_high_fail_set) + "/" + str(main_high_fail_restore))
+        self.excel_handler.update_cell("SMR COUNT/ SOLAR CHARGER COUNT", str(smr_count) + "/" + str("NA"))
+        self.excel_handler.update_cell("VRLA: BATTERY CAPACITY/ FACTOR", str(battery_capacity_vrla) + "/" + str(bcl_factor_vrla))
+        self.excel_handler.update_cell("LI-ON BATTERY/ FACTOR", str(battery_capacity) + "/" + str(bcl_factor)+"/"+str(module_count))
+        QtGui.qApp.processEvents()  # ADDED TO PREVENT GUI HANG PROBLEM,Paras MITTAL,24/10/2016
         return RESULT_TEMP
 
     def CHECK_DEVICES(self):
@@ -5062,7 +5141,6 @@ def height(value):
 
 if __name__ == "__main__":
     import sys
-
     global ate_name
     app = QtWidgets.QApplication(sys.argv)
     ate_name = sys.argv[0].split("\\")[-1].split(".")[0]
