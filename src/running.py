@@ -311,7 +311,7 @@ def files_and_values():
         else:
             try:
                 os.makedirs(f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}")
-                shutil.copy(j, f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}/")
+                shutil.copy(i, f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}/")
             except:
                 if os.path.exists(f"D:/backup/backup/files_backup/backup_{day}_{month}_{year}"):
                     os.makedirs(

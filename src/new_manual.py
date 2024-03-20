@@ -118,7 +118,7 @@ class MyWindow(QMainWindow):
         qApp.processEvents()
         if self.getalphavalue() == 130 and self.getalphavalue(self.pushButton_6) == 0:
             self.status(button_name=self.pushButton_6, pfc_name=["load_mains"])
-            self.BusCheck(self.pushButton_6)
+        self.BusCheck(self.pushButton_6)
 
 
     def LOAD2(self):
@@ -126,7 +126,7 @@ class MyWindow(QMainWindow):
         qApp.processEvents()
         if self.getalphavalue() == 130 and self.getalphavalue(self.pushButton_6) == 0:
             self.status(button_name=self.pushButton_6, pfc_name=["load_mains"])
-            self.BusCheck(self.pushButton_6)
+        self.BusCheck(self.pushButton_6)
 
 
     def LOAD3(self):
@@ -134,7 +134,7 @@ class MyWindow(QMainWindow):
         qApp.processEvents()
         if self.getalphavalue() == 130 and self.getalphavalue(self.pushButton_6) == 0:
             self.status(button_name=self.pushButton_6, pfc_name=["load_mains"])
-            self.BusCheck(self.pushButton_6)
+        self.BusCheck(self.pushButton_6)
 
 
     def LOAD4(self):
@@ -142,7 +142,7 @@ class MyWindow(QMainWindow):
         qApp.processEvents()
         if self.getalphavalue() == 130 and self.getalphavalue(self.pushButton_6) == 0:
             self.status(button_name=self.pushButton_6, pfc_name=["load_mains"])
-            self.BusCheck(self.pushButton_6)
+        self.BusCheck(self.pushButton_6)
 
 
     def LOAD5(self):
@@ -150,7 +150,7 @@ class MyWindow(QMainWindow):
         qApp.processEvents()
         if self.getalphavalue() == 130 and self.getalphavalue(self.pushButton_6) == 0:
             self.status(button_name=self.pushButton_6, pfc_name=["load_mains"])
-            self.BusCheck(self.pushButton_6)
+        self.BusCheck(self.pushButton_6)
 
     def LOADCommon(self):
         self.status(button_name=self.pushButton_6,pfc_name=['load_mains'])
@@ -165,19 +165,19 @@ class MyWindow(QMainWindow):
         self.status(self.pushButton_7, ['battery_1'])
         if self.getalphavalue() == 130 and self.getalphavalue(self.pushButton_10) == 0:
             self.status(self.pushButton_10, ['battery_mains'])
-            self.BusCheck(self.pushButton_10)
+        self.BusCheck(self.pushButton_10)
 
     def BATT2(self):
         self.status(self.pushButton_9, ['battery_2'])
         if self.getalphavalue() == 130 and self.getalphavalue(self.pushButton_10) == 0:
             self.status(self.pushButton_10, ['battery_mains'])
-            self.BusCheck(self.pushButton_10)
+        self.BusCheck(self.pushButton_10)
 
     def BATT3(self):
         self.status(self.pushButton_8, ['battery_3'])
         if self.getalphavalue() == 130 and self.getalphavalue(self.pushButton_10) == 0:
             self.status(self.pushButton_10, ['battery_mains'])
-            self.BusCheck(self.pushButton_10)
+        self.BusCheck(self.pushButton_10)
 
 
     def BATTMAINS(self):

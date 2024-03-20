@@ -1,7 +1,7 @@
-# import sys
-# sys.path.insert(0, '..\\')
 import sys
-import exception
+sys.path.insert(0, '..\\')
+import sys
+#import exception
 import time
 import pyvisa
 from config_done import *
@@ -54,6 +54,8 @@ set_CV_voltage='VOLT:STAT:L1'
 ##RESET='*RST'
 ##set_CV_mode='MODE CVM'
 ##set_CV_voltage='VOLT:STAT:L1'
+global initial_address
+initial_address = ""
 
 class DC_LOAD():
     def __init__(self):
@@ -62,34 +64,53 @@ class DC_LOAD():
         self.rm = None
 
     def OPEN_DC_LOAD(self,load_type='LOAD'):
+        global initial_address, address
+        if initial_address == "":
+            self.rm = pyvisa.ResourceManager()
+            device_listed = self.rm.list_resources()
+
+            for i in device_listed:
+                if "USB" in i:
+                    if "::632" in i:
+                        address = str(i).split("::INSTR")[0]
+                        self.chroma = self.rm.open_resource(address)
+                    else:
+                        pass
+                elif "GPIB" in i:
+                    self.chroma = self.rm.open_resource(i)
+
+            print(self.chroma.query("*IDN?"))
+            # initial_address = address
+        else:
+            pass
         source_status=True
         count=0
-        if SettingRead('SETTING')['ate load comm type']=='USB':
-            if load_type=='LOAD':
-                self.ID=SettingRead('SETTING')['dc load usb id']
-                self.load_name='DC LOAD'
-
-            if load_type=='BATT':
-                self.ID=SettingRead('SETTING')['battery load usb id']
-                self.load_name='Battery LOAD'
-
-        elif SettingRead('SETTING')['ate load comm type']=='GPIB':
-            if load_type=='LOAD':
-                self.ID=SettingRead('SETTING')['dc load gpib id']
-                self.load_name='DC LOAD'
-
-            if load_type=='BATT':
-                self.ID=SettingRead('SETTING')['battery load gpib id']
-                self.load_name='Battery LOAD'
-
-        elif SettingRead('SETTING')['ate load comm type'] == 'ETHERNET':
-            if load_type == 'LOAD':
-                self.ID = SettingRead('SETTING')['dc load ethernet id']
-                self.load_name = 'DC LOAD'
-                self.read_termination = '\r\n'
-            if load_type == 'BATT':
-                self.ID = SettingRead('SETTING')['battery load ethernet id']
-                self.read_termination = '\r\n'
+        # if SettingRead('SETTING')['ate load comm type']=='USB':
+        #     if load_type=='LOAD':
+        #         self.ID=SettingRead('SETTING')['dc load usb id']
+        #         self.load_name='DC LOAD'
+        #
+        #     if load_type=='BATT':
+        #         self.ID=SettingRead('SETTING')['battery load usb id']
+        #         self.load_name='Battery LOAD'
+        #
+        # elif SettingRead('SETTING')['ate load comm type']=='GPIB':
+        #     if load_type=='LOAD':
+        #         self.ID=SettingRead('SETTING')['dc load gpib id']
+        #         self.load_name='DC LOAD'
+        #
+        #     if load_type=='BATT':
+        #         self.ID=SettingRead('SETTING')['battery load gpib id']
+        #         self.load_name='Battery LOAD'
+        #
+        # elif SettingRead('SETTING')['ate load comm type'] == 'ETHERNET':
+        #     if load_type == 'LOAD':
+        #         self.ID = SettingRead('SETTING')['dc load ethernet id']
+        #         self.load_name = 'DC LOAD'
+        #         self.read_termination = '\r\n'
+        #     if load_type == 'BATT':
+        #         self.ID = SettingRead('SETTING')['battery load ethernet id']
+        #         self.read_termination = '\r\n'
 
 #         while source_status and count<3:
 #             count+=1
@@ -116,20 +137,7 @@ class DC_LOAD():
 #                 pass
 
 
-        self.rm = pyvisa.ResourceManager()
-        device_listed = self.rm.list_resources()
 
-        for i in device_listed:
-            if "USB" in i:
-                if "::632" in i:
-                    address = str(i).split("::INSTR")[0]
-                    self.chroma = self.rm.open_resource(address)
-                else:
-                    pass
-            elif "GPIB" in i:
-                self.chroma = self.rm.open_resource(i)
-
-        print(self.chroma.query("*IDN?"))
 
 
 
@@ -143,11 +151,11 @@ class DC_LOAD():
             try:
                 # if globalvarialbles.APP_STOP_FLAG==True:
                     # return None
-                self.OPEN_DC_LOAD(DC_LOAD)
+                self.OPEN_DC_LOAD(self)
                 self.chroma.write(command)
                 source_status=False
                 # globalvarialbles.CLEAR_JIG_FLAG=True
-                self.CLOSE_DC_LOAD()
+                self.CLOSE_DC_LOAD(self)
             except Exception as err:
                 print (err)
                 #print err
@@ -159,7 +167,7 @@ class DC_LOAD():
                 time.sleep(1)
 ##                #print"usb not found / "+self.load_name+" is OFF. Retrying..."
                 #print "Unable to set command to Load"
-                self.CLOSE_DC_LOAD(DC_LOAD)
+                self.CLOSE_DC_LOAD(self)
 ##                self.OPEN_DC_LOAD()
                 # time.sleep(2)
                 # self.OPEN_DC_LOAD(load_type)
@@ -172,26 +180,28 @@ class DC_LOAD():
         while source_status and count<3:
             count+=1
             try:
-                if globalvarialbles.APP_STOP_FLAG==True:
-                    return None
-                self.OPEN_DC_LOAD()
+                # if globalvarialbles.APP_STOP_FLAG==True:
+                #     return None
+                self.OPEN_DC_LOAD(self)
                 read_data=self.chroma.query(command)
+                print(read_data)
                 source_status=False
-                globalvarialbles.CLEAR_JIG_FLAG=True
-                self.CLOSE_DC_LOAD()
+                # globalvarialbles.CLEAR_JIG_FLAG=True
+                self.CLOSE_DC_LOAD(self)
                 return read_data
             except Exception as err:
+                print(err)
                 #print err
                 #print err
-                globalvarialbles.CLEAR_JIG_FLAG=False
+                # globalvarialbles.CLEAR_JIG_FLAG=False
 ##                #print"usb not found / "+self.load_name+" is OFF"
                 #print "globalvarialbles.APP_STOP_FLAG: "+str(globalvarialbles.APP_STOP_FLAG)
-                if globalvarialbles.APP_STOP_FLAG==True:
-                    return None
+                # if globalvarialbles.APP_STOP_FLAG==True:
+                #     return No//ne
                 # time.sleep(1)
 ##                #print"usb not found / "+self.load_name+" is OFF. Retrying..."
                 #print "Unable to read command from Load"
-                self.CLOSE_DC_LOAD()
+                self.CLOSE_DC_LOAD(self)
                 # time.sleep(2)
                 # self.OPEN_DC_LOAD(load_type)
                 pass

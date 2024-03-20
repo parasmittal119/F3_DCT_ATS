@@ -21,16 +21,16 @@ global w, h, m, factor
 
 """MULTIPLYING FACTOR"""
 try:
-    factor = round(abs(eval(SettingRead('MULTIPLY')['factor'])))
-    if factor <= 0 or factor >= 2:
-        factor = 1
+    factor = abs(eval(SettingRead('MULTIPLY')['factor']))
+    # if factor <= 0 or factor >= 2:
+    #     factor = 1
 except TypeError:
     with open(f'{gui_global.files_directory_location}setting.txt', 'a') as file:
         file.write("\n[MULTIPLY]\nfactor=0.8\n")
     factor = round(abs(eval(SettingRead('MULTIPLY')['factor'])))
     if factor <= 0 or factor >= 2:
         factor = 1
-
+print(factor)
 w = get_monitors()[0].width
 h = get_monitors()[0].height
 
@@ -514,8 +514,9 @@ class Ui_Test(object):
 
         self.log_clear = QtWidgets.QPushButton(self.centralwidget)
         self.log_clear.setGeometry(QtCore.QRect(width(1240), height(50), width(75), height(23)))
+        self.log_clear.setFont(self.font11_BF_UF_50)
         self.log_clear.setStyleSheet(
-            "QPushButton{\nbackground-color:rgba(42,226,230,255);\nfont: 75 15pt 'MS Shell Dlg 2';\nborder-bottom-left-radius:0px;border:2px solid black;\n"
+            "QPushButton{\nbackground-color:rgba(42,226,230,255);\nborder-bottom-left-radius:0px;border:2px solid black;\n"
             "border-top-left-radius:15px;border-bottom-right-radius:15px;}QPushButton::pressed{padding-top:5px;}")
 
         self.log_clear.setObjectName("log_clear")
@@ -642,6 +643,9 @@ class Ui_Test(object):
 
         self.dcload = CommandSetDcLoadUsb
         self.smrcan = CommandSetSmrBatteryCan
+
+        self.dcload.DC_LOAD.OPEN_DC_LOAD(self.dcload.DC_LOAD)
+        # self.dcload.DC_LOAD_SET_CURRENT_CC(5)
 
     def dut_serial_check(self):
         global customer_name

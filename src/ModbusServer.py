@@ -5,7 +5,7 @@ minimalmodbus.CLOSE_PORT_AFTER_EACH_CALL=True
 import time
 import os
 import sys
-import exception
+# import exception
 from serial import Serial
 from random import randint
 from config_done import *
