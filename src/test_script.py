@@ -644,7 +644,7 @@ class Ui_Test(object):
         self.dcload = CommandSetDcLoadUsb
         self.smrcan = CommandSetSmrBatteryCan
 
-        self.dcload.DC_LOAD.OPEN_DC_LOAD(self.dcload.DC_LOAD)
+        # self.dcload.DC_LOAD.OPEN_DC_LOAD(self.dcload.DC_LOAD)
         # self.dcload.DC_LOAD_SET_CURRENT_CC(5)
 
     def dut_serial_check(self):
@@ -802,6 +802,10 @@ class Ui_Test(object):
             bulk_upload = [str(last_cell)] + ["FAIL"] * (len(self.excel_handler.get_headers()) - 1)
 
             self.excel_handler.append_row(bulk_upload)
+
+            self.CLEAR_JIG()
+            self.prompt.Message(prompt="Switch OFF Load MCBs/Battery MCBs/ Remove Fuss/ SMR MCBs!")
+            self.CHECK_DEVICES()
 
             while testing_flag:
                 final_output = []
@@ -4290,8 +4294,8 @@ class Ui_Test(object):
         ATE_LOAD_COUNT = int(SettingRead("SETTING")['ate load count'])
         if ATE_LOAD_COUNT != 1:
             self.HEALTH_CHECK_BATTERY_LOAD()
-        self.dcload.DC_LOAD_SET_CURRENT_CC(0, type="LOAD")
-        self.dcload.DC_LOAD_SET_CURRENT_CC(0, type="BATT")
+        self.dcload.DC_LOAD.DC_LOAD_SET_CURRENT_CC(self.dcload.DC_LOAD, 0, type="LOAD")
+        self.dcload.DC_LOAD.DC_LOAD_SET_CURRENT_CC(self.dcload.DC_LOAD, 0, type="BATT")
         self.print_console("CHECK DEVICES TEST FINISHED...")
 
     def ATS_INITIALIZE(self):
@@ -4308,14 +4312,13 @@ class Ui_Test(object):
         self.smrcan.SMR_BATTERY_SET_VOLTAGE(50.0)
 
     def HEALTH_CHECK_DC_LOAD(self):
-        self.dcload.DC_LOAD.DC_LOAD_READ_COMMAND(self.dcload.DC_LOAD, id)
+        self.dcload.DC_LOAD.DC_LOAD_READ_COMMAND(self.dcload.DC_LOAD, self.dcload.identify_unit)
 
     def CLEAR_JIG(self):
         self.print_console('CLEARING JIG....')
-        self.pfc.pfc_set(0, "all", 0)  ## PENDING DCLOAD RESET
-        # self.M2000SET_PFC(pfc=1, status=1, alarm_index=1)  # Clearing AC Contactors
-        # # dc load output off
-        # self.M2000.SET_PFC(pfc=1, status=1, alarm_index=1)  # Clearing other PFCs
+        self.pfc.pfc_set("0", "all", 0)  ## PENDING DCLOAD RESET
+        self.dcload.DC_LOAD.DC_LOAD_SET_COMMAND(self.dcload.DC_LOAD, self.dcload.load_OFF)
+        self.dcload.DC_LOAD.DC_LOAD_SET_COMMAND(self.dcload.DC_LOAD, self.dcload.load_OFF, "BATT")
         time.sleep(1)
         self.print_console("JIG CLEARED....")
 
