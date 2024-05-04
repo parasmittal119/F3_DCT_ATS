@@ -45,6 +45,13 @@ class pfc_control:
 
     @staticmethod
     def pfc_set(can_channel, cont, state):
+        '''
+        0C Blue ONLY
+        00 Yellow ONLY
+        0A Green Only
+        18 Red ONLY
+        19 Red and Buzzer
+        '''
         global data_packet, var, contact_value, card_id
         data_packet = []
         var = ''
@@ -278,6 +285,5 @@ def calculate_ip_bit_location(pfc_number, packet):
         status = 1
 
     return status
-
 
 

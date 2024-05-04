@@ -204,6 +204,8 @@ class Ui_MainWindow(QMainWindow):
         # LOGS
         self.actionLogs.triggered.connect(self.log_folder)
 
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", f"{gui_global.ate_name}"))

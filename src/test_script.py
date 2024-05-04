@@ -16,6 +16,7 @@ from report_gui import *
 from PyQt5.QtCore import pyqtSignal, QObject
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 from PyQt5.QtGui import QColor
+import CanModule
 
 global w, h, m, factor
 
@@ -556,6 +557,9 @@ class Ui_Test(object):
         except Exception:
             pass
 
+        CanModule.CAN.CAN_WRITE_SOLO(CanModule.CAN, 0, 0x208, [0x60B,0,0, 43, 00, 32, 00, 00, 20, 00, 00])
+
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -773,12 +777,18 @@ class Ui_Test(object):
         self.start.setDisabled(True)
         global final_output
         testing_flag = True
+
+        CanModule.CAN.CAN_WRITE_SOLO(CanModule.CAN, 0, 0x208, [0x60B, 0, 0, 43, 00, 32, 00, 00, 18, 00, 00])
+
         test_detail_flag = self.dut_serial_check()
+
         if test_detail_flag:
             '''Set the initials to default before starting the testing'''
 
             self.initials()
-            self.physical_check(BYPASS=True)
+            # self.physical_check(BYPASS=True)
+            self.prompt.Message(prompt="Switch OFF Load MCBs/ Battery MCBs/ Remove Fuses/ SMR MCBs")
+
             self.print_console(f'DUT PART NUMBER: {self.part_number}')
             self.print_console(f'DUT SERIAL NUMBER: {self.serial_number}')
             self.print_console(f'CUSTOMER NAME: {self.customer_name_edit.text()}')
@@ -803,9 +813,6 @@ class Ui_Test(object):
 
             self.excel_handler.append_row(bulk_upload)
 
-            self.CLEAR_JIG()
-            self.prompt.Message(prompt="Switch OFF Load MCBs/Battery MCBs/ Remove Fuss/ SMR MCBs!")
-            self.CHECK_DEVICES()
 
             while testing_flag:
                 final_output = []
@@ -845,13 +852,13 @@ class Ui_Test(object):
             if all(final_output):
                 self.final_status.setText("PASS")
                 # self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;}")
-                self.final_status.setFont(QtGui.QFont("Calibri", 90))
+                self.final_status.setFont(QtGui.QFont("Calibri", 60))
                 self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;color:DARKGREEN;}")
                 self.excel_handler.update_cell("RESULT", "PASS")
             else:
                 self.final_status.setText("FAIL")
                 # self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;}")
-                self.final_status.setFont(QtGui.QFont("Calibri", 90))
+                self.final_status.setFont(QtGui.QFont("Calibri", 60))
                 self.final_status.setStyleSheet("QLabel{border:5px solid black; border-radius:40px;color:RED;}")
                 self.excel_handler.update_cell("RESULT", "FAIL")
             self.shadowFunction(self.final_status, (0, 0, 0, 255), 35, (10, 10))
@@ -864,6 +871,8 @@ class Ui_Test(object):
 
         self.start.setDisabled(False)
 
+        CanModule.CAN.CAN_WRITE_SOLO(CanModule.CAN, 0, 0x208, [0x60B, 0, 0, 43, 00, 32, 00, 00, 20, 00, 00])
+
     def shadowFunction(self, element, colors_alpha=(0, 0, 0, 0), blurRadius=0, offset=(0, 0)):
         effect = QGraphicsDropShadowEffect()
         effect.setBlurRadius(blurRadius)
@@ -873,8 +882,8 @@ class Ui_Test(object):
 
     def run_test(self, test_number):
         if test_number == int(self.test_order[0]):
-            controller_health_check_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
-            # controller_health_check_variable = self.physical_check(BYPASS=False)
+            # controller_health_check_variable = self.prompt.User_prompt("Do you want to pass this test and continue?")
+            controller_health_check_variable = self.physical_check(BYPASS=False)
             self.setStatus(self.controller_health_status)
             self.excel_handler.update_cell("PHYSICAL TEST", "FAIL")
             if controller_health_check_variable:
@@ -1041,9 +1050,7 @@ class Ui_Test(object):
         if BYPASS:
             return True
         else:
-            self.CLEAR_JIG()
-            self.CHECK_DEVICES()
-            self.INITIALIZE_JIG()
+
             RESULT = []
             self.print_console("PHYSICAL CHECK TEST STARTED...")
 
@@ -1069,7 +1076,9 @@ class Ui_Test(object):
             RESULT.append(RESULT_TEMP)
 
             self.print_console("PHYSICAL CHECK TEST FINISHED....")
-
+            self.CLEAR_JIG()
+            # self.CHECK_DEVICES()
+            # self.INITIALIZE_JIG()
             return CALCULATE_RESULT(RESULT)
 
     def report_function(self, event):
@@ -1086,6 +1095,7 @@ class Ui_Test(object):
         return time_var
 
     def log(self):
+        import sys
         root, extension = os.path.splitext(os.path.basename(sys.argv[0]))
         """Log Creation"""
         # if os.path.exists(f'{os.path.dirname(os.getcwd())}\\logs'):
@@ -4293,9 +4303,10 @@ class Ui_Test(object):
         self.HEALTH_CHECK_DC_LOAD()
         ATE_LOAD_COUNT = int(SettingRead("SETTING")['ate load count'])
         if ATE_LOAD_COUNT != 1:
-            self.HEALTH_CHECK_BATTERY_LOAD()
-        self.dcload.DC_LOAD.DC_LOAD_SET_CURRENT_CC(self.dcload.DC_LOAD, 0, type="LOAD")
-        self.dcload.DC_LOAD.DC_LOAD_SET_CURRENT_CC(self.dcload.DC_LOAD, 0, type="BATT")
+            self.HEALTH_CHECK_DC_LOAD()
+        # self.dcload.DC_LOAD_SET_CURRENT_CC()
+        self.dcload.DC_LOAD_SET_CURRENT_CC(0, load_type="LOAD")
+        self.dcload.DC_LOAD_SET_CURRENT_CC(0, load_type="BATT")
         self.print_console("CHECK DEVICES TEST FINISHED...")
 
     def ATS_INITIALIZE(self):
